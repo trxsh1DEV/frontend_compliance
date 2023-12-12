@@ -1,5 +1,5 @@
 import { HTMLAttributes, forwardRef, useId } from "react";
-import { Container, HelperText, InputStyle, Label } from "./styles";
+import { HelperText, InputStyle, Label, InputContent } from "./styles";
 
 type inputProps = HTMLAttributes<HTMLInputElement> & {
   label?: string;
@@ -13,10 +13,9 @@ export const Input = forwardRef<HTMLInputElement, inputProps>(
   ) => {
     const inputId = useId();
     const hasError = helperText.length > 0;
-    // console.log(hasError);
     return (
       <>
-        <Container>
+        <InputContent>
           <Label htmlFor={inputId}>{label}</Label>
           <InputStyle
             id={inputId}
@@ -26,9 +25,8 @@ export const Input = forwardRef<HTMLInputElement, inputProps>(
             hasError={hasError}
             {...props}
           />
-
           {hasError && <HelperText>{helperText}</HelperText>}
-        </Container>
+        </InputContent>
       </>
     );
   }

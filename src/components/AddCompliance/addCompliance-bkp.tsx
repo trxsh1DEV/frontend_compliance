@@ -78,247 +78,244 @@ const Formulary1 = ({ nextStep, setData }) => {
 
   return (
     <div className="app">
-      <div>
-        <h2>Form 1</h2>
-        <form onSubmit={handleSubmit(handleSubmitForm)}>
-          <div className="bill-item">
-            <div>
-              <input {...register(`backup.policy.description`)} type="text" />
+      {/* <div> */}
+      <h2>Form 1</h2>
+      <form onSubmit={handleSubmit(handleSubmitForm)}>
+        <div className="bill-item">
+          <div>
+            <input {...register(`backup.policy.description`)} type="text" />
 
-              {errors?.backup?.policy?.description && (
-                <p className="error-message">
-                  {errors.backup?.policy?.description.message}
-                </p>
-              )}
-            </div>
-
-            <div>
-              <input
-                {...register(`backup.policy.score`, {
-                  valueAsNumber: true,
-                })}
-                type="number"
-              />
-
-              {errors?.backup?.policy?.score && (
-                <p className="error-message">
-                  {errors.backup?.policy?.score?.message}
-                </p>
-              )}
-            </div>
-
-            <div>
-              <input
-                {...register(`backup.policy.enabled`, {
-                  valueAsNumber: true,
-                })}
-                type="checkbox"
-              />
-
-              {errors?.backup?.policy?.enabled && (
-                <p className="error-message">
-                  {errors?.backup?.policy?.enabled.message}
-                </p>
-              )}
-            </div>
+            {errors?.backup?.policy?.description && (
+              <p className="error-message">
+                {errors.backup?.policy?.description.message}
+              </p>
+            )}
           </div>
 
-          <div className="bill-item">
-            <div>
-              <input
-                {...register(`backup.frequency.description`)}
-                type="text"
-              />
+          <div>
+            <input
+              {...register(`backup.policy.score`, {
+                valueAsNumber: true,
+              })}
+              type="number"
+            />
 
-              {errors?.backup?.frequency?.description && (
-                <p className="error-message">
-                  {errors.backup?.frequency?.description.message}
-                </p>
-              )}
-            </div>
-
-            <div>
-              <input
-                {...register(`backup.frequency.score`, {
-                  valueAsNumber: true,
-                })}
-                type="number"
-              />
-
-              {errors?.backup?.frequency?.score && (
-                <p className="error-message">
-                  {errors.backup?.frequency?.score?.message}
-                </p>
-              )}
-            </div>
-
-            <div>
-              <input
-                {...register(`backup.policy.value`, {
-                  valueAsNumber: true,
-                })}
-                type="number"
-              />
-
-              {errors?.backup?.policy?.value && (
-                <p className="error-message">
-                  {errors.backup?.policy?.value?.message}
-                </p>
-              )}
-            </div>
-
-            <div>
-              <input
-                {...register(`backup.frequency.enabled`, {
-                  valueAsNumber: true,
-                })}
-                type="checkbox"
-              />
-
-              {errors?.backup?.frequency?.enabled && (
-                <p className="error-message">
-                  {errors?.backup?.frequency?.enabled.message}
-                </p>
-              )}
-            </div>
+            {errors?.backup?.policy?.score && (
+              <p className="error-message">
+                {errors.backup?.policy?.score?.message}
+              </p>
+            )}
           </div>
 
-          <div className="bill-item">
-            <div>
-              <input
-                {...register(`backup.storage.local.description`)}
-                type="text"
-              />
+          <div>
+            <input
+              {...register(`backup.policy.enabled`, {
+                valueAsNumber: true,
+              })}
+              type="checkbox"
+            />
 
-              {errors?.backup?.storage?.local?.description && (
-                <p className="error-message">
-                  {errors.backup?.storage.local?.description.message}
-                </p>
-              )}
-            </div>
+            {errors?.backup?.policy?.enabled && (
+              <p className="error-message">
+                {errors?.backup?.policy?.enabled.message}
+              </p>
+            )}
+          </div>
+        </div>
 
-            <div>
-              <input
-                {...register(`backup.storage.local.score`, {
-                  valueAsNumber: true,
-                })}
-                type="number"
-              />
+        <div className="bill-item">
+          <div>
+            <input {...register(`backup.frequency.description`)} type="text" />
 
-              {errors?.backup?.storage?.local?.score && (
-                <p className="error-message">
-                  {errors.backup?.storage?.local?.score?.message}
-                </p>
-              )}
-            </div>
-
-            <div>
-              <input
-                {...register(`backup.storage.local.enabled`, {
-                  valueAsNumber: true,
-                })}
-                type="checkbox"
-              />
-
-              {errors?.backup?.storage?.local?.enabled && (
-                <p className="error-message">
-                  {errors?.backup?.storage.local?.enabled.message}
-                </p>
-              )}
-            </div>
+            {errors?.backup?.frequency?.description && (
+              <p className="error-message">
+                {errors.backup?.frequency?.description.message}
+              </p>
+            )}
           </div>
 
-          <div className="bill-item">
-            <div>
-              <input
-                {...register(`backup.storage.remote.description`)}
-                type="text"
-              />
+          <div>
+            <input
+              {...register(`backup.frequency.score`, {
+                valueAsNumber: true,
+              })}
+              type="number"
+            />
 
-              {errors?.backup?.storage?.remote?.description && (
-                <p className="error-message">
-                  {errors.backup?.storage.remote?.description.message}
-                </p>
-              )}
-            </div>
-
-            <div>
-              <input
-                {...register(`backup.storage.remote.score`, {
-                  valueAsNumber: true,
-                })}
-                type="number"
-              />
-
-              {errors?.backup?.storage?.remote?.score && (
-                <p className="error-message">
-                  {errors.backup?.storage?.remote?.score?.message}
-                </p>
-              )}
-            </div>
-
-            <div>
-              <input
-                {...register(`backup.storage.remote.enabled`, {
-                  valueAsNumber: true,
-                })}
-                type="checkbox"
-              />
-
-              {errors?.backup?.storage?.remote?.enabled && (
-                <p className="error-message">
-                  {errors?.backup?.storage.remote?.enabled.message}
-                </p>
-              )}
-            </div>
+            {errors?.backup?.frequency?.score && (
+              <p className="error-message">
+                {errors.backup?.frequency?.score?.message}
+              </p>
+            )}
           </div>
 
-          <div className="bill-item">
-            <div>
-              <input
-                {...register(`backup.restoration.description`)}
-                type="text"
-              />
+          <div>
+            <input
+              {...register(`backup.policy.value`, {
+                valueAsNumber: true,
+              })}
+              type="number"
+            />
 
-              {errors?.backup?.restoration?.description && (
-                <p className="error-message">
-                  {errors.backup?.restoration?.description?.message}
-                </p>
-              )}
-            </div>
-
-            <div>
-              <input
-                {...register(`backup.restoration.score`, {
-                  valueAsNumber: true,
-                })}
-                type="number"
-              />
-
-              {errors?.backup?.restoration?.score && (
-                <p className="error-message">
-                  {errors.backup?.restoration?.score?.message}
-                </p>
-              )}
-            </div>
-
-            <div>
-              <input
-                {...register(`backup.restoration.enabled`, {
-                  valueAsNumber: true,
-                })}
-                type="checkbox"
-              />
-
-              {errors?.backup?.restoration?.enabled && (
-                <p className="error-message">
-                  {errors?.backup?.restoration?.enabled?.message}
-                </p>
-              )}
-            </div>
+            {errors?.backup?.policy?.value && (
+              <p className="error-message">
+                {errors.backup?.policy?.value?.message}
+              </p>
+            )}
           </div>
 
-          {/* {errors?.backup?.frequency ||
+          <div>
+            <input
+              {...register(`backup.frequency.enabled`, {
+                valueAsNumber: true,
+              })}
+              type="checkbox"
+            />
+
+            {errors?.backup?.frequency?.enabled && (
+              <p className="error-message">
+                {errors?.backup?.frequency?.enabled.message}
+              </p>
+            )}
+          </div>
+        </div>
+
+        <div className="bill-item">
+          <div>
+            <input
+              {...register(`backup.storage.local.description`)}
+              type="text"
+            />
+
+            {errors?.backup?.storage?.local?.description && (
+              <p className="error-message">
+                {errors.backup?.storage.local?.description.message}
+              </p>
+            )}
+          </div>
+
+          <div>
+            <input
+              {...register(`backup.storage.local.score`, {
+                valueAsNumber: true,
+              })}
+              type="number"
+            />
+
+            {errors?.backup?.storage?.local?.score && (
+              <p className="error-message">
+                {errors.backup?.storage?.local?.score?.message}
+              </p>
+            )}
+          </div>
+
+          <div>
+            <input
+              {...register(`backup.storage.local.enabled`, {
+                valueAsNumber: true,
+              })}
+              type="checkbox"
+            />
+
+            {errors?.backup?.storage?.local?.enabled && (
+              <p className="error-message">
+                {errors?.backup?.storage.local?.enabled.message}
+              </p>
+            )}
+          </div>
+        </div>
+
+        <div className="bill-item">
+          <div>
+            <input
+              {...register(`backup.storage.remote.description`)}
+              type="text"
+            />
+
+            {errors?.backup?.storage?.remote?.description && (
+              <p className="error-message">
+                {errors.backup?.storage.remote?.description.message}
+              </p>
+            )}
+          </div>
+
+          <div>
+            <input
+              {...register(`backup.storage.remote.score`, {
+                valueAsNumber: true,
+              })}
+              type="number"
+            />
+
+            {errors?.backup?.storage?.remote?.score && (
+              <p className="error-message">
+                {errors.backup?.storage?.remote?.score?.message}
+              </p>
+            )}
+          </div>
+
+          <div>
+            <input
+              {...register(`backup.storage.remote.enabled`, {
+                valueAsNumber: true,
+              })}
+              type="checkbox"
+            />
+
+            {errors?.backup?.storage?.remote?.enabled && (
+              <p className="error-message">
+                {errors?.backup?.storage.remote?.enabled.message}
+              </p>
+            )}
+          </div>
+        </div>
+
+        <div className="bill-item">
+          <div>
+            <input
+              {...register(`backup.restoration.description`)}
+              type="text"
+            />
+
+            {errors?.backup?.restoration?.description && (
+              <p className="error-message">
+                {errors.backup?.restoration?.description?.message}
+              </p>
+            )}
+          </div>
+
+          <div>
+            <input
+              {...register(`backup.restoration.score`, {
+                valueAsNumber: true,
+              })}
+              type="number"
+            />
+
+            {errors?.backup?.restoration?.score && (
+              <p className="error-message">
+                {errors.backup?.restoration?.score?.message}
+              </p>
+            )}
+          </div>
+
+          <div>
+            <input
+              {...register(`backup.restoration.enabled`, {
+                valueAsNumber: true,
+              })}
+              type="checkbox"
+            />
+
+            {errors?.backup?.restoration?.enabled && (
+              <p className="error-message">
+                {errors?.backup?.restoration?.enabled?.message}
+              </p>
+            )}
+          </div>
+        </div>
+
+        {/* {errors?.backup?.frequency ||
             errors?.backup?.restoration ||
             errors?.backup?.policy ||
             (errors?.backup?.storage && (
@@ -329,20 +326,20 @@ const Formulary1 = ({ nextStep, setData }) => {
                   errors.backup.frequency?.message}
               </p>
             ))} */}
-          {errors.backup && errors.backup.message}
+        {errors.backup && errors.backup.message}
 
-          <button className={`send`} type="submit">
-            Validar
-          </button>
-          <button
-            onClick={handleNext}
-            className={`next ${formValidated ? "form-validated" : ""}`}
-            disabled={!formValidated}
-          >
-            Proximo
-          </button>
-        </form>
-      </div>
+        <button className={`send`} type="submit">
+          Validar
+        </button>
+        <button
+          onClick={handleNext}
+          className={`next ${formValidated ? "form-validated" : ""}`}
+          disabled={!formValidated}
+        >
+          Proximo
+        </button>
+      </form>
+      {/* </div> */}
     </div>
   );
 };

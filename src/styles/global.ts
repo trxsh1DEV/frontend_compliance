@@ -30,4 +30,8 @@ export default createGlobalStyle`
   a{
     text-decoration: none;
   }
+
+  form button{
+    width: 100%;
+  }
 `;
