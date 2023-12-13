@@ -32,19 +32,19 @@ export const DefaultValues = {
   backup: {
     frequency: {
       score: 0,
-      enabled: false,
+      enabled: true,
     },
     policy: {
       score: 0,
-      enabled: false,
+      enabled: true,
     },
     restoration: {
       score: 0,
-      enabled: false,
+      enabled: true,
     },
     storage: {
-      local: { score: 0, enabled: false },
-      remote: { score: 0, enabled: false },
+      local: { score: 0, enabled: true },
+      remote: { score: 0, enabled: true },
     },
   },
 };

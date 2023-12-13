@@ -1,0 +1,7 @@
+.next {
+  cursor: not-allowed;
+}
+
+.next.form-validated {
+  cursor: pointer;
+}
