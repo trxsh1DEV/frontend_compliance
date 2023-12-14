@@ -6,21 +6,23 @@ import {
 } from "../../../utils/Schemas/schemaFormBackup";
 import { FormBackupProps } from "../../../types/typesForm";
 import { useState } from "react";
-import { calledApi } from "../../../utils/requestApi";
 
 interface FormularyProps {
   nextStep: () => void;
+  setFormValues: any;
 }
 
-const useFormulary = ({ nextStep }: FormularyProps) => {
+const useFormulary = ({ nextStep, setFormValues }: FormularyProps) => {
   const [formValidate, setFormValidate] = useState(false);
 
   const handleFormSubmit = async (data: any) => {
-    const bodyData = data;
     setFormValidate(true);
 
     try {
-      DataForm(bodyData);
+      setFormValues((prevState: any) => ({
+        ...prevState,
+        ...data,
+      }));
     } catch (err: any) {
       console.log(err.message);
     }
@@ -62,48 +64,6 @@ const useFormulary = ({ nextStep }: FormularyProps) => {
     test,
     formValidate,
   };
-};
-
-const DataForm = (data: any) => {
-  // const ha = {
-  //   ha: {
-  //     enabled: true,
-  //     solutions: ["load balance", "cluster", "failover"],
-  //     tested: true,
-  //     rto: 24,
-  //     score: 5,
-  //   },
-  // };
-  // const server = {
-  //   server: {
-  //     enabled: true,
-  //     servers: [
-  //       {
-  //         server_name: "Server 1",
-  //         systemOperation: {
-  //           patching: "Regular",
-  //           score: 5,
-  //           weight: 3,
-  //         },
-  //         config: {
-  //           value: "low",
-  //           score: 7,
-  //         },
-  //         monitoringPerformance: {
-  //           enabled: true,
-  //           score: 4,
-  //         },
-  //         score: 5,
-  //         description: "Descrição do servidor",
-  //       },
-  //     ],
-  //   },
-  // };
-  const allData = {
-    client: "657a021673b480d28f63e6ea",
-    ...data,
-  };
-  calledApi(allData, "compliance");
 };
 
 export default useFormulary;

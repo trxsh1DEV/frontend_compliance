@@ -3,20 +3,24 @@ import { useFieldArray, useForm } from "react-hook-form";
 import { schemaServer } from "../../../utils/Schemas/schemaFormServer";
 import { FormServerProps } from "../../../types/typesForm";
 import { useState } from "react";
-import { DataForm } from "../test";
+// import { DataForm } from "../test";
 
 interface FormularyProps {
   nextStep: () => void;
+  setFormValues: any;
 }
 
-const useFormulary = ({ nextStep }: FormularyProps) => {
+const useFormulary = ({ nextStep, setFormValues }: FormularyProps) => {
   const [formValidate, setFormValidate] = useState(false);
 
   const handleFormSubmit = async (data: any) => {
     setFormValidate(true);
 
     try {
-      DataForm(data);
+      setFormValues((prevState: any) => ({
+        ...prevState,
+        ...data,
+      }));
     } catch (err: any) {
       console.log(err.message);
     }

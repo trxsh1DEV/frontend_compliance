@@ -3,7 +3,10 @@ import { Input } from "../../Input/Input";
 import { FC } from "react";
 import useFormulary from "./useFormulary";
 
-const FormBackup: FC<{ nextStep: () => void }> = ({ nextStep }) => {
+const FormBackup: FC<{ nextStep: () => void; setFormValues: any }> = ({
+  nextStep,
+  setFormValues,
+}) => {
   const {
     errors,
     formValidate,
@@ -12,7 +15,7 @@ const FormBackup: FC<{ nextStep: () => void }> = ({ nextStep }) => {
     handleSubmit,
     register,
     test,
-  } = useFormulary({ nextStep });
+  } = useFormulary({ nextStep, setFormValues });
 
   return (
     <>

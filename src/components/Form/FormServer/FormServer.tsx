@@ -10,7 +10,10 @@ import { FC } from "react";
 import useFormulary from "../FormServer/useFormServer";
 import { Minus, Plus } from "phosphor-react";
 
-const FormServer: FC<{ nextStep: () => void }> = ({ nextStep }) => {
+const FormServer: FC<{ nextStep: () => void; setFormValues: any }> = ({
+  nextStep,
+  setFormValues,
+}) => {
   const {
     errors,
     formValidate,
@@ -23,7 +26,7 @@ const FormServer: FC<{ nextStep: () => void }> = ({ nextStep }) => {
     fields,
     remove,
     monitoringServer,
-  } = useFormulary({ nextStep });
+  } = useFormulary({ nextStep, setFormValues });
 
   const hasServer = !!haveServer;
 
