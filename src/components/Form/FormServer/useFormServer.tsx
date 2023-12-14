@@ -1,9 +1,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import { schemaServer } from "../../../utils/Schemas/schemaFormServer";
 import { FormServerProps } from "../../../types/typesForm";
 import { useState } from "react";
-import { calledApi } from "../../../utils/requestApi";
+import { DataForm } from "../test";
 
 interface FormularyProps {
   nextStep: () => void;
@@ -13,12 +13,10 @@ const useFormulary = ({ nextStep }: FormularyProps) => {
   const [formValidate, setFormValidate] = useState(false);
 
   const handleFormSubmit = async (data: any) => {
-    const bodyData = data;
-    console.log(data);
     setFormValidate(true);
 
     try {
-      DataForm(bodyData);
+      DataForm(data);
     } catch (err: any) {
       console.log(err.message);
     }
@@ -27,6 +25,7 @@ const useFormulary = ({ nextStep }: FormularyProps) => {
     register,
     handleSubmit,
     watch,
+    control,
     formState: { errors },
   } = useForm<FormServerProps>({
     mode: "onBlur",
@@ -35,17 +34,18 @@ const useFormulary = ({ nextStep }: FormularyProps) => {
     // defaultValues: DefaultValuesBackup,
   });
 
+  const { fields, append, remove } = useFieldArray({
+    name: "server.servers",
+    control,
+  });
+
   const haveServer = watch("server.enabled");
-  const servers = watch([`server.servers.0`]);
-
-  // const test = (n?: number) => {
-  //   const servers = watch([`server`]);
-  //   return servers.map((item) => item);
-  //   // return monitoringEnable. ? "" : { cursor: "not-allowed" };
-  // };
-
   const handleNext = () => {
     nextStep();
+  };
+  const monitoringServer = (n: number) => {
+    const servers = watch("server.servers");
+    return servers[n].monitoringPerfomance.enabled;
   };
 
   return {
@@ -56,50 +56,11 @@ const useFormulary = ({ nextStep }: FormularyProps) => {
     handleNext,
     haveServer,
     formValidate,
-    servers,
+    fields,
+    append,
+    remove,
+    monitoringServer,
   };
-};
-
-const DataForm = (data: any) => {
-  // const ha = {
-  //   ha: {
-  //     enabled: true,
-  //     solutions: ["load balance", "cluster", "failover"],
-  //     tested: true,
-  //     rto: 24,
-  //     score: 5,
-  //   },
-  // };
-  // const server = {
-  //   server: {
-  //     enabled: true,
-  //     servers: [
-  //       {
-  //         server_name: "Server 1",
-  //         systemOperation: {
-  //           patching: "Regular",
-  //           score: 5,
-  //           weight: 3,
-  //         },
-  //         config: {
-  //           value: "low",
-  //           score: 7,
-  //         },
-  //         monitoringPerformance: {
-  //           enabled: true,
-  //           score: 4,
-  //         },
-  //         score: 5,
-  //         description: "Descrição do servidor",
-  //       },
-  //     ],
-  //   },
-  // };
-  const allData = {
-    client: "657a021673b480d28f63e6ea",
-    ...data,
-  };
-  calledApi(allData, "compliance");
 };
 
 export default useFormulary;

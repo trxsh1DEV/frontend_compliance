@@ -3,7 +3,6 @@ import theme from "../../styles/theme";
 import { lighten } from "polished";
 
 export const InputStyle = styled.input<{ hasError: boolean }>`
-  display: inline-block;
   padding: 1rem;
   border-radius: 8px;
   border: 1px solid ${theme.colors.primary};
@@ -41,7 +40,6 @@ export const InputContent = styled.div`
   align-items: center;
   width: 100%;
   flex-direction: column;
-  position: relative;
 `;
 
 export const HelperText = styled.p`

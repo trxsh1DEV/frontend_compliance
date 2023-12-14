@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { descriptionType, scoreType } from "./genericForm";
 
-export const fieldsServerSchema = z.tuple([
+export const fieldsServerSchema = z.array(
   z.object({
     serverName: z.string().min(3, "O nome deve ser maior que 3"),
     systemOperation: z.object({
@@ -24,35 +24,14 @@ export const fieldsServerSchema = z.tuple([
       enabled: z.boolean(),
       score: scoreType.optional().default(0),
     }),
-  }),
-]);
+    score: scoreType.optional(),
+    description: descriptionType,
+  })
+);
 
 export const schemaServer = z.object({
   server: z.object({
     enabled: z.boolean(),
     servers: fieldsServerSchema,
-    score: scoreType,
-    description: descriptionType,
   }),
 });
-
-// export const DefaultValuesServer = {
-//   servers: {
-//     frequency: {
-//       score: 0,
-//       enabled: true,
-//     },
-//     policy: {
-//       score: 0,
-//       enabled: true,
-//     },
-//     restoration: {
-//       score: 0,
-//       enabled: true,
-//     },
-//     storage: {
-//       local: { score: 0, enabled: true },
-//       remote: { score: 0, enabled: true },
-//     },
-//   },
-// };

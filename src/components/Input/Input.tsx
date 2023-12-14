@@ -14,20 +14,18 @@ export const Input = forwardRef<HTMLInputElement, inputProps>(
     const inputId = useId();
     const hasError = helperText.length > 0;
     return (
-      <>
-        <InputContent>
-          <Label htmlFor={inputId}>{label}</Label>
-          <InputStyle
-            id={inputId}
-            type={type}
-            name={name}
-            ref={ref}
-            hasError={hasError}
-            {...props}
-          />
-          {hasError && <HelperText>{helperText}</HelperText>}
-        </InputContent>
-      </>
+      <InputContent>
+        <Label htmlFor={inputId}>{label}</Label>
+        <InputStyle
+          id={inputId}
+          type={type}
+          name={name}
+          ref={ref}
+          hasError={hasError}
+          {...props}
+        />
+        {hasError && <HelperText>{helperText}</HelperText>}
+      </InputContent>
     );
   }
 );

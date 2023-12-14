@@ -7,7 +7,4 @@ export const scoreType = z
   .positive("Informe um valor maior que 0")
   .max(10, "Informe um valor menor que 11");
 
-export const descriptionType = z
-  .string()
-  .min(3, "Informe uma descrição válida")
-  .optional();
+export const descriptionType = z.string().optional();
