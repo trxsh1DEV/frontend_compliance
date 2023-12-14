@@ -1,6 +1,5 @@
-import { FormContainer, MainContainer } from "../Input/style";
-import { Input } from "../Input/Input";
-import { Container } from "../Input/styles";
+import { FormContainer, MainContainer, Container, Heading2 } from "../style";
+import { Input } from "../../Input/Input";
 import { FC } from "react";
 import useFormulary from "./useFormulary";
 
@@ -19,7 +18,7 @@ const FormBackup: FC<{ nextStep: () => void }> = ({ nextStep }) => {
     <>
       <MainContainer>
         <FormContainer onSubmit={handleSubmit(handleFormSubmit)}>
-          <h2 style={{ marginBottom: "2rem" }}>Formulário Backup</h2>
+          <Heading2>Formulário Backup</Heading2>
           <Container>
             <Input
               {...register(`backup.frequency.description`)}

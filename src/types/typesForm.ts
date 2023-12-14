@@ -1,4 +1,6 @@
 import { z } from "zod";
-import { schema } from "../utils/schemaForm";
+import { schemaBackup } from "../utils/Schemas/schemaFormBackup";
+import { schemaServer } from "../utils/Schemas/schemaFormServer";
 
-export type FormDataProps = z.infer<typeof schema>;
+export type FormBackupProps = z.infer<typeof schemaBackup>;
+export type FormServerProps = z.infer<typeof schemaServer>;

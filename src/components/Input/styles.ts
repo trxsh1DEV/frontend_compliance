@@ -33,6 +33,7 @@ export const Label = styled.label`
   margin-bottom: 0.8rem;
   height: 30px;
   width: 100%;
+  text-align: center;
 `;
 
 export const InputContent = styled.div`
@@ -41,17 +42,6 @@ export const InputContent = styled.div`
   width: 100%;
   flex-direction: column;
   position: relative;
-`;
-
-export const Container = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* width: 100%; */
-  gap: 20px;
-  & + & {
-    margin-top: 1rem;
-  }
 `;
 
 export const HelperText = styled.p`

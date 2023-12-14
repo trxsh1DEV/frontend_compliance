@@ -1,9 +1,12 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { DefaultValues, schema } from "../../utils/schemaForm";
-import { FormDataProps } from "../../types/typesForm";
+import {
+  DefaultValuesBackup,
+  schemaBackup,
+} from "../../../utils/Schemas/schemaFormBackup";
+import { FormBackupProps } from "../../../types/typesForm";
 import { useState } from "react";
-import { calledApi } from "../../utils/requestApi";
+import { calledApi } from "../../../utils/requestApi";
 
 interface FormularyProps {
   nextStep: () => void;
@@ -27,11 +30,11 @@ const useFormulary = ({ nextStep }: FormularyProps) => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<FormDataProps>({
+  } = useForm<FormBackupProps>({
     mode: "onBlur",
     criteriaMode: "all",
-    resolver: zodResolver(schema),
-    defaultValues: DefaultValues,
+    resolver: zodResolver(schemaBackup),
+    defaultValues: DefaultValuesBackup,
   });
 
   // const isEnabled = watch('backup.frequ');
