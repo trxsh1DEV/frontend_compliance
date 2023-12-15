@@ -29,6 +29,7 @@ const FormBackup: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
               helperText={errors.backup?.frequency?.description?.message}
               style={test(0)}
               disabled={!!test(0)}
+              autoFocus={true}
             />
             <Input
               {...register(`backup.frequency.score`, {

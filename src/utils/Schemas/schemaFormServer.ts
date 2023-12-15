@@ -22,9 +22,9 @@ export const fieldsServerSchema = z.array(
     }),
     monitoringPerfomance: z.object({
       enabled: z.boolean(),
-      score: scoreType.optional().default(0),
+      score: scoreType,
     }),
-    score: scoreType.optional(),
+    score: scoreType,
     description: descriptionType,
   })
 );

@@ -16,13 +16,8 @@ export const schemaHA = z.object({
       }
     ),
     tested: z.boolean(),
-    rto: z
-      .number({
-        invalid_type_error: "Insira um número válido",
-      })
-      .positive("Informe um valor maior que 0")
-      .optional(),
-    score: scoreType,
+    rto: scoreType.optional(),
+    score: scoreType.optional(),
     description: descriptionType,
   }),
 });

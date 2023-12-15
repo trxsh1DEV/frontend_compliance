@@ -16,10 +16,10 @@ const AddCompliance = () => {
 
   return (
     <div className="container">
-      {step === 3 && (
+      {step === 2 && (
         <FormBackup nextStep={nextStep} setFormValues={setFormValues} />
       )}
-      {step === 2 && (
+      {step === 3 && (
         <FormServer nextStep={nextStep} setFormValues={setFormValues} />
       )}
       {step === 1 && (

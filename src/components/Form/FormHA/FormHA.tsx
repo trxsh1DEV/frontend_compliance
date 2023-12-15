@@ -7,13 +7,14 @@ import { FormularyProps } from "../../../types/typesForm";
 const FormHA: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
   const {
     errors,
-    formValidate,
     handleFormSubmit,
     handleNext,
     handleSubmit,
     register,
     haveHA,
     tested,
+    formValidate,
+    refFocus,
   } = useFormulary({ nextStep, setFormValues });
 
   return (
@@ -31,11 +32,12 @@ const FormHA: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
             <>
               <Container>
                 <Input
-                  {...register(`ha.solutions`)}
+                  {...register(`ha.description`)}
                   type="text"
-                  placeholder="redundancy, load balance, failover, cluster, none"
-                  label="Soluções de HA"
-                  helperText={errors.ha?.solutions?.message}
+                  helperText={errors.ha?.description?.message}
+                  label="Descrição (Opcional)"
+                  placeholder="Insira uma descrição"
+                  ref={refFocus}
                 />
                 <Input {...register(`ha.tested`)} type="checkbox" />
 
@@ -60,14 +62,22 @@ const FormHA: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
                   helperText={errors.ha?.score?.message}
                   label="Pontuação (Score)"
                 />
+                <Input
+                  {...register(`ha.solutions`)}
+                  type="text"
+                  placeholder="redundancy, load balance, failover, cluster, none"
+                  label="Soluções de HA"
+                  helperText={errors.ha?.solutions?.message}
+                />
               </Container>
-
-              <button type="submit">Send</button>
-              <button onClick={handleNext} disabled={!formValidate}>
-                next
-              </button>
             </>
           )}
+          <button type="submit" disabled={!haveHA}>
+            Validate
+          </button>
+          <button onClick={handleNext} disabled={!formValidate}>
+            Next
+          </button>
         </FormContainer>
       </MainContainer>
     </>

@@ -28,8 +28,6 @@ const FormServer: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
 
   const hasServer = !!haveServer;
 
-  // console.log(errors);
-
   return (
     <>
       <MainContainer>
