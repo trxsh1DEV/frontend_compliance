@@ -1,10 +1,8 @@
 import axios from "axios";
 
 export const calledApi = async (data: any, route?: string) => {
-  console.log(data);
-  const dataArray = { ...data };
+  // console.log(data);
 
-  console.log(dataArray);
   const apiUrl = `http://localhost:5421/api/${route}`;
 
   try {

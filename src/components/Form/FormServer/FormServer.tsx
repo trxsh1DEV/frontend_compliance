@@ -9,11 +9,9 @@ import { Input } from "../../Input/Input";
 import { FC } from "react";
 import useFormulary from "../FormServer/useFormServer";
 import { Minus, Plus } from "phosphor-react";
+import { FormularyProps } from "../../../types/typesForm";
 
-const FormServer: FC<{ nextStep: () => void; setFormValues: any }> = ({
-  nextStep,
-  setFormValues,
-}) => {
+const FormServer: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
   const {
     errors,
     formValidate,

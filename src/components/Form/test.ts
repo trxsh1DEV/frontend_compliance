@@ -1,4 +1,4 @@
-import { calledApi } from "../../utils/requestApi";
+// import { calledApi } from "../../utils/requestApi";
 
 // Função para enviar dados para a API
 export const DataForm = async (data: any) => {
@@ -16,14 +16,3 @@ export const DataForm = async (data: any) => {
     throw error;
   }
 };
-
-// export default DataForm;
-// export const DataBackup = (bkp?: FormBackupProps) => {
-//   console.log(bkp?.backup.restoration.score);
-//   return bkp;
-// };
-
-// export const DataServer = (data?: FormServerProps) => {
-//   console.log(data?.server.servers[0].serverName);
-//   return data;
-// };

@@ -2,11 +2,9 @@ import { FormContainer, MainContainer, Container, Heading2 } from "../style";
 import { Input } from "../../Input/Input";
 import { FC } from "react";
 import useFormulary from "./useFormulary";
+import { FormularyProps } from "../../../types/typesForm";
 
-const FormBackup: FC<{ nextStep: () => void; setFormValues: any }> = ({
-  nextStep,
-  setFormValues,
-}) => {
+const FormBackup: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
   const {
     errors,
     formValidate,

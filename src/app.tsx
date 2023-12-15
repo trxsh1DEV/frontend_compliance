@@ -4,7 +4,6 @@ import theme from "./styles/theme";
 // import InputPage from "./components/Input/Input";
 import { ThemeProvider } from "styled-components";
 import AddCompliance from "./components/MultiStep/NextStep";
-import MultiStepForm from "./Context/FormContext";
 // import './app.css'
 
 export function App() {
@@ -14,7 +13,6 @@ export function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<AddCompliance />} />
-            <Route path="/test" element={<MultiStepForm />} />
           </Routes>
         </BrowserRouter>
         <GlobalStyle />

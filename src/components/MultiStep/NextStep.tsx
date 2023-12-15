@@ -2,29 +2,30 @@ import { useState } from "preact/hooks";
 
 import FormBackup from "../Form/FormBackup/FormBackup";
 import FormServer from "../Form/FormServer/FormServer";
+import { combineInfra } from "../../types/typesForm";
+import FormHA from "../Form/FormHA/FormHA";
+import Success from "../../pages/Success";
 
 const AddCompliance = () => {
   const [step, setStep] = useState(1);
-  const [formValues, setFormValues] = useState({});
+  const [formValues, setFormValues] = useState<combineInfra>();
 
   const nextStep = () => {
     setStep(step + 1);
   };
 
-  // const prevStep = () => {
-  //   setStep(step - 1);
-  // };
-
-  console.log(formValues);
-
   return (
     <div className="container">
-      {step === 1 && (
+      {step === 3 && (
         <FormBackup nextStep={nextStep} setFormValues={setFormValues} />
       )}
       {step === 2 && (
         <FormServer nextStep={nextStep} setFormValues={setFormValues} />
       )}
+      {step === 1 && (
+        <FormHA nextStep={nextStep} setFormValues={setFormValues} />
+      )}
+      {step === 4 && <Success infra={formValues} />}
     </div>
   );
 };

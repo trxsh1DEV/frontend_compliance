@@ -1,10 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import {
-  DefaultValuesBackup,
-  schemaBackup,
-} from "../../../utils/Schemas/schemaFormBackup";
-import { FormBackupProps, FormularyProps } from "../../../types/typesForm";
+import { schemaHA } from "../../../utils/Schemas/schemaFormHA";
+import { FormularyProps, FormHAProps } from "../../../types/typesForm";
 import { useState } from "react";
 
 const useFormulary = ({ nextStep, setFormValues }: FormularyProps) => {
@@ -27,27 +24,17 @@ const useFormulary = ({ nextStep, setFormValues }: FormularyProps) => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<FormBackupProps>({
+  } = useForm<FormHAProps>({
     mode: "onBlur",
     criteriaMode: "all",
-    resolver: zodResolver(schemaBackup),
-    defaultValues: DefaultValuesBackup,
+    resolver: zodResolver(schemaHA),
   });
 
-  // const isEnabled = watch('backup.frequ');
-  const isEnabled = watch([
-    "backup.frequency.enabled",
-    "backup.policy.enabled",
-    "backup.restoration.enabled",
-    "backup.storage.local.enabled",
-    "backup.storage.remote.enabled",
-  ]);
+  const tested = watch("ha.tested");
+  const haveHA = watch("ha.enabled");
+
   const handleNext = () => {
     nextStep();
-  };
-
-  const test = (n: number) => {
-    return isEnabled[n] ? "" : { cursor: "not-allowed" };
   };
 
   return {
@@ -56,8 +43,9 @@ const useFormulary = ({ nextStep, setFormValues }: FormularyProps) => {
     register,
     errors,
     handleNext,
-    test,
+    haveHA,
     formValidate,
+    tested,
   };
 };
 

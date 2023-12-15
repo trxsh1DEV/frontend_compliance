@@ -9,7 +9,6 @@ export const fieldsBackupSchema = z.object({
 });
 
 export const schemaBackup = z.object({
-  // client: z.string(),
   backup: z.object({
     frequency: fieldsBackupSchema,
     restoration: fieldsBackupSchema,
