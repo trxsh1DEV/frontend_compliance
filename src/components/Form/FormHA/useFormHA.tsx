@@ -25,6 +25,7 @@ const useFormulary = ({ nextStep, setFormValues }: FormularyProps) => {
     register,
     handleSubmit,
     watch,
+    setValue,
     formState: { errors },
   } = useForm<FormHAProps>({
     mode: "onBlur",
@@ -37,7 +38,7 @@ const useFormulary = ({ nextStep, setFormValues }: FormularyProps) => {
         score: 0,
         description: "",
         solutions: "none",
-        tested: true,
+        tested: false,
       },
     },
   });
@@ -50,22 +51,21 @@ const useFormulary = ({ nextStep, setFormValues }: FormularyProps) => {
   };
 
   useEffect(() => {
-    if (!haveHA) {
-      setFormValidate(true);
-      return;
-    } else if (Object.keys(errors).length === 0) {
-      setFormValidate(true);
-      return;
+    if (!haveHA || Object.keys(errors).length === 0) {
+      return setFormValidate(true);
     }
     setFormValidate(false);
-  }, [errors]);
+  }, [errors, haveHA]);
 
   useEffect(() => {
-    if (haveHA) {
-      // Defina o foco no input após a renderização inicial
-      refFocus.current?.focus();
-    }
-  }, [haveHA]);
+    !tested && setValue("ha.rto", 0);
+  }, [setValue, tested]);
+
+  // useEffect(() => {
+  //   if (haveHA) {
+  //     refFocus.current?.focus();
+  //   }
+  // }, [haveHA]);
 
   return {
     handleFormSubmit,

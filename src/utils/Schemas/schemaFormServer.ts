@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { descriptionType, scoreType } from "./genericForm";
 
-export const fieldsServerSchema = z.array(
+const fieldsServerSchema = z.array(
   z.object({
     serverName: z.string().min(3, "O nome deve ser maior que 3"),
     systemOperation: z.object({
@@ -10,7 +10,7 @@ export const fieldsServerSchema = z.array(
           return { message: "Informe 'Regular' ou 'Irregular'" };
         },
       }),
-      score: scoreType,
+      score: scoreType.positive("Informe um valor maior que 0"),
     }),
     config: z.object({
       level: z.enum(["low", "medium", "high"], {
@@ -18,13 +18,26 @@ export const fieldsServerSchema = z.array(
           return { message: "Informe 'low'|'medium'|'high'" };
         },
       }),
-      score: scoreType,
+      score: scoreType.positive("Informe um valor maior que 0"),
     }),
-    monitoringPerfomance: z.object({
-      enabled: z.boolean(),
-      score: scoreType,
-    }),
-    score: scoreType,
+    monitoringPerfomance: z
+      .object({
+        enabled: z.boolean(),
+        score: scoreType,
+      })
+      .superRefine((values, ctx) => {
+        if (values.enabled && values.score <= 0) {
+          ctx.addIssue({
+            path: ["score"],
+            code: z.ZodIssueCode.too_small,
+            minimum: 0,
+            type: "number",
+            inclusive: true,
+            message: "Insira um valor maior que 0",
+          });
+        }
+      }),
+    score: scoreType.positive("Informe um valor maior que 0"),
     description: descriptionType,
   })
 );

@@ -24,6 +24,7 @@ const useFormulary = ({ nextStep, setFormValues }: FormularyProps) => {
     handleSubmit,
     watch,
     control,
+    setValue,
     formState: { errors },
   } = useForm<FormServerProps>({
     mode: "onBlur",
@@ -35,16 +36,11 @@ const useFormulary = ({ nextStep, setFormValues }: FormularyProps) => {
   const haveServer = watch("server.enabled");
 
   useEffect(() => {
-    console.log(Object.keys(errors).length);
-    if (!haveServer) {
-      setFormValidate(true);
-      return;
-    } else if (Object.keys(errors).length === 0) {
-      setFormValidate(true);
-      return;
+    if (!haveServer || Object.keys(errors).length === 0) {
+      return setFormValidate(true);
     }
     setFormValidate(false);
-  });
+  }, [errors, haveServer]);
 
   const { fields, append, remove } = useFieldArray({
     name: "server.servers",
@@ -54,9 +50,18 @@ const useFormulary = ({ nextStep, setFormValues }: FormularyProps) => {
   const handleNext = () => {
     nextStep();
   };
+
   const monitoringServer = (n: number) => {
     const servers = watch("server.servers");
-    return servers[n].monitoringPerfomance.enabled;
+    const monitoring = servers[n]?.monitoringPerfomance?.enabled;
+
+    useEffect(() => {
+      if (!monitoring) {
+        setValue(`server.servers.${n}.monitoringPerfomance.score`, 0);
+      }
+    }, [monitoring, n, setValue]);
+
+    return monitoring;
   };
 
   return {

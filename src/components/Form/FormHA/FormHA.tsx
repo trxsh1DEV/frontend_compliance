@@ -14,7 +14,7 @@ const FormHA: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
     haveHA,
     tested,
     formValidate,
-    refFocus,
+    // refFocus,
   } = useFormulary({ nextStep, setFormValues });
 
   return (
@@ -37,7 +37,7 @@ const FormHA: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
                   helperText={errors.ha?.description?.message}
                   label="Descrição (Opcional)"
                   placeholder="Insira uma descrição"
-                  ref={refFocus}
+                  // ref={refFocus}
                 />
                 <Input {...register(`ha.tested`)} type="checkbox" />
 
@@ -70,11 +70,12 @@ const FormHA: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
                   helperText={errors.ha?.solutions?.message}
                 />
               </Container>
+              <button type="submit" disabled={!haveHA}>
+                Validate
+              </button>
             </>
           )}
-          <button type="submit" disabled={!haveHA}>
-            Validate
-          </button>
+
           <button onClick={handleNext} disabled={!formValidate}>
             Next
           </button>

@@ -4,7 +4,6 @@ export const scoreType = z
   .number({
     invalid_type_error: "Insira um número válido",
   })
-  .positive("Informe um valor maior que 0")
   .max(10, "Informe um valor menor que 11");
 
-export const descriptionType = z.string().optional();
+export const descriptionType = z.optional(z.string());

@@ -2,22 +2,52 @@ import { z } from "zod";
 import { descriptionType, scoreType } from "./genericForm";
 
 export const schemaHA = z.object({
-  ha: z.object({
-    enabled: z.boolean(),
-    solutions: z.enum(
-      ["redundancy", "load balance", "failover", "cluster", "none"],
-      {
-        errorMap: () => {
-          return {
-            message:
-              "Informe 'redundancy'|'load balance'|'failover'|'cluster'|'none'",
-          };
-        },
+  ha: z
+    .object({
+      enabled: z.boolean(),
+      solutions: z.enum(
+        ["redundancy", "load balance", "failover", "cluster", "none"],
+        {
+          errorMap: () => {
+            return {
+              message:
+                "Informe 'redundancy'|'load balance'|'failover'|'cluster'|'none'",
+            };
+          },
+        }
+      ),
+      tested: z.boolean(),
+      rto: z.number(),
+      score: scoreType,
+      description: descriptionType,
+    })
+    .superRefine((values, ctx) => {
+      if (values.tested && values.rto <= 0) {
+        ctx.addIssue({
+          path: ["rto"],
+          code: z.ZodIssueCode.too_small,
+          minimum: 0,
+          type: "number",
+          inclusive: true,
+          message: "Insira um valor maior que 0",
+        });
+      } else if (values.enabled && values.score <= 0) {
+        ctx.addIssue({
+          path: ["score"],
+          code: z.ZodIssueCode.too_small,
+          minimum: 0,
+          type: "number",
+          inclusive: true,
+          message: "Insira um valor maior que 0",
+        });
       }
-    ),
-    tested: z.boolean(),
-    rto: scoreType.optional(),
-    score: scoreType.optional(),
-    description: descriptionType,
-  }),
+    })
+    .transform((fields) => ({
+      enabled: fields.enabled,
+      solutions: fields.solutions,
+      tested: fields.tested,
+      rto: fields.tested ? fields.rto : 0,
+      score: fields.score,
+      description: fields.description,
+    })),
 });

@@ -97,7 +97,6 @@ const FormServer: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
                         errors.server?.servers?.[index]?.monitoringPerfomance
                           ?.score?.message
                       }
-                      // disabled={!monitoringServer(index)}
                       disabled={!monitoringServer(index)}
                     />
                   </Container>
@@ -124,7 +123,8 @@ const FormServer: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
                       label="Quantos pontos?"
                       type="number"
                       helperText={
-                        errors.server?.servers?.[index]?.config?.score?.message
+                        errors.server?.servers?.[index]?.systemOperation?.score
+                          ?.message
                       }
                     />
                   </Container>
@@ -189,7 +189,9 @@ const FormServer: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
           )}
 
           <ButtonContent>
-            <button type="submit">Send</button>
+            <button type="submit" disabled={!haveServer}>
+              Send
+            </button>
             <button onClick={handleNext} disabled={!formValidate}>
               next
             </button>
