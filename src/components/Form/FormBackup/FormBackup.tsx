@@ -43,7 +43,7 @@ const FormBackup: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
                 <Input
                   {...register(`backup.frequency.level`)}
                   type="text"
-                  placeholder="Digite 'low' | 'high'"
+                  placeholder="Informe 'low' | 'medium' | 'high'"
                   label="Frequencia de Backup"
                   helperText={errors.backup?.frequency?.level?.message}
                   style={isEnabled(0)}

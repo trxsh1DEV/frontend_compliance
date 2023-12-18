@@ -68,7 +68,7 @@ export const frequencySchema = z
     enabled: z.boolean(),
     score: scoreType,
     level: z.optional(
-      z.enum(["low", "high"], {
+      z.enum(["low", "medium", "high"], {
         errorMap: () => {
           return {
             message: "Informe 'low' | 'high'",
@@ -91,6 +91,7 @@ export const frequencySchema = z
     } else if (
       values.enabled &&
       values.level !== "low" &&
+      values.level !== "medium" &&
       values.level !== "high"
     ) {
       ctx.addIssue({

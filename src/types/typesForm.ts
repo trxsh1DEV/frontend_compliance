@@ -6,9 +6,12 @@ import { schemaHA } from "../utils/Schemas/schemaFormHA";
 export type FormBackupProps = z.infer<typeof schemaBackup>;
 export type FormServerProps = z.infer<typeof schemaServer>;
 export type FormHAProps = z.infer<typeof schemaHA>;
+type clientType = {
+  clientId: string;
+};
 
 export type combineInfra =
-  | (FormServerProps & FormBackupProps & FormHAProps)
+  | (FormServerProps & FormBackupProps & FormHAProps & clientType)
   | undefined;
 
 export interface FormularyProps {

@@ -1,9 +1,10 @@
 // Component Success
 import { combineInfra } from "../types/typesForm";
+import { calledApi } from "../utils/requestApi";
 
 const Success = ({ infra }: { infra: combineInfra }) => {
   if (infra) {
-    console.log(infra);
+    calledApi(infra, "compliance");
   }
   return <>Success</>;
 };

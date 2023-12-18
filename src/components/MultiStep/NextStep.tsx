@@ -9,6 +9,7 @@ import Success from "../../pages/Success";
 const AddCompliance = () => {
   const [step, setStep] = useState(1);
   const [formValues, setFormValues] = useState<combineInfra>();
+  console.log(formValues);
 
   const nextStep = () => {
     setStep(step + 1);
@@ -16,13 +17,13 @@ const AddCompliance = () => {
 
   return (
     <div className="container">
-      {step === 1 && (
+      {step === 2 && (
         <FormBackup nextStep={nextStep} setFormValues={setFormValues} />
       )}
       {step === 3 && (
         <FormServer nextStep={nextStep} setFormValues={setFormValues} />
       )}
-      {step === 2 && (
+      {step === 1 && (
         <FormHA nextStep={nextStep} setFormValues={setFormValues} />
       )}
       {step === 4 && <Success infra={formValues} />}

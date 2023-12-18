@@ -68,6 +68,8 @@ const useFormulary = ({ nextStep, setFormValues }: FormularyProps) => {
     return fieldsEnabled[n] ? "" : { cursor: "not-allowed" };
   };
 
+  console.log(errors);
+
   useEffect(() => {
     if (!haveBackup || Object.keys(errors).length === 0) {
       return setFormValidate(true);
