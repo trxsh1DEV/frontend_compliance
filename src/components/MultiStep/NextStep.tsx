@@ -9,7 +9,6 @@ import Success from "../../pages/Success";
 const AddCompliance = () => {
   const [step, setStep] = useState(1);
   const [formValues, setFormValues] = useState<combineInfra>();
-  console.log(formValues);
 
   const nextStep = () => {
     setStep(step + 1);

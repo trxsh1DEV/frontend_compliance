@@ -6,7 +6,6 @@ export default createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
     outline: 0;
-    box-sizing: border-box;
     font-size: 1.8rem;
   }
   body {
@@ -27,7 +26,5 @@ export default createGlobalStyle`
   button {
     cursor: pointer;
   }
-  a{
-    text-decoration: none;
-  }
+
 `;

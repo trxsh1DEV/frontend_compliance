@@ -7,7 +7,7 @@ export type FormBackupProps = z.infer<typeof schemaBackup>;
 export type FormServerProps = z.infer<typeof schemaServer>;
 export type FormHAProps = z.infer<typeof schemaHA>;
 type clientType = {
-  clientId: string;
+  client: string;
 };
 
 export type combineInfra =
