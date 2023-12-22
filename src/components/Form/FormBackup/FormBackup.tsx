@@ -3,6 +3,7 @@ import { Input } from "../../Input/Input";
 import { FC } from "react";
 import useFormulary from "./useFormulary";
 import { FormularyProps } from "../../../types/typesForm";
+import { Button } from "@mui/material";
 
 const FormBackup: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
   const {
@@ -197,9 +198,16 @@ const FormBackup: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
             </>
           )}
 
-          <button onClick={handleNext} disabled={!formValidate}>
+          <Button
+            size="large"
+            sx={{ fontSize: "16px" }}
+            color="secondary"
+            variant="outlined"
+            onClick={handleNext}
+            disabled={!formValidate}
+          >
             Next
-          </button>
+          </Button>
         </FormContainer>
       </MainContainer>
     </>

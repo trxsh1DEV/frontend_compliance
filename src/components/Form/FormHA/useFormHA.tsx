@@ -2,14 +2,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { schemaHA } from "../../../utils/Schemas/schemaFormHA";
 import { FormularyProps, FormHAProps } from "../../../types/typesForm";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 const useFormulary = ({ nextStep, setFormValues }: FormularyProps) => {
   const [formValidate, setFormValidate] = useState(false);
-  const refFocus = useRef<HTMLInputElement>(null);
+  // const refFocus = useRef<HTMLInputElement>(null);
 
   const handleFormSubmit = async (data: any) => {
     setFormValidate(true);
+    console.log(data);
 
     try {
       setFormValues((prevState: any) => ({
@@ -25,6 +26,7 @@ const useFormulary = ({ nextStep, setFormValues }: FormularyProps) => {
     register,
     handleSubmit,
     watch,
+    control,
     setValue,
     formState: { errors },
   } = useForm<FormHAProps>({
@@ -37,7 +39,7 @@ const useFormulary = ({ nextStep, setFormValues }: FormularyProps) => {
         rto: 0,
         score: 0,
         description: "",
-        solutions: "none",
+        solutions: ["none"],
         tested: false,
       },
     },
@@ -76,7 +78,7 @@ const useFormulary = ({ nextStep, setFormValues }: FormularyProps) => {
     haveHA,
     formValidate,
     tested,
-    refFocus,
+    control,
   };
 };
 

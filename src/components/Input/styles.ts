@@ -5,14 +5,14 @@ import { lighten } from "polished";
 export const InputStyle = styled.input<{ hasError: boolean }>`
   padding: 1rem;
   border-radius: 8px;
-  border: 1px solid ${theme.colors.primary};
+  border: 1px solid ${theme.colors.cyanPrimary};
   margin: 0;
   width: fit-content;
   max-width: 300px;
 
   &:focus {
-    border-color: ${theme.colors.green};
-    outline: 2px solid ${lighten(0.2, theme.colors.green)};
+    border-color: ${theme.colors.cyanPrimary};
+    outline: 1px solid ${lighten(0.2, theme.colors.cyanPrimary)};
   }
 
   &::placeholder {

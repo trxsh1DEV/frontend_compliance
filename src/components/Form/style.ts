@@ -15,9 +15,11 @@ export const FormContainer = styled.form`
 `;
 
 export const MainContainer = styled.div`
+  width: calc(100vw - 250px);
+  height: 94vh;
   display: flex;
   justify-content: center;
-  width: 98vw;
+  align-items: center;
 `;
 
 export const Container = styled.div`

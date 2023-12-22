@@ -7,9 +7,11 @@ const theme = {
     green: "#3FD97A",
     green_100: "#65EA98",
     errorLight: "#dc6179",
+    cyanPrimary: "#1BA9D4",
   },
   fonts: {
-    main: "Arial, sans-serif",
+    default: "'Urbanist', sans-serif",
+    secondary: "'Open Sans', -apple-system",
   },
 };
 

@@ -10,6 +10,7 @@ import { FC } from "react";
 import useFormulary from "../FormServer/useFormServer";
 import { Minus, Plus } from "phosphor-react";
 import { FormularyProps } from "../../../types/typesForm";
+import { Button } from "@mui/material";
 
 const FormServer: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
   const {
@@ -192,9 +193,16 @@ const FormServer: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
             <button type="submit" disabled={!haveServer}>
               Send
             </button>
-            <button onClick={handleNext} disabled={!formValidate}>
-              next
-            </button>
+            <Button
+              size="large"
+              sx={{ fontSize: "16px" }}
+              color="secondary"
+              variant="outlined"
+              onClick={handleNext}
+              disabled={!formValidate}
+            >
+              Next
+            </Button>
           </ButtonContent>
         </FormContainer>
       </MainContainer>

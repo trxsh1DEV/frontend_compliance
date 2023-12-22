@@ -8,9 +8,10 @@ import Register from "./pages/Auth/Register";
 import Login from "./pages/Auth/Login";
 import { ToastContainer } from "react-toastify";
 import { Home } from "./pages/Home/Home";
-import Sidebar from "./components/Navbar/Navbar";
+import Sidebar from "./pages/Navbar/Navbar";
 import { AppContainer, MainContent } from "./app";
-// import './app.css'
+import Clients from "./pages/Clients/Clients";
+import Client from "./pages/Clients/Client";
 
 export function App() {
   return (
@@ -25,6 +26,8 @@ export function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/compliance/add" element={<AddCompliance />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/clients/:id" element={<Client />} />
+                <Route path="/clients" element={<Clients />} />
                 <Route path="/admin/login" element={<Login />} />
               </Routes>
             </MainContent>
