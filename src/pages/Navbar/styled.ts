@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { NavLink as ReactRouterNavLink } from "react-router-dom";
-import { mobile } from "../../styles/theme";
+import { compactSlidebar } from "../../styles/theme";
 
 export const SidebarContainer = styled.div`
   height: 100vh;
@@ -10,7 +10,7 @@ export const SidebarContainer = styled.div`
   transition: 300ms all ease-in-out;
 
   & {
-    ${mobile({ width: "67px" })}
+    ${compactSlidebar({ width: "67px" })}
   }
 `;
 
@@ -35,6 +35,6 @@ export const ListItemStyled = styled.div`
   }
 
   & > span {
-    ${mobile({ display: "none" })}
+    ${compactSlidebar({ display: "none" })}
   }
 `;

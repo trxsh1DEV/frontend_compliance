@@ -8,6 +8,8 @@ const theme = {
     green_100: "#65EA98",
     errorLight: "#dc6179",
     cyanPrimary: "#1BA9D4",
+    violet: "#8305BD",
+    rose: "#E305C9",
   },
   fonts: {
     default: "'Urbanist', sans-serif",
@@ -17,7 +19,15 @@ const theme = {
 
 export const mobile = (props: any) => {
   return css`
-    @media only screen and (max-width: 920px) {
+    @media only screen and (max-width: 770px) {
+      ${props}
+    }
+  `;
+};
+
+export const compactSlidebar = (props: any) => {
+  return css`
+    @media only screen and (max-width: 1020px) {
       ${props}
     }
   `;

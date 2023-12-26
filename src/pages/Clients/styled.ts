@@ -23,19 +23,21 @@ export const DivButton = styled.div`
 `;
 
 export const TopContainer = styled.section`
-  width: 100%;
   background-color: gray;
 `;
 
 export const CenterContainer = styled.section`
-  width: 100%;
   background-color: cyan;
 `;
 
 export const BottomContainer = styled.section`
-  width: 100%;
   background-color: green;
   overflow-y: hidden;
+`;
+
+export const MainContainer = styled.main`
+  height: 100%;
+  width: 100%;
 `;
 
 export const WrapperGrid = styled.div`
@@ -45,7 +47,7 @@ export const WrapperGrid = styled.div`
   gap: 30px 20px;
   padding: 15px;
   overflow-y: hidden;
-  justify-items: self-start;
+  /* justify-items: self-start; */
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
@@ -53,7 +55,8 @@ export const WrapperGrid = styled.div`
 `;
 
 export const ContentGrid = styled.div`
-  background-color: #ccc;
+  background-color: #333;
+  font-size: 1.4rem !important;
   padding: 15px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -63,4 +66,17 @@ export const Button = styled.button`
   padding: 5px;
   position: absolute;
   background-color: #fff;
+`;
+
+export const Bold = styled.b`
+  font-size: 2rem;
+  color: ${({ theme }) => theme.colors.rose};
+`;
+
+export const WrapperAvailable = styled.div`
+  margin: 1rem 0px;
+`;
+
+export const ContentGteaa = styled.article`
+  /* font-size: 1.2rem !important; */
 `;
