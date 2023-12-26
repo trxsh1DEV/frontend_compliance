@@ -4,7 +4,7 @@ import {
   Container,
   Heading2,
   ButtonContent,
-} from "../style";
+} from "../styleForm";
 import { Input } from "../../Input/Input";
 import { FC } from "react";
 import useFormulary from "../FormServer/useFormServer";

@@ -1,4 +1,9 @@
-import { FormContainer, MainContainer, Container, Heading2 } from "../style";
+import {
+  FormContainer,
+  MainContainer,
+  Container,
+  Heading2,
+} from "../styleForm";
 import { Input } from "../../Input/Input";
 import { FC } from "react";
 import useFormulary from "./useFormulary";

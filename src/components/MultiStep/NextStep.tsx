@@ -17,7 +17,6 @@ const AddCompliance = () => {
   const nextStep = () => {
     setStep(step + 1);
   };
-  console.log(id);
 
   return (
     <div className="container">
