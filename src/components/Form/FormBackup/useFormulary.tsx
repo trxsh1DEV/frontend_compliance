@@ -59,7 +59,6 @@ const useFormulary = ({ nextStep, setFormValues }: FormularyProps) => {
     !fieldsEnabled[3] && setValue("backup.policy.score", 0);
     !fieldsEnabled[4] && setValue("backup.restoration.score", 0);
   }, [setValue, fieldsEnabled]);
-  // console.log(fieldsEnabled.);
   const handleNext = () => {
     nextStep();
   };
@@ -67,8 +66,6 @@ const useFormulary = ({ nextStep, setFormValues }: FormularyProps) => {
   const isEnabled = (n: number) => {
     return fieldsEnabled[n] ? "" : { cursor: "not-allowed" };
   };
-
-  console.log(errors);
 
   useEffect(() => {
     if (!haveBackup || Object.keys(errors).length === 0) {

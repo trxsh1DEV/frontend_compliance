@@ -143,7 +143,7 @@ const FormServer: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
                       {...register(`server.servers.${index}.score`, {
                         valueAsNumber: true,
                       })}
-                      label="Quantos pontos?"
+                      label="Pontuação geral do servidor"
                       type="number"
                       helperText={
                         errors.server?.servers?.[index]?.score?.message

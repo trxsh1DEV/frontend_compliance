@@ -10,7 +10,6 @@ const useFormulary = ({ nextStep, setFormValues }: FormularyProps) => {
 
   const handleFormSubmit = async (data: any) => {
     setFormValidate(true);
-    console.log(data);
 
     try {
       setFormValues((prevState: any) => ({

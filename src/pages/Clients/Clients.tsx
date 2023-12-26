@@ -3,7 +3,7 @@ import { useEffect, useState } from "preact/hooks";
 import { requestWithToken } from "../../utils/requestApi";
 import { formatDateString } from "../../utils/formatDate";
 import { FormRegisterProps } from "../../types/typesForm";
-import { columns } from "./columntsDataClients";
+import { columns } from "./DataClients";
 
 export default function Clients() {
   const [data, setData] = useState<[FormRegisterProps]>();

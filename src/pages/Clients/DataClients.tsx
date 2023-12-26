@@ -48,7 +48,9 @@ export const columns: GridColDef[] = [
       return (
         <Actions className="action">
           <Link to={`/clients/${params.row._id}`}>
-            <Image src="view.svg" alt="" />
+            <DivButton>
+              <Image src="view.svg" alt="" />
+            </DivButton>
           </Link>
 
           <DivButton className="edit" onClick={() => console.log(params.row)}>

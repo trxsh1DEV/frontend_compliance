@@ -1,21 +1,27 @@
 import axios from "axios";
 import Cookie from "js-cookie";
 import { combineInfra } from "../types/typesForm";
+import { toast } from "react-toastify";
 
-export const calledApi = async (data: combineInfra, route?: string) => {
+export const calledApi = async (
+  data: combineInfra,
+  id: string,
+  route?: string
+) => {
   const apiUrl = `http://localhost:5421/api/${route}`;
   if (!data) return;
-  data.client = "657368d6d908967cdbabc46e" ?? data.client;
-
+  console.log(id);
+  data.client = id;
+  console.log("asd", data);
   try {
-    const res = await axios.post(apiUrl, {
+    const res = await requestWithToken.post(apiUrl, {
       data,
     });
     console.log(res.status);
     console.log(res.data);
-    // console.log(res.headers);
   } catch (err: any) {
-    console.log(err.message);
+    toast.error(`Falha ao criar compliance`);
+    console.log(err?.response?.data?.errors[0]);
   }
 };
 

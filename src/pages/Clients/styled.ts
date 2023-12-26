@@ -24,7 +24,6 @@ export const DivButton = styled.div`
 
 export const TopContainer = styled.section`
   width: 100%;
-  /* height: 30%; */
   background-color: gray;
 `;
 

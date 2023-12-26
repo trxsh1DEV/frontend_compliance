@@ -38,6 +38,7 @@ const Login = () => {
   const onSubmit = async (data: any) => {
     try {
       const res = await requestWithToken.post("auth/login", data);
+      console.log(res.data);
       Cookie.set("token", res.data.token, { expires: 1 });
       toast.success("Login realizado com sucesso");
       navigate("/");

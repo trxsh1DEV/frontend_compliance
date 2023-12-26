@@ -54,7 +54,7 @@ export default function Client() {
             <ContentGrid>asdhuasiud</ContentGrid>
           </WrapperGrid>
         </BottomContainer>
-        <Link to="/compliance/add">
+        <Link to="/compliance/add" state={{ id: data._id }}>
           <button>
             <Plus />
           </button>
