@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+      }
+
+      .post {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .post-content {
+        overflow: hidden;
+        text-overflow: clip;
+        white-space: nowrap;
+        max-height: 120px;
+      }
+
+      .read-more-btn {
+        cursor: pointer;
+        color: blue;
+        display: block;
+        margin-top: 10px;
+      }
+    </style>
+    <script>
+      function toggleText() {
+        const postContent = document.querySelector(".post-content");
+        postContent.classList.toggle("expanded");
+      }
+    </script>
+  </head>
+  <body>
+    <div class="post">
+      <div class="post-content">
+        <!-- Seu conteúdo do post aqui -->
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat.
+      </div>
+      <span class="read-more-btn" onclick="toggleText()">Leia Mais</span>
+    </div>
+  </body>
+</html>

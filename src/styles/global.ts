@@ -8,14 +8,14 @@ export default createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
     outline: 0;
-    /* font-size: 1.8rem; */
+    font-size: 1.8rem;
     color: #fff;
   }
   body {
     background: #212534;
     font-family: ${theme.fonts.default};
     -webkit-font-smoothing: antialiased;
-    font-size: 1.8rem;
+    /* font-size: 1.8rem; */
   }
   html {
     font-size: 62.5%;
@@ -25,7 +25,9 @@ export default createGlobalStyle`
   }
 
   h2 {
-    margin-bottom: 1rem;
+    /* margin-bottom: 1rem; */
+    text-align: center;
+    border-bottom: 1px solid #fff;
   }
   button {
     cursor: pointer;
