@@ -10,6 +10,7 @@ import { Actions, DivButton, Image } from "./styled";
 import { Link } from "react-router-dom";
 import "./test.css";
 import { toast } from "react-toastify";
+import { Plus } from "phosphor-react";
 
 export default function Clients() {
   const [data, setData] = useState<[FormRegisterProps]>();
@@ -91,11 +92,9 @@ export default function Clients() {
   };
 
   const handleDelete = async (id: string) => {
-    console.log("oi", id);
     try {
       await requestWithToken.delete(`clients/${id}`);
-      location.reload();
-      // toast.success("Cliente deletado com sucesso");
+      toast.success("Cliente deletado com sucesso");
     } catch (err: any) {
       toast.error(
         `Falha ao deletar usuário - ${err?.response?.data?.errors[0]}`
@@ -118,7 +117,7 @@ export default function Clients() {
     };
 
     fetchData();
-  }, []);
+  }, [data]);
 
   if (!data) return null;
   const rowsId = data.map((clients, i) => ({
@@ -148,7 +147,11 @@ export default function Clients() {
         disableColumnSelector
         disableColumnMenu
       />
-
+      <div>
+        <Link to="/register">
+          <Plus />
+        </Link>
+      </div>
       {modalIsOpen && (
         <CustomModal isOpen={modalIsOpen} onClose={handleCloseModal} id={id} />
       )}

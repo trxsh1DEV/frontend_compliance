@@ -25,7 +25,6 @@ export default createGlobalStyle`
   }
 
   h2 {
-    /* margin-bottom: 1rem; */
     text-align: center;
     border-bottom: 1px solid #fff;
   }

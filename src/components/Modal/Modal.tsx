@@ -61,7 +61,7 @@ const CustomModal: FC<CustomModalProps> = ({ isOpen, onClose, id }) => {
     };
 
     fetchData();
-  }, [id, setData]);
+  }, [id, data]);
   if (!data) return null;
 
   const {
