@@ -109,10 +109,10 @@ export default function Clients() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await requestWithToken.get("clients");
+        const res = await requestWithToken.get("clients/all");
         setData(res.data);
-      } catch (error) {
-        console.error("Erro ao buscar dados:", error);
+      } catch (err: any) {
+        toast.error(`Erro ao buscar dados: ${err.response.data.errors[0]}`);
       }
     };
 

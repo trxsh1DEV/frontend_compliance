@@ -1,5 +1,5 @@
 import axios from "axios";
-import Cookie from "js-cookie";
+import Cookies from "js-cookie";
 import { combineInfra } from "../types/typesForm";
 import { toast } from "react-toastify";
 
@@ -38,6 +38,6 @@ export const requestWithToken = axios.create({
   baseURL: baseUrl,
   headers: {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${Cookie.get("token")}`,
+    Authorization: `Bearer ${Cookies.get("token")}`,
   },
 });

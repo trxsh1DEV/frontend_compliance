@@ -12,25 +12,34 @@ import Sidebar from "./pages/Navbar/Navbar";
 import { AppContainer, MainContent } from "./app";
 import Clients from "./pages/Clients/Clients";
 import Client from "./pages/Clients/Client";
+import Cookies from "js-cookie";
+import UserContext from "./Context/UserContext";
 
 export function App() {
+  const user = Cookies.get("token");
+  // console.log(user);
   return (
     <>
       <ThemeProvider theme={theme}>
         <BrowserRouter>
           <ToastContainer autoClose={2000} theme="dark" />
           <AppContainer>
-            <Sidebar />
-            <MainContent>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/compliance/add" element={<AddCompliance />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/clients/:id" element={<Client />} />
-                <Route path="/clients" element={<Clients />} />
-                <Route path="/admin/login" element={<Login />} />
-              </Routes>
-            </MainContent>
+            <UserContext>
+              <Sidebar />
+              <MainContent>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/compliance/add" element={<AddCompliance />} />
+                  <Route path="/register" element={<Register />} />
+                  <Route path="/clients/:id" element={<Client />} />
+                  <Route
+                    path="/clients"
+                    element={user ? <Clients /> : <Login />}
+                  />
+                  <Route path="/admin/login" element={<Login />} />
+                </Routes>
+              </MainContent>
+            </UserContext>
           </AppContainer>
         </BrowserRouter>
         <GlobalStyle />

@@ -6,7 +6,6 @@ import { requestWithToken } from "../../utils/requestApi";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Input } from "../../components/Input/Input";
-import { useNavigate } from "react-router-dom";
 import Cookie from "js-cookie";
 
 const schema = z.object({
@@ -32,14 +31,13 @@ const Login = () => {
       password: "",
     },
   });
-  const navigate = useNavigate();
 
   const onSubmit = async (data: any) => {
     try {
       const res = await requestWithToken.post("auth/login", data);
       Cookie.set("token", res.data.token, { expires: 1 });
+      location.href = "/clients";
       toast.success("Login realizado com sucesso");
-      navigate("/");
     } catch (err: any) {
       console.log(err.response.data.errors[0]);
       toast.error(`Erro ao tentar se conectar: ${err.response.data.errors[0]}`);

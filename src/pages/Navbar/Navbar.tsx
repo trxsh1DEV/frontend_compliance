@@ -1,9 +1,42 @@
 // Sidebar.js
-import { House, UserCircle, Graph, SignIn, SignOut } from "phosphor-react";
+import {
+  House,
+  UsersThree,
+  Graph,
+  SignIn,
+  SignOut,
+  UserCircleGear,
+} from "phosphor-react";
 import { SidebarContainer, ListItemStyled, NavLink } from "./styled";
 import Cookies from "js-cookie";
+import { useContext, useEffect, useState } from "preact/hooks";
+import { UserContext } from "../../Context/UserContext";
+import { requestWithToken } from "../../utils/requestApi";
+
 const Sidebar = () => {
-  const tokenValid = Cookies.get("token") && true;
+  const [tokenValid, setToken] = useState(Cookies.get("token"));
+  const { user, setUser } = useContext(UserContext);
+
+  const signOut = () => {
+    Cookies.remove("token");
+    location.href = "/admin/login";
+  };
+
+  useEffect(() => {
+    if (Cookies.get("token")) {
+      setToken(Cookies.get("token"));
+      findUserLogged();
+    }
+  }, [tokenValid]);
+
+  const findUserLogged = async () => {
+    try {
+      const response = await requestWithToken.get("/clients/");
+      setUser(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <SidebarContainer>
@@ -16,7 +49,7 @@ const Sidebar = () => {
 
       <NavLink to="/clients">
         <ListItemStyled>
-          <UserCircle size={26} />
+          <UsersThree size={26} />
           <span>Clientes</span>
         </ListItemStyled>
       </NavLink>
@@ -28,12 +61,20 @@ const Sidebar = () => {
         </ListItemStyled>
       </NavLink>
       {tokenValid ? (
-        <NavLink to="/admin/login">
-          <ListItemStyled>
-            <SignOut size={26} />
-            <span>Quit</span>
-          </ListItemStyled>
-        </NavLink>
+        <>
+          <NavLink onClick={signOut}>
+            <ListItemStyled>
+              <UserCircleGear size={26} />
+              <span>Meu perfil</span>
+            </ListItemStyled>
+          </NavLink>
+          <NavLink onClick={signOut}>
+            <ListItemStyled>
+              <SignOut size={26} />
+              <span>Quit</span>
+            </ListItemStyled>
+          </NavLink>
+        </>
       ) : (
         <NavLink to="/admin/login">
           <ListItemStyled>
