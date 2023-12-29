@@ -96,6 +96,12 @@ export type combineInfra =
   | undefined;
 
 export interface FormularyProps {
-  nextStep: () => void;
-  setFormValues: any;
+  nextStep?: () => void;
+  setFormValues?: any;
+}
+
+export interface FormularyPropsHA {
+  nextStep?: () => void;
+  setFormValues?: any;
+  data?: any;
 }

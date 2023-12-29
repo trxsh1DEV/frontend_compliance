@@ -7,24 +7,13 @@ import {
 import { Input } from "../../Input/Input";
 import { FC } from "react";
 import useFormulary from "./useFormHA";
-import { FormularyProps } from "../../../types/typesForm";
-import {
-  Button,
-  FormHelperText,
-  InputLabel,
-  MenuItem,
-  Select,
-} from "@mui/material";
+import { FormularyPropsHA } from "../../../types/typesForm";
+import { Button, FormHelperText, MenuItem, Select } from "@mui/material";
 import { Controller } from "react-hook-form";
 import "./style.css";
+import { dataHAUtil } from "../../../utils/dataUtil";
 
-const menu = {
-  color: "#fff",
-  backgroundColor: "#333",
-  fontSize: "14px",
-};
-
-const FormHA: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
+const FormHA: FC<FormularyPropsHA> = ({ nextStep, setFormValues, data }) => {
   const {
     errors,
     handleFormSubmit,
@@ -36,7 +25,7 @@ const FormHA: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
     formValidate,
     control,
     // refFocus,
-  } = useFormulary({ nextStep, setFormValues });
+  } = useFormulary({ nextStep, setFormValues, data });
 
   return (
     <>
@@ -83,58 +72,27 @@ const FormHA: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
                   helperText={errors.ha?.score?.message}
                   label="Pontuação (Score)"
                 />
-                {/* <Input
-                  {...register(`ha.solutions`)}
-                  type="text"
-                  placeholder="redundancy, load balance, failover, cluster, none"
-                  label="Soluções de HA"
-                  helperText={errors.ha?.solutions?.message}
-                /> */}
-                <InputLabel
-                  id="multiple-select-label"
-                  sx={{ color: "#fff", fontSize: "16px" }}
-                >
-                  Soluções
-                </InputLabel>
+                <label id="multiple-select-label">Soluções</label>
                 <Controller
                   name="ha.solutions"
                   control={control}
                   render={({ field }) => (
                     <Select
                       labelId="multiple-select-label"
-                      id="multiple-select"
                       multiple
                       value={field.value}
                       onChange={(e: any) => field.onChange(e.target.value)}
-                      label="Selecionar Opções"
+                      // label="Selecionar Opções"
                       sx={{
                         color: "#fff",
                         fontSize: "16px",
                       }}
                     >
-                      <MenuItem sx={menu} className="menuItem" value="none">
-                        none
-                      </MenuItem>
-                      <MenuItem
-                        sx={menu}
-                        className="menuItem"
-                        value="redundancy"
-                      >
-                        redundancy
-                      </MenuItem>
-                      <MenuItem sx={menu} className="menuItem" value="failover">
-                        failover
-                      </MenuItem>
-                      <MenuItem sx={menu} className="menuItem" value="cluster">
-                        cluster
-                      </MenuItem>
-                      <MenuItem
-                        sx={menu}
-                        className="menuItem"
-                        value="load balance"
-                      >
-                        failover
-                      </MenuItem>
+                      {dataHAUtil.map((item) => (
+                        <MenuItem className="menuItem" value={`${item}`}>
+                          {item}
+                        </MenuItem>
+                      ))}
                     </Select>
                   )}
                 />

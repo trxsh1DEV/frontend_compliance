@@ -12,10 +12,9 @@ import {
   WrapperAvailable,
   Paragrafh,
   ArticleStyled,
-  StyledLink,
 } from "./styled";
 import { FormRegisterProps } from "../../types/typesForm";
-import { Plus } from "phosphor-react";
+import { Add } from "@mui/icons-material";
 import { formatDateString } from "../../utils/formatDate";
 
 export default function Client() {
@@ -81,9 +80,7 @@ export default function Client() {
                 <Paragrafh>
                   Descrição: {compliance.server.description}.
                 </Paragrafh>
-                <button onClick={() => handleDetails("server")}>
-                  Veja mais!
-                </button>
+                <div onClick={() => handleDetails("server")}>Veja mais!</div>
               </ArticleStyled>
             </ContentGrid>
             <ContentGrid>
@@ -97,9 +94,7 @@ export default function Client() {
                 <Paragrafh>
                   Descrição: {compliance.backup.description}.
                 </Paragrafh>
-                <button onClick={() => handleDetails("backup")}>
-                  Veja mais!
-                </button>
+                <div onClick={() => handleDetails("backup")}>Veja mais!</div>
               </ArticleStyled>
             </ContentGrid>
             <ContentGrid>
@@ -111,7 +106,7 @@ export default function Client() {
                   operacional.
                 </WrapperAvailable>
                 <Paragrafh>Descrição: {compliance.ha.description}.</Paragrafh>
-                <StyledLink to="/">Veja mais!</StyledLink>
+                <div onClick={() => handleDetails("ha")}>Veja mais!</div>
               </ArticleStyled>
             </ContentGrid>
             <ContentGrid>
@@ -125,7 +120,7 @@ export default function Client() {
                 <Paragrafh>
                   Descrição: {compliance.firewall.description}.
                 </Paragrafh>
-                <StyledLink to="/">Veja mais!</StyledLink>
+                <div onClick={() => handleDetails("firewall")}>Veja mais!</div>
               </ArticleStyled>
             </ContentGrid>
             <ContentGrid>
@@ -139,7 +134,7 @@ export default function Client() {
                 <Paragrafh>
                   Descrição: {compliance.inventory.description}.
                 </Paragrafh>
-                <StyledLink to="/">Veja mais!</StyledLink>
+                <div onClick={() => handleDetails("inventory")}>Veja mais!</div>
               </ArticleStyled>
             </ContentGrid>
             <ContentGrid>
@@ -153,7 +148,7 @@ export default function Client() {
                 <Paragrafh>
                   Descrição: {compliance.security.description}.
                 </Paragrafh>
-                <StyledLink to="/">Veja mais!</StyledLink>
+                <div onClick={() => handleDetails("security")}>Veja mais!</div>
               </ArticleStyled>
             </ContentGrid>
             <ContentGrid>
@@ -168,14 +163,14 @@ export default function Client() {
                 <Paragrafh>
                   Descrição: {compliance.servicesOutsourcing.description}.
                 </Paragrafh>
-                <StyledLink to="/">Veja mais!</StyledLink>
+                <div onClick={() => handleDetails("services")}>Veja mais!</div>
               </ArticleStyled>
             </ContentGrid>
           </WrapperGrid>
         </BottomContainer>
         <Link to="/compliance/add" state={{ id: user._id }}>
           <button>
-            <Plus />
+            <Add />
           </button>
         </Link>
       </MainContainer>

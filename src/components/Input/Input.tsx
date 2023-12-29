@@ -4,6 +4,7 @@ import { HelperText, InputStyle, Label, InputContent } from "./styles";
 type inputProps = HTMLAttributes<HTMLInputElement> & {
   label?: string;
   helperText?: string;
+  value?: string;
 };
 
 export const Input = forwardRef<HTMLInputElement, inputProps>(

@@ -119,14 +119,3 @@ export const StyledLink = styled(Link)`
     text-decoration: none;
   }
 `;
-
-export const DivFullWidth = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  padding: 10px;
-  cursor: pointer;
-
-  /* & + * {
-  } */
-`;

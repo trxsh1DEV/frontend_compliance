@@ -1,10 +1,12 @@
 import { useLocation } from "react-router-dom";
-import InfoPanel from "../InfoPanel/InfoPanel"; // Certifique-se de ajustar o caminho do import conforme necessário
+import FormHA from "../Form/FormHA/FormHA";
+// import InfoPanel from "../InfoPanel/InfoPanel";
 
 const DetailsCompliance = () => {
   const location = useLocation();
   const data = location.state?.data || {};
   const part = location.state?.part || "none";
+  // console.log(data);
 
   let selectedData = null;
 
@@ -15,14 +17,30 @@ const DetailsCompliance = () => {
     case "server":
       selectedData = data.server;
       break;
-    // Adicione mais casos conforme necessário para outras partes
+    case "firewall":
+      selectedData = data.firewall;
+      break;
+    case "ha":
+      selectedData = data.ha;
+      return <FormHA data={selectedData} />;
+      break;
+    case "services":
+      selectedData = data.servicesOutsourcing;
+      break;
+    case "inventory":
+      selectedData = data.inventory;
+      break;
+    case "security":
+      selectedData = data.security;
+      break;
     default:
       break;
   }
 
   if (!selectedData) return null;
+  // console.log(selectedData);
 
-  return <InfoPanel data={selectedData} />;
+  return <>asdsa</>;
 };
 
 export default DetailsCompliance;
