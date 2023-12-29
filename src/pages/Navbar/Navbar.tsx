@@ -14,7 +14,7 @@ import { UserContext } from "../../Context/UserContext";
 import { requestWithToken } from "../../utils/requestApi";
 
 const Sidebar = () => {
-  const [tokenValid, setToken] = useState(Cookies.get("token"));
+  const [tokenValid, setToken] = useState<string | undefined>("");
   const { user, setUser } = useContext(UserContext);
 
   const signOut = () => {
@@ -27,7 +27,7 @@ const Sidebar = () => {
       setToken(Cookies.get("token"));
       findUserLogged();
     }
-  }, [tokenValid]);
+  }, []);
 
   const findUserLogged = async () => {
     try {

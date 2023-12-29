@@ -10,7 +10,8 @@ import { Actions, DivButton, Image } from "./styled";
 import { Link } from "react-router-dom";
 import "./test.css";
 import { toast } from "react-toastify";
-import { Plus } from "phosphor-react";
+import { UserPlus } from "phosphor-react";
+// import ModalCreate from "../../components/Modal/ModalCreate";
 
 export default function Clients() {
   const [data, setData] = useState<[FormRegisterProps]>();
@@ -18,7 +19,7 @@ export default function Clients() {
   const [id, setId] = useState("");
 
   const columns: GridColDef[] = [
-    { field: "_id", type: "string", headerName: "ID", width: 60 },
+    { field: "_id", type: "text", headerName: "ID", width: 60 },
     {
       field: "avatar",
       headerName: "Avatar",
@@ -40,15 +41,15 @@ export default function Clients() {
       },
       type: "file",
     },
-    { field: "name", type: "string", headerName: "Nome cliente", width: 150 },
-    { field: "email", type: "string", headerName: "email", width: 200 },
+    { field: "name", type: "text", headerName: "Nome cliente", width: 150 },
+    { field: "email", type: "text", headerName: "email", width: 200 },
     {
       field: "social_reason",
-      type: "string",
+      type: "text",
       headerName: "Razão Social",
       width: 180,
     },
-    { field: "createdAt", type: "string", headerName: "Criado Em", width: 120 },
+    { field: "createdAt", type: "text", headerName: "Criado Em", width: 120 },
     {
       field: "isAdmin",
       type: "boolean",
@@ -86,15 +87,29 @@ export default function Clients() {
     },
   ];
 
+  const fetchData = async () => {
+    try {
+      const res = await requestWithToken.get("clients/all");
+      setData(res.data);
+    } catch (err: any) {
+      toast.error(`Erro ao buscar dados: ${err.response.data.errors[0]}`);
+    }
+  };
+
   const handleEdit = (id: string) => {
     setId(id);
     setModalIsOpen(true);
   };
 
+  // const handleAdd = () => {
+  //   setModalIsOpen(true);
+  // };
+
   const handleDelete = async (id: string) => {
     try {
       await requestWithToken.delete(`clients/${id}`);
       toast.success("Cliente deletado com sucesso");
+      fetchData();
     } catch (err: any) {
       toast.error(
         `Falha ao deletar usuário - ${err?.response?.data?.errors[0]}`
@@ -107,17 +122,8 @@ export default function Clients() {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await requestWithToken.get("clients/all");
-        setData(res.data);
-      } catch (err: any) {
-        toast.error(`Erro ao buscar dados: ${err.response.data.errors[0]}`);
-      }
-    };
-
     fetchData();
-  }, [data]);
+  }, []);
 
   if (!data) return null;
   const rowsId = data.map((clients, i) => ({
@@ -147,13 +153,16 @@ export default function Clients() {
         disableColumnSelector
         disableColumnMenu
       />
-      <div>
-        <Link to="/register">
-          <Plus />
-        </Link>
-      </div>
+      <Link to="/register">
+        <UserPlus size={32} />
+      </Link>
       {modalIsOpen && (
         <CustomModal isOpen={modalIsOpen} onClose={handleCloseModal} id={id} />
+        // <ModalCreate
+        //   isOpen={modalIsOpen}
+        //   onClose={handleCloseModal}
+        //   columns={columns}
+        // />
       )}
     </Box>
   );

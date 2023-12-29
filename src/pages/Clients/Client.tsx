@@ -1,6 +1,6 @@
 import { useEffect, useState } from "preact/hooks";
 import { Link, useLocation } from "react-router-dom";
-import { requestWithToken } from "../../utils/requestApi";
+import { requestUserToken, requestWithToken } from "../../utils/requestApi";
 import {
   BottomContainer,
   TopContainer,
@@ -27,9 +27,12 @@ export default function Client() {
   useEffect(() => {
     const fetchData = async () => {
       const resUser = requestWithToken.get(`clients/${id}`);
-      const resCompliance = requestWithToken.get(`compliance/latest`);
+      const resCompliance = requestUserToken.post("compliance/latest", {
+        client: id,
+      });
       const [user, compliance] = await Promise.all([resUser, resCompliance]);
       setUser(user.data);
+      console.log("hi");
       setCompliance(compliance.data);
     };
 
@@ -42,26 +45,29 @@ export default function Client() {
       <MainContainer>
         <TopContainer>
           <WrapperGrid>
-            <ContentGrid>Responsável {user.name}</ContentGrid>
-            <ContentGrid>{user.email}</ContentGrid>
-            <ContentGrid>{user.social_reason}</ContentGrid>
-            <ContentGrid>{formatDateString(user.createdAt)}</ContentGrid>
-            <ContentGrid>11 99999-9999</ContentGrid>
-            <ContentGrid>Tipo de contrato</ContentGrid>
-            <ContentGrid>Próximas melhorias:</ContentGrid>
-            <ContentGrid>CNPJ</ContentGrid>
+            <ContentGrid>Responsável: {user.name}</ContentGrid>
+            <ContentGrid>E-mail: {user.email}</ContentGrid>
+            <ContentGrid>Razão S.{user.social_reason}</ContentGrid>
+            <ContentGrid>
+              Ultima atualização: {formatDateString(user.createdAt)}
+            </ContentGrid>
+            <ContentGrid>Contato: 11 99999-9999</ContentGrid>
+            <ContentGrid>Tipo de contrato: Fixo</ContentGrid>
+            <ContentGrid>Problemas Critícos? No</ContentGrid>
+            <ContentGrid>CNPJ: 18.518.793/0001-09</ContentGrid>
           </WrapperGrid>
         </TopContainer>
         <CenterContainer>asdas</CenterContainer>
         <BottomContainer>
           <h1 style={{ textAlign: "center" }}>
-            Pontuação Total - {compliance.totalScore}%
+            Pontuação Total -{" "}
+            {compliance.totalScore <= 0 ? "N/A" : compliance.totalScore}%
           </h1>
           <WrapperGrid>
             <ContentGrid>
               <h2>Servidores</h2>
               <ArticleStyled>
-                Pontuação - <Bold>{compliance.server.servers[0].points}%</Bold>
+                Pontuação - <Bold>{compliance.server.points}%</Bold>
                 <WrapperAvailable>
                   O que avaliamos? Monitoramento, Hardware, e Sistema
                   operacional.

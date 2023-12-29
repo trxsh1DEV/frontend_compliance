@@ -10,15 +10,12 @@ export const calledApi = async (
 ) => {
   const apiUrl = `http://localhost:5421/api/${route}`;
   if (!data) return;
-  console.log(id);
   data.client = id;
-  console.log("asd", data);
   try {
-    const res = await requestWithToken.post(apiUrl, {
+    await requestWithToken.post(apiUrl, {
       data,
     });
-    console.log(res.status);
-    console.log(res.data);
+    toast.success("Sucesso ao criar compliance");
   } catch (err: any) {
     toast.error(`Falha ao criar compliance`);
     console.log(err?.response?.data?.errors[0]);
@@ -27,12 +24,12 @@ export const calledApi = async (
 
 const baseUrl = "http://localhost:5421/api/";
 
-// export const requestCommom = axios.create({
-//   baseURL: baseUrl,
-//   headers: {
-//     "Content-Type": "application/json",
-//   },
-// });
+export const requestUserToken = axios.create({
+  baseURL: baseUrl,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
 
 export const requestWithToken = axios.create({
   baseURL: baseUrl,
