@@ -14,6 +14,7 @@ import Clients from "./pages/Clients/Clients";
 import Client from "./pages/Clients/Client";
 import Cookies from "js-cookie";
 import UserContext from "./Context/UserContext";
+import DetailsCompliance from "./components/Compliance/DetailsCompliance";
 
 export function App() {
   const user = Cookies.get("token");
@@ -32,6 +33,10 @@ export function App() {
                   <Route path="/compliance/add" element={<AddCompliance />} />
                   <Route path="/register" element={<Register />} />
                   <Route path="/clients/:id" element={<Client />} />
+                  <Route
+                    path="/clients/:id/details"
+                    element={<DetailsCompliance />}
+                  />
                   <Route
                     path="/clients"
                     element={user ? <Clients /> : <Login />}

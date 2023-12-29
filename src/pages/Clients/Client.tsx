@@ -1,5 +1,5 @@
 import { useEffect, useState } from "preact/hooks";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { requestUserToken, requestWithToken } from "../../utils/requestApi";
 import {
   BottomContainer,
@@ -21,23 +21,29 @@ import { formatDateString } from "../../utils/formatDate";
 export default function Client() {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
+  const navigate = useNavigate();
   const [user, setUser] = useState<FormRegisterProps>();
   const [compliance, setCompliance] = useState<any>();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const resUser = requestWithToken.get(`clients/${id}`);
-      const resCompliance = requestUserToken.post("compliance/latest", {
-        client: id,
-      });
-      const [user, compliance] = await Promise.all([resUser, resCompliance]);
-      setUser(user.data);
-      console.log("hi");
-      setCompliance(compliance.data);
-    };
+  const fetchData = async () => {
+    const resUser = requestWithToken.get(`clients/${id}`);
+    const resCompliance = requestUserToken.post("compliance/latest", {
+      client: id,
+    });
+    const [user, compliance] = await Promise.all([resUser, resCompliance]);
+    setUser(user.data);
+    setCompliance(compliance.data);
+  };
 
+  useEffect(() => {
     fetchData();
   }, []);
+
+  const handleDetails = (part: string) => {
+    navigate(`/clients/${id}/details`, {
+      state: { data: compliance, part: part },
+    });
+  };
 
   if (!user || !compliance) return null;
   return (
@@ -75,7 +81,9 @@ export default function Client() {
                 <Paragrafh>
                   Descrição: {compliance.server.description}.
                 </Paragrafh>
-                <StyledLink to="/">Veja mais!</StyledLink>
+                <button onClick={() => handleDetails("server")}>
+                  Veja mais!
+                </button>
               </ArticleStyled>
             </ContentGrid>
             <ContentGrid>
@@ -89,7 +97,9 @@ export default function Client() {
                 <Paragrafh>
                   Descrição: {compliance.backup.description}.
                 </Paragrafh>
-                <StyledLink to="/">Veja mais!</StyledLink>
+                <button onClick={() => handleDetails("backup")}>
+                  Veja mais!
+                </button>
               </ArticleStyled>
             </ContentGrid>
             <ContentGrid>
