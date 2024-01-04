@@ -13,7 +13,7 @@ import { Controller } from "react-hook-form";
 import "./style.css";
 import { dataHAUtil } from "../../../utils/dataUtil";
 
-const FormHA: FC<FormularyProps> = ({ nextStep, setFormValues, data }) => {
+const FormHA: FC<FormularyProps> = ({ nextStep, setFormValues, data, id }) => {
   const {
     errors,
     handleFormSubmit,
@@ -26,7 +26,7 @@ const FormHA: FC<FormularyProps> = ({ nextStep, setFormValues, data }) => {
     control,
     isEditable,
     // refFocus,
-  } = useFormulary({ nextStep, setFormValues, data });
+  } = useFormulary({ nextStep, setFormValues, data, id });
 
   const isEditMode = () => (!!data && !isEditable ? true : false);
   // console.log(refFocus);
@@ -117,6 +117,7 @@ const FormHA: FC<FormularyProps> = ({ nextStep, setFormValues, data }) => {
                 />
                 <FormHelperText>{errors.ha?.solutions?.message}</FormHelperText>
               </Container>
+
               {data && (
                 <Input
                   {...register(`ha.isEditable`)}
@@ -132,13 +133,15 @@ const FormHA: FC<FormularyProps> = ({ nextStep, setFormValues, data }) => {
               )}
             </>
           )}
+
           {data ? (
             <Button
               size="large"
               sx={{ fontSize: "16px" }}
               color="secondary"
               variant="outlined"
-              onClick={() => console.log("clicked")}
+              // onClick={updateData}
+              type="submit"
               disabled={!formValidate}
             >
               Save

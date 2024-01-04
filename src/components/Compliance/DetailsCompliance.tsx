@@ -8,25 +8,53 @@ import FormServer from "../Form/FormServer/FormServer";
 
 const DetailsCompliance = () => {
   const [, setFormValues] = useState<combineInfra>();
-  const location = useLocation();
-  const data = location.state?.data || {};
-  const part = location.state?.part || "none";
-  // console.log(data);
+  const {
+    state: { data, part, id },
+  } = useLocation();
 
   let selectedData = {};
+  const { _id: complianceId } = data;
+
+  // Adiciona a propriedade 'client' a todos os sub-objetos dentro do objeto
+  // Object.values(data).forEach((value: any) => {
+  //   if (typeof value === "object" && value !== null && "client" in value) {
+  //     value.client = id;
+  //   }
+  // });
+
   switch (part) {
     case "backup":
+      data.backup.client = id;
       selectedData = data.backup;
-      return <FormBackup data={selectedData} setFormValues={setFormValues} />;
+      return (
+        <FormBackup
+          data={selectedData}
+          setFormValues={setFormValues}
+          id={complianceId}
+        />
+      );
     case "server":
       selectedData = data.server;
-      return <FormServer data={selectedData} setFormValues={setFormValues} />;
+      return (
+        <FormServer
+          data={selectedData}
+          setFormValues={setFormValues}
+          id={complianceId}
+        />
+      );
     case "firewall":
       selectedData = data.firewall;
       break;
     case "ha":
+      data.ha.client = id;
       selectedData = data.ha;
-      return <FormHA data={selectedData} setFormValues={setFormValues} />;
+      return (
+        <FormHA
+          data={selectedData}
+          setFormValues={setFormValues}
+          id={complianceId}
+        />
+      );
     case "services":
       selectedData = data.servicesOutsourcing;
       break;

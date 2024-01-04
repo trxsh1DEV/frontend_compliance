@@ -4,15 +4,31 @@ import { schemaHA } from "../../../utils/Schemas/schemaFormHA";
 import { FormularyProps, FormHAProps } from "../../../types/typesForm";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
+import { updateCompliance } from "../../../services/compliance";
 
-const useFormulary = ({ nextStep, setFormValues, data }: FormularyProps) => {
+type TypesHA = FormHAProps & {
+  ha: {
+    client: string; // Adicionando a propriedade client dentro do objeto ha
+  };
+};
+
+const useFormulary = ({
+  nextStep,
+  setFormValues,
+  data,
+  id: complianceID,
+}: FormularyProps) => {
   const [formValidate, setFormValidate] = useState(false);
-  const datas: FormHAProps = { ha: { ...data } };
+  const datas: TypesHA = { ha: { ...data } };
 
   const refFocus = useRef<HTMLInputElement>(null);
 
   const handleFormSubmit = async (data: any) => {
     setFormValidate(true);
+
+    if (datas && complianceID) {
+      updateCompliance(data, complianceID, datas.ha.client);
+    }
 
     try {
       setFormValues((prevState: any) => ({

@@ -22,7 +22,7 @@ export default function Client() {
   const id = location.pathname.split("/")[2];
   const navigate = useNavigate();
   const [user, setUser] = useState<FormRegisterProps>();
-  const [compliance, setCompliance] = useState<any>();
+  const [compliance, setCompliance] = useState<any>({});
 
   const fetchData = async () => {
     const resUser = requestWithToken.get(`clients/${id}`);
@@ -40,7 +40,7 @@ export default function Client() {
 
   const handleDetails = (part: string) => {
     navigate(`/clients/${id}/details`, {
-      state: { data: compliance, part: part },
+      state: { data: compliance, part, id },
     });
   };
 

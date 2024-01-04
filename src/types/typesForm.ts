@@ -99,6 +99,7 @@ export interface FormularyProps {
   nextStep?: () => void;
   setFormValues?: any;
   data?: any;
+  id?: string;
 }
 
 export interface FormularyPropsBackup {
