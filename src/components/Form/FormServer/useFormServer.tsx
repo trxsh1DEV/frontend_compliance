@@ -4,8 +4,9 @@ import { schemaServer } from "../../../utils/Schemas/schemaFormServer";
 import { FormServerProps, FormularyProps } from "../../../types/typesForm";
 import { useEffect, useState } from "react";
 
-const useFormulary = ({ nextStep, setFormValues }: FormularyProps) => {
+const useFormulary = ({ nextStep, setFormValues, data }: FormularyProps) => {
   const [formValidate, setFormValidate] = useState(false);
+  const datas: FormServerProps = { server: { ...data } };
 
   const handleFormSubmit = async (data: any) => {
     setFormValidate(true);
@@ -19,6 +20,7 @@ const useFormulary = ({ nextStep, setFormValues }: FormularyProps) => {
       console.log(err.message);
     }
   };
+
   const {
     register,
     handleSubmit,
@@ -30,10 +32,37 @@ const useFormulary = ({ nextStep, setFormValues }: FormularyProps) => {
     mode: "onBlur",
     criteriaMode: "all",
     resolver: zodResolver(schemaServer),
-    // defaultValues: DefaultValuesBackup,
+
+    defaultValues: {
+      server: {
+        servers: datas?.server?.servers?.map((item) => {
+          return {
+            config: {
+              level: item?.config?.level || "low",
+              score: item?.config?.score || 0,
+            },
+            monitoringPerformance: {
+              enabled: item?.monitoringPerformance?.enabled || false,
+              score: item?.monitoringPerformance?.score || 0,
+            },
+            score: item?.score || 0,
+            serverName: item?.serverName || "",
+            systemOperation: {
+              patching: item?.systemOperation?.patching || "Irregular",
+              score: item?.systemOperation?.score || 0,
+            },
+            description: item?.description || "",
+          };
+        }),
+        description: datas?.server?.description || "",
+        enabled: datas?.server?.enabled || false,
+        isEditable: false,
+      },
+    },
   });
 
   const haveServer = watch("server.enabled");
+  const isEditable = watch("server.isEditable");
 
   useEffect(() => {
     if (!haveServer || Object.keys(errors).length === 0) {
@@ -48,16 +77,16 @@ const useFormulary = ({ nextStep, setFormValues }: FormularyProps) => {
   });
 
   const handleNext = () => {
-    nextStep();
+    nextStep && nextStep();
   };
 
   const monitoringServer = (n: number) => {
     const servers = watch("server.servers");
-    const monitoring = servers[n]?.monitoringPerfomance?.enabled;
+    const monitoring = servers[n]?.monitoringPerformance?.enabled;
 
     useEffect(() => {
       if (!monitoring) {
-        setValue(`server.servers.${n}.monitoringPerfomance.score`, 0);
+        setValue(`server.servers.${n}.monitoringPerformance.score`, 0);
       }
     }, [monitoring, n, setValue]);
 
@@ -76,6 +105,7 @@ const useFormulary = ({ nextStep, setFormValues }: FormularyProps) => {
     append,
     remove,
     monitoringServer,
+    isEditable,
   };
 };
 

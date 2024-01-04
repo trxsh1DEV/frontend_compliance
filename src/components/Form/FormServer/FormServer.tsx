@@ -11,8 +11,9 @@ import useFormulary from "../FormServer/useFormServer";
 import { Minus, Plus } from "phosphor-react";
 import { FormularyProps } from "../../../types/typesForm";
 import { Button } from "@mui/material";
+import { Send } from "@mui/icons-material";
 
-const FormServer: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
+const FormServer: FC<FormularyProps> = ({ nextStep, setFormValues, data }) => {
   const {
     errors,
     formValidate,
@@ -25,9 +26,10 @@ const FormServer: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
     fields,
     remove,
     monitoringServer,
-  } = useFormulary({ nextStep, setFormValues });
+    isEditable,
+  } = useFormulary({ nextStep, setFormValues, data });
 
-  const hasServer = !!haveServer;
+  const isEditMode = () => (!!data && !isEditable ? true : false);
 
   return (
     <>
@@ -40,7 +42,7 @@ const FormServer: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
             label="Tem servidor(es)?"
           />
 
-          {hasServer && (
+          {haveServer && (
             <>
               {fields.map((field, index) => (
                 <div key={field.id}>
@@ -50,6 +52,7 @@ const FormServer: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
                       type="text"
                       placeholder="Digite o nome do servidor"
                       label="Hostname do servidor"
+                      disabled={isEditMode()}
                       helperText={
                         errors.server?.servers?.[index]?.serverName?.message
                       }
@@ -61,6 +64,7 @@ const FormServer: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
                       type="text"
                       placeholder="low | medium | high"
                       label="Hardware do servidor?"
+                      disabled={isEditMode()}
                       helperText={
                         errors.server?.servers?.[index]?.config?.level?.message
                       }
@@ -71,6 +75,7 @@ const FormServer: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
                       })}
                       key={field.id}
                       label="Quantos pontos?"
+                      disabled={isEditMode()}
                       type="number"
                       helperText={
                         errors.server?.servers?.[index]?.config?.score?.message
@@ -80,25 +85,26 @@ const FormServer: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
                   <Container>
                     <Input
                       {...register(
-                        `server.servers.${index}.monitoringPerfomance.enabled`
+                        `server.servers.${index}.monitoringPerformance.enabled`
                       )}
                       type="checkbox"
                       label="Tem monitoramento"
+                      disabled={isEditMode()}
                     />
                     <Input
                       {...register(
-                        `server.servers.${index}.monitoringPerfomance.score`,
+                        `server.servers.${index}.monitoringPerformance.score`,
                         {
                           valueAsNumber: true,
                         }
                       )}
                       type="number"
                       label="Quantos pontos?"
+                      disabled={isEditMode() || !monitoringServer(index)}
                       helperText={
-                        errors.server?.servers?.[index]?.monitoringPerfomance
+                        errors.server?.servers?.[index]?.monitoringPerformance
                           ?.score?.message
                       }
-                      disabled={!monitoringServer(index)}
                     />
                   </Container>
                   <Container>
@@ -109,6 +115,7 @@ const FormServer: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
                       type="text"
                       placeholder="Regular | Irregular"
                       label="Updates do SO"
+                      disabled={isEditMode()}
                       helperText={
                         errors.server?.servers?.[index]?.systemOperation
                           ?.patching?.message
@@ -122,6 +129,7 @@ const FormServer: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
                         }
                       )}
                       label="Quantos pontos?"
+                      disabled={isEditMode()}
                       type="number"
                       helperText={
                         errors.server?.servers?.[index]?.systemOperation?.score
@@ -134,7 +142,8 @@ const FormServer: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
                       {...register(`server.servers.${index}.description`)}
                       type="text"
                       placeholder="Insira uma descrição (Opciona)"
-                      label="Descrição"
+                      label="Descrição servidor"
+                      disabled={isEditMode()}
                       helperText={
                         errors.server?.servers?.[index]?.description?.message
                       }
@@ -143,7 +152,8 @@ const FormServer: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
                       {...register(`server.servers.${index}.score`, {
                         valueAsNumber: true,
                       })}
-                      label="Pontuação geral do servidor"
+                      label="Pontuação Geral"
+                      disabled={isEditMode()}
                       type="number"
                       helperText={
                         errors.server?.servers?.[index]?.score?.message
@@ -161,12 +171,21 @@ const FormServer: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
                   </Container>
                 </div>
               ))}
+              <Container>
+                <Input
+                  {...register(`server.description`)}
+                  type="text"
+                  placeholder="Anotações de todos os servidores"
+                  label="Descrição Geral"
+                  helperText={errors.server?.description?.message}
+                />
+              </Container>
               <button
                 type="button"
                 className="add"
                 onClick={() =>
                   append({
-                    monitoringPerfomance: {
+                    monitoringPerformance: {
                       enabled: false,
                       score: 0,
                     },
@@ -188,20 +207,29 @@ const FormServer: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
               </button>
             </>
           )}
-
+          {data && (
+            <Input
+              {...register(`server.isEditable`)}
+              type="checkbox"
+              helperText={errors.server?.isEditable?.message}
+              label="Deseja Editar?"
+            />
+          )}
           <ButtonContent>
-            <button type="submit" disabled={!haveServer}>
-              Send
-            </button>
+            {!isEditMode() && (
+              <button type="submit" disabled={!haveServer}>
+                Validate
+              </button>
+            )}
             <Button
               size="large"
-              sx={{ fontSize: "16px" }}
-              color="secondary"
-              variant="outlined"
+              sx={{ fontSize: "24px" }}
+              color="success"
+              variant="contained"
               onClick={handleNext}
               disabled={!formValidate}
             >
-              Next
+              <Send fontSize="inherit" />
             </Button>
           </ButtonContent>
         </FormContainer>

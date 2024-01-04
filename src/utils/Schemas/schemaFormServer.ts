@@ -20,7 +20,7 @@ const fieldsServerSchema = z.array(
       }),
       score: scoreType.positive("Informe um valor maior que 0"),
     }),
-    monitoringPerfomance: z
+    monitoringPerformance: z
       .object({
         enabled: z.boolean(),
         score: scoreType,
@@ -46,5 +46,7 @@ export const schemaServer = z.object({
   server: z.object({
     enabled: z.boolean(),
     servers: fieldsServerSchema,
+    description: z.string().min(3, "Insira uma descrição válida"),
+    isEditable: z.boolean(),
   }),
 });

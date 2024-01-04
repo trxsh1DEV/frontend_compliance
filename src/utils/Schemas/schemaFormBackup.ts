@@ -118,29 +118,8 @@ export const schemaBackup = z.object({
     }),
     restoration: fieldsBackupSchema,
     policy: fieldsBackupSchema,
+    isEditable: z.boolean(),
   }),
 });
 
-export const DefaultValuesBackup = {
-  backup: {
-    frequency: {
-      score: 0,
-      enabled: false,
-      description: "",
-    },
-    storage: {
-      local: { score: 0, enabled: false, qtde: 0, description: "" },
-      remote: { score: 0, enabled: false, qtde: 0, description: "" },
-    },
-    policy: {
-      score: 0,
-      enabled: false,
-      description: "",
-    },
-    restoration: {
-      score: 0,
-      enabled: false,
-      description: "",
-    },
-  },
-};
+// export type FormBackupProps = z.infer<typeof TypesValuesBackup>;

@@ -14,6 +14,6 @@ export const StyledLink = styled(Link)`
   }
 `;
 
-const LinkCompliance = (id) => {
+const LinkCompliance = (id: string) => {
   return <StyledLink to="/">Veja mais!</StyledLink>;
 };

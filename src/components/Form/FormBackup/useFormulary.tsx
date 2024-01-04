@@ -1,13 +1,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import {
-  DefaultValuesBackup,
-  schemaBackup,
-} from "../../../utils/Schemas/schemaFormBackup";
+import { schemaBackup } from "../../../utils/Schemas/schemaFormBackup";
 import { FormBackupProps, FormularyProps } from "../../../types/typesForm";
 import { useEffect, useState } from "react";
-
-const useFormulary = ({ nextStep, setFormValues }: FormularyProps) => {
+const useFormulary = ({ nextStep, setFormValues, data }: FormularyProps) => {
   const [formValidate, setFormValidate] = useState(false);
 
   const handleFormSubmit = async (data: any) => {
@@ -32,7 +28,42 @@ const useFormulary = ({ nextStep, setFormValues }: FormularyProps) => {
     mode: "onBlur",
     criteriaMode: "all",
     resolver: zodResolver(schemaBackup),
-    defaultValues: DefaultValuesBackup,
+    defaultValues: {
+      backup: {
+        frequency: {
+          score: data?.frequency?.score || 0,
+          enabled: data?.frequency.enabled || false,
+          level: data?.frequency.level || "low",
+          description: data?.frequency.description || "",
+        },
+        storage: {
+          local: {
+            description: data?.storage?.local?.description || "",
+            enabled: data?.storage?.local?.enabled || false,
+            qtde: data?.storage?.local?.qtde || 0,
+            score: data?.storage?.local?.score || 0,
+          },
+          remote: {
+            description: data?.storage?.remote?.description || "",
+            enabled: data?.storage?.remote?.enabled || false,
+            qtde: data?.storage?.remote?.qtde || 0,
+            score: data?.storage?.remote?.score || 0,
+          },
+        },
+        policy: {
+          score: data?.policy?.score || 0,
+          enabled: data?.policy?.enabled || false,
+          description: data?.policy?.description || "",
+        },
+        restoration: {
+          score: data?.restoration?.score || 0,
+          enabled: data?.restoration?.enabled || false,
+          description: data?.restoration?.description || "",
+        },
+        enabled: data?.enabled || false,
+        isEditable: false,
+      },
+    },
   });
 
   // const isEnabled = watch('backup.frequ');
@@ -44,6 +75,8 @@ const useFormulary = ({ nextStep, setFormValues }: FormularyProps) => {
     "backup.restoration.enabled",
   ]);
   const haveBackup = watch("backup.enabled");
+  const isEditable = watch("backup.isEditable");
+
   useEffect(() => {
     const resetInput = { score: 0, qtde: 0, description: "", enabled: false };
 
@@ -59,8 +92,9 @@ const useFormulary = ({ nextStep, setFormValues }: FormularyProps) => {
     !fieldsEnabled[3] && setValue("backup.policy.score", 0);
     !fieldsEnabled[4] && setValue("backup.restoration.score", 0);
   }, [setValue, fieldsEnabled]);
+
   const handleNext = () => {
-    nextStep();
+    nextStep && nextStep();
   };
 
   const isEnabled = (n: number) => {
@@ -83,6 +117,7 @@ const useFormulary = ({ nextStep, setFormValues }: FormularyProps) => {
     isEnabled,
     formValidate,
     haveBackup,
+    isEditable,
   };
 };
 

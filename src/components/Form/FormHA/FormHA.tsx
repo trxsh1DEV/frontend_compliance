@@ -7,13 +7,13 @@ import {
 import { Input } from "../../Input/Input";
 import { FC } from "react";
 import useFormulary from "./useFormHA";
-import { FormularyPropsHA } from "../../../types/typesForm";
+import { FormularyProps } from "../../../types/typesForm";
 import { Button, FormHelperText, MenuItem, Select } from "@mui/material";
 import { Controller } from "react-hook-form";
 import "./style.css";
 import { dataHAUtil } from "../../../utils/dataUtil";
 
-const FormHA: FC<FormularyPropsHA> = ({ nextStep, setFormValues, data }) => {
+const FormHA: FC<FormularyProps> = ({ nextStep, setFormValues, data }) => {
   const {
     errors,
     handleFormSubmit,
@@ -24,14 +24,20 @@ const FormHA: FC<FormularyPropsHA> = ({ nextStep, setFormValues, data }) => {
     tested,
     formValidate,
     control,
+    isEditable,
     // refFocus,
   } = useFormulary({ nextStep, setFormValues, data });
+
+  const isEditMode = () => (!!data && !isEditable ? true : false);
+  // console.log(refFocus);
+  // const isEditStyleMode = () =>
+  //   !!data && !isEditable ? { cursor: "not-allowed" } : "";
 
   return (
     <>
       <MainContainer>
         <FormContainer onSubmit={handleSubmit(handleFormSubmit)}>
-          <Heading2>Formulário Backup</Heading2>
+          <Heading2>Formulário Alta Disponibilidade</Heading2>
           <Input
             {...register(`ha.enabled`)}
             type="checkbox"
@@ -47,9 +53,16 @@ const FormHA: FC<FormularyPropsHA> = ({ nextStep, setFormValues, data }) => {
                   helperText={errors.ha?.description?.message}
                   label="Descrição (Opcional)"
                   placeholder="Insira uma descrição"
+                  disabled={isEditMode()}
+                  // style={isEditStyleMode()}
                   // ref={refFocus}
                 />
-                <Input {...register(`ha.tested`)} type="checkbox" />
+                <Input
+                  {...register(`ha.tested`)}
+                  type="checkbox"
+                  disabled={isEditMode()}
+                  // style={isEditStyleMode()}
+                />
 
                 <Input
                   {...register(`ha.rto`, {
@@ -57,7 +70,7 @@ const FormHA: FC<FormularyPropsHA> = ({ nextStep, setFormValues, data }) => {
                   })}
                   type="number"
                   helperText={errors.ha?.rto?.message}
-                  disabled={!tested}
+                  disabled={isEditMode() || !tested}
                   style={tested ? "" : { cursor: "not-allowed" }}
                   label="Tempo de RTO (em horas)"
                   placeholder="Ex: 1, 24 (convertido em horas)"
@@ -71,6 +84,8 @@ const FormHA: FC<FormularyPropsHA> = ({ nextStep, setFormValues, data }) => {
                   type="number"
                   helperText={errors.ha?.score?.message}
                   label="Pontuação (Score)"
+                  disabled={isEditMode()}
+                  // style={isEditStyleMode()}
                 />
                 <label id="multiple-select-label">Soluções</label>
                 <Controller
@@ -89,7 +104,11 @@ const FormHA: FC<FormularyPropsHA> = ({ nextStep, setFormValues, data }) => {
                       }}
                     >
                       {dataHAUtil.map((item) => (
-                        <MenuItem className="menuItem" value={`${item}`}>
+                        <MenuItem
+                          className="menuItem"
+                          value={`${item}`}
+                          disabled={isEditMode()}
+                        >
                           {item}
                         </MenuItem>
                       ))}
@@ -98,21 +117,44 @@ const FormHA: FC<FormularyPropsHA> = ({ nextStep, setFormValues, data }) => {
                 />
                 <FormHelperText>{errors.ha?.solutions?.message}</FormHelperText>
               </Container>
-              <button type="submit" disabled={!haveHA}>
-                Validate
-              </button>
+              {data && (
+                <Input
+                  {...register(`ha.isEditable`)}
+                  type="checkbox"
+                  helperText={errors.ha?.isEditable?.message}
+                  label="Deseja Editar?"
+                />
+              )}
+              {!isEditMode() && (
+                <button type="submit" disabled={!haveHA}>
+                  Validate
+                </button>
+              )}
             </>
           )}
-          <Button
-            size="large"
-            sx={{ fontSize: "16px" }}
-            color="secondary"
-            variant="outlined"
-            onClick={handleNext}
-            disabled={!formValidate}
-          >
-            Next
-          </Button>
+          {data ? (
+            <Button
+              size="large"
+              sx={{ fontSize: "16px" }}
+              color="secondary"
+              variant="outlined"
+              onClick={() => console.log("clicked")}
+              disabled={!formValidate}
+            >
+              Save
+            </Button>
+          ) : (
+            <Button
+              size="large"
+              sx={{ fontSize: "16px" }}
+              color="secondary"
+              variant="outlined"
+              onClick={handleNext}
+              disabled={!formValidate}
+            >
+              Next
+            </Button>
+          )}
         </FormContainer>
       </MainContainer>
     </>

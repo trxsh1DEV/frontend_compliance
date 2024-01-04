@@ -10,7 +10,7 @@ import useFormulary from "./useFormulary";
 import { FormularyProps } from "../../../types/typesForm";
 import { Button } from "@mui/material";
 
-const FormBackup: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
+const FormBackup: FC<FormularyProps> = ({ nextStep, setFormValues, data }) => {
   const {
     errors,
     formValidate,
@@ -20,7 +20,9 @@ const FormBackup: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
     register,
     isEnabled,
     haveBackup,
-  } = useFormulary({ nextStep, setFormValues });
+    isEditable,
+  } = useFormulary({ nextStep, setFormValues, data });
+  const isEditMode = () => (!!data && !isEditable ? true : false);
 
   return (
     <>
@@ -32,10 +34,18 @@ const FormBackup: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
             {...register(`backup.enabled`)}
             type="checkbox"
             label="Tem Backup?"
-            autofocus={false}
           />
+
           {haveBackup && (
             <>
+              {data && (
+                <Input
+                  {...register(`backup.isEditable`)}
+                  type="checkbox"
+                  helperText={errors.backup?.isEditable?.message}
+                  label="Deseja Editar?"
+                />
+              )}
               <Container>
                 <Input
                   {...register(`backup.frequency.description`)}
@@ -44,7 +54,7 @@ const FormBackup: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
                   label="Frequencia de Backup"
                   helperText={errors.backup?.frequency?.description?.message}
                   style={isEnabled(0)}
-                  disabled={!!isEnabled(0)}
+                  disabled={isEditMode() || !!isEnabled(0)}
                 />
                 <Input
                   {...register(`backup.frequency.level`)}
@@ -53,7 +63,7 @@ const FormBackup: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
                   label="Frequencia de Backup"
                   helperText={errors.backup?.frequency?.level?.message}
                   style={isEnabled(0)}
-                  disabled={!!isEnabled(0)}
+                  disabled={isEditMode() || !!isEnabled(0)}
                 />
                 <Input
                   {...register(`backup.frequency.score`, {
@@ -63,7 +73,7 @@ const FormBackup: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
                   type="number"
                   helperText={errors.backup?.frequency?.score?.message}
                   style={isEnabled(0)}
-                  disabled={!!isEnabled(0)}
+                  disabled={isEditMode() || !!isEnabled(0)}
                 />
 
                 <Input
@@ -82,7 +92,7 @@ const FormBackup: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
                     errors.backup?.storage?.local?.description?.message
                   }
                   style={isEnabled(1)}
-                  disabled={!!isEnabled(1)}
+                  disabled={isEditMode() || !!isEnabled(1)}
                 />
                 <Input
                   {...register(`backup.storage.local.qtde`, {
@@ -92,7 +102,7 @@ const FormBackup: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
                   label="Quantidade de backups"
                   helperText={errors.backup?.storage?.local?.qtde?.message}
                   style={isEnabled(1)}
-                  disabled={!!isEnabled(1)}
+                  disabled={isEditMode() || !!isEnabled(1)}
                 />
                 <Input
                   {...register(`backup.storage.local.score`, {
@@ -102,7 +112,7 @@ const FormBackup: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
                   type="number"
                   helperText={errors.backup?.storage?.local?.score?.message}
                   style={isEnabled(1)}
-                  disabled={!!isEnabled(1)}
+                  disabled={isEditMode() || !!isEnabled(1)}
                 />
                 <Input
                   {...register(`backup.storage.local.enabled`)}
@@ -120,7 +130,7 @@ const FormBackup: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
                     errors.backup?.storage?.remote?.description?.message
                   }
                   style={isEnabled(2)}
-                  disabled={!!isEnabled(2)}
+                  disabled={isEditMode() || !!isEnabled(2)}
                 />
 
                 <Input
@@ -131,7 +141,7 @@ const FormBackup: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
                   label="Quantidade de backups"
                   helperText={errors.backup?.storage?.remote?.qtde?.message}
                   style={isEnabled(2)}
-                  disabled={!!isEnabled(2)}
+                  disabled={isEditMode() || !!isEnabled(2)}
                 />
 
                 <Input
@@ -142,7 +152,7 @@ const FormBackup: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
                   type="number"
                   helperText={errors.backup?.storage?.remote?.score?.message}
                   style={isEnabled(2)}
-                  disabled={!!isEnabled(2)}
+                  disabled={isEditMode() || !!isEnabled(2)}
                 />
                 <Input
                   {...register(`backup.storage.remote.enabled`)}
@@ -157,7 +167,7 @@ const FormBackup: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
                   label="Politicas de Backup"
                   helperText={errors.backup?.policy?.description?.message}
                   style={isEnabled(3)}
-                  disabled={!!isEnabled(3)}
+                  disabled={isEditMode() || !!isEnabled(3)}
                 />
                 <Input
                   {...register(`backup.policy.score`, {
@@ -167,7 +177,7 @@ const FormBackup: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
                   type="number"
                   helperText={errors.backup?.policy?.score?.message}
                   style={isEnabled(3)}
-                  disabled={!!isEnabled(3)}
+                  disabled={isEditMode() || !!isEnabled(3)}
                 />
                 <Input {...register(`backup.policy.enabled`)} type="checkbox" />
               </Container>
@@ -180,7 +190,7 @@ const FormBackup: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
                   label="Teste de restauração"
                   helperText={errors.backup?.restoration?.description?.message}
                   style={isEnabled(4)}
-                  disabled={!!isEnabled(4)}
+                  disabled={isEditMode() || !!isEnabled(4)}
                 />
                 <Input
                   {...register(`backup.restoration.score`, {
@@ -190,29 +200,44 @@ const FormBackup: FC<FormularyProps> = ({ nextStep, setFormValues }) => {
                   type="number"
                   helperText={errors.backup?.restoration?.score?.message}
                   style={isEnabled(4)}
-                  disabled={!!isEnabled(4)}
+                  disabled={isEditMode() || !!isEnabled(4)}
                 />
                 <Input
                   {...register(`backup.restoration.enabled`)}
                   type="checkbox"
                 />
               </Container>
-              <button type="submit" disabled={!haveBackup}>
-                Validate
-              </button>
+              {!isEditMode() && (
+                <button type="submit" disabled={!haveBackup}>
+                  Validate
+                </button>
+              )}
             </>
           )}
 
-          <Button
-            size="large"
-            sx={{ fontSize: "16px" }}
-            color="secondary"
-            variant="outlined"
-            onClick={handleNext}
-            disabled={!formValidate}
-          >
-            Next
-          </Button>
+          {data ? (
+            <Button
+              size="large"
+              sx={{ fontSize: "16px" }}
+              color="secondary"
+              variant="outlined"
+              onClick={() => console.log("clicked")}
+              disabled={!formValidate}
+            >
+              Save
+            </Button>
+          ) : (
+            <Button
+              size="large"
+              sx={{ fontSize: "16px" }}
+              color="secondary"
+              variant="outlined"
+              onClick={handleNext}
+              disabled={!formValidate}
+            >
+              Next
+            </Button>
+          )}
         </FormContainer>
       </MainContainer>
     </>

@@ -21,6 +21,7 @@ export const schemaHA = z.object({
       rto: z.number(),
       score: scoreType,
       description: descriptionType,
+      isEditable: z.boolean(),
     })
     .superRefine((values, ctx) => {
       if (values.tested && values.rto <= 0) {
@@ -50,5 +51,6 @@ export const schemaHA = z.object({
       rto: fields.tested ? fields.rto : 0,
       score: fields.score,
       description: fields.description,
+      isEditable: fields.isEditable,
     })),
 });

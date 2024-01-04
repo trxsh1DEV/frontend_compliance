@@ -98,10 +98,11 @@ export type combineInfra =
 export interface FormularyProps {
   nextStep?: () => void;
   setFormValues?: any;
+  data?: any;
 }
 
-export interface FormularyPropsHA {
+export interface FormularyPropsBackup {
   nextStep?: () => void;
   setFormValues?: any;
-  data?: any;
+  data?: FormBackupProps | any;
 }

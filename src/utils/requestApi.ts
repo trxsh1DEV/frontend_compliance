@@ -10,6 +10,7 @@ export const calledApi = async (
 ) => {
   const apiUrl = `http://localhost:5421/api/${route}`;
   if (!data) return;
+  console.log(data);
   data.client = id;
   try {
     await requestWithToken.post(apiUrl, {

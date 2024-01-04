@@ -1,13 +1,15 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { schemaHA } from "../../../utils/Schemas/schemaFormHA";
-import { FormularyPropsHA, FormHAProps } from "../../../types/typesForm";
-import { useEffect, useState } from "react";
+import { FormularyProps, FormHAProps } from "../../../types/typesForm";
+import { useEffect, useRef, useState } from "react";
+import { toast } from "react-toastify";
 
-const useFormulary = ({ nextStep, setFormValues, data }: FormularyPropsHA) => {
+const useFormulary = ({ nextStep, setFormValues, data }: FormularyProps) => {
   const [formValidate, setFormValidate] = useState(false);
+  const datas: FormHAProps = { ha: { ...data } };
 
-  // const refFocus = useRef<HTMLInputElement>(null);
+  const refFocus = useRef<HTMLInputElement>(null);
 
   const handleFormSubmit = async (data: any) => {
     setFormValidate(true);
@@ -18,7 +20,7 @@ const useFormulary = ({ nextStep, setFormValues, data }: FormularyPropsHA) => {
         ...data,
       }));
     } catch (err: any) {
-      console.log(err.message);
+      toast.error(`Ocorreu um erro: ${err.message}`);
     }
   };
 
@@ -30,23 +32,26 @@ const useFormulary = ({ nextStep, setFormValues, data }: FormularyPropsHA) => {
     setValue,
     formState: { errors },
   } = useForm<FormHAProps>({
-    mode: "onBlur",
+    mode: "all",
     criteriaMode: "all",
     resolver: zodResolver(schemaHA),
     defaultValues: {
+      // Setar os valores padrão caso exista "data", serve para saber quando o formulário é só para visualização ou para criação
       ha: {
-        enabled: data?.enabled || false,
-        rto: data?.rto || 0,
-        score: data?.score || 0,
-        description: data?.description || "",
-        solutions: data?.solutions || ["none"],
-        tested: data?.tested || false,
+        enabled: datas?.ha?.enabled || false,
+        rto: datas?.ha?.rto || 0,
+        score: datas?.ha?.score || 0,
+        description: datas.ha.description || "",
+        solutions: datas?.ha?.solutions || ["none"],
+        tested: datas?.ha?.tested || false,
+        isEditable: false,
       },
     },
   });
 
   const tested = watch("ha.tested");
   const haveHA = watch("ha.enabled");
+  const isEditable = watch("ha.isEditable");
 
   const handleNext = () => {
     nextStep && nextStep();
@@ -63,11 +68,11 @@ const useFormulary = ({ nextStep, setFormValues, data }: FormularyPropsHA) => {
     !tested && setValue("ha.rto", 0);
   }, [setValue, tested]);
 
-  // useEffect(() => {
-  //   if (haveHA) {
-  //     refFocus.current?.focus();
-  //   }
-  // }, [haveHA]);
+  useEffect(() => {
+    if (haveHA) {
+      refFocus.current?.focus();
+    }
+  }, [haveHA]);
 
   return {
     handleFormSubmit,
@@ -79,6 +84,8 @@ const useFormulary = ({ nextStep, setFormValues, data }: FormularyPropsHA) => {
     formValidate,
     tested,
     control,
+    isEditable,
+    refFocus,
   };
 };
 
