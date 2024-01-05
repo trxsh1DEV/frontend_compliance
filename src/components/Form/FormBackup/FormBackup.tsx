@@ -10,7 +10,12 @@ import useFormulary from "./useFormulary";
 import { FormularyProps } from "../../../types/typesForm";
 import { Button } from "@mui/material";
 
-const FormBackup: FC<FormularyProps> = ({ nextStep, setFormValues, data }) => {
+const FormBackup: FC<FormularyProps> = ({
+  nextStep,
+  setFormValues,
+  data,
+  id,
+}) => {
   const {
     errors,
     formValidate,
@@ -21,7 +26,7 @@ const FormBackup: FC<FormularyProps> = ({ nextStep, setFormValues, data }) => {
     isEnabled,
     haveBackup,
     isEditable,
-  } = useFormulary({ nextStep, setFormValues, data });
+  } = useFormulary({ nextStep, setFormValues, data, id });
   const isEditMode = () => (!!data && !isEditable ? true : false);
 
   return (
@@ -47,7 +52,7 @@ const FormBackup: FC<FormularyProps> = ({ nextStep, setFormValues, data }) => {
                 />
               )}
               <Container>
-                <Input
+                {/* <Input
                   {...register(`backup.frequency.description`)}
                   type="text"
                   placeholder="Descrição (Opcional)"
@@ -55,7 +60,7 @@ const FormBackup: FC<FormularyProps> = ({ nextStep, setFormValues, data }) => {
                   helperText={errors.backup?.frequency?.description?.message}
                   style={isEnabled(0)}
                   disabled={isEditMode() || !!isEnabled(0)}
-                />
+                /> */}
                 <Input
                   {...register(`backup.frequency.level`)}
                   type="text"
@@ -79,11 +84,12 @@ const FormBackup: FC<FormularyProps> = ({ nextStep, setFormValues, data }) => {
                 <Input
                   {...register(`backup.frequency.enabled`)}
                   type="checkbox"
+                  disabled={isEditMode()}
                 />
               </Container>
 
               <Container>
-                <Input
+                {/* <Input
                   {...register(`backup.storage.local.description`)}
                   type="text"
                   placeholder="Descrição (Opcional)"
@@ -93,7 +99,7 @@ const FormBackup: FC<FormularyProps> = ({ nextStep, setFormValues, data }) => {
                   }
                   style={isEnabled(1)}
                   disabled={isEditMode() || !!isEnabled(1)}
-                />
+                /> */}
                 <Input
                   {...register(`backup.storage.local.qtde`, {
                     valueAsNumber: true,
@@ -117,11 +123,12 @@ const FormBackup: FC<FormularyProps> = ({ nextStep, setFormValues, data }) => {
                 <Input
                   {...register(`backup.storage.local.enabled`)}
                   type="checkbox"
+                  disabled={isEditMode()}
                 />
               </Container>
 
               <Container>
-                <Input
+                {/* <Input
                   {...register(`backup.storage.remote.description`)}
                   type="text"
                   placeholder="Descrição (Opcional)"
@@ -131,7 +138,7 @@ const FormBackup: FC<FormularyProps> = ({ nextStep, setFormValues, data }) => {
                   }
                   style={isEnabled(2)}
                   disabled={isEditMode() || !!isEnabled(2)}
-                />
+                /> */}
 
                 <Input
                   {...register(`backup.storage.remote.qtde`, {
@@ -157,10 +164,11 @@ const FormBackup: FC<FormularyProps> = ({ nextStep, setFormValues, data }) => {
                 <Input
                   {...register(`backup.storage.remote.enabled`)}
                   type="checkbox"
+                  disabled={isEditMode()}
                 />
               </Container>
               <Container>
-                <Input
+                {/* <Input
                   {...register(`backup.policy.description`)}
                   type="text"
                   placeholder="Descrição (Opcional)"
@@ -168,21 +176,41 @@ const FormBackup: FC<FormularyProps> = ({ nextStep, setFormValues, data }) => {
                   helperText={errors.backup?.policy?.description?.message}
                   style={isEnabled(3)}
                   disabled={isEditMode() || !!isEnabled(3)}
-                />
+                /> */}
                 <Input
                   {...register(`backup.policy.score`, {
                     valueAsNumber: true,
                   })}
-                  label="Pontuação"
+                  label="Politicas Backup (Points)"
                   type="number"
                   helperText={errors.backup?.policy?.score?.message}
                   style={isEnabled(3)}
                   disabled={isEditMode() || !!isEnabled(3)}
                 />
-                <Input {...register(`backup.policy.enabled`)} type="checkbox" />
+                <Input
+                  {...register(`backup.policy.enabled`)}
+                  type="checkbox"
+                  disabled={isEditMode()}
+                />
+
+                <Input
+                  {...register(`backup.restoration.score`, {
+                    valueAsNumber: true,
+                  })}
+                  label="T. de restauração (Points)"
+                  type="number"
+                  helperText={errors.backup?.restoration?.score?.message}
+                  style={isEnabled(4)}
+                  disabled={isEditMode() || !!isEnabled(4)}
+                />
+                <Input
+                  {...register(`backup.restoration.enabled`)}
+                  type="checkbox"
+                  disabled={isEditMode()}
+                />
               </Container>
 
-              <Container>
+              {/* <Container>
                 <Input
                   {...register(`backup.restoration.description`)}
                   type="text"
@@ -196,7 +224,7 @@ const FormBackup: FC<FormularyProps> = ({ nextStep, setFormValues, data }) => {
                   {...register(`backup.restoration.score`, {
                     valueAsNumber: true,
                   })}
-                  label="Pontuação"
+                  label="T. de restauração (Points)"
                   type="number"
                   helperText={errors.backup?.restoration?.score?.message}
                   style={isEnabled(4)}
@@ -205,8 +233,21 @@ const FormBackup: FC<FormularyProps> = ({ nextStep, setFormValues, data }) => {
                 <Input
                   {...register(`backup.restoration.enabled`)}
                   type="checkbox"
+                  disabled={isEditMode()}
+                />
+              </Container> */}
+
+              <Container>
+                <Input
+                  {...register(`backup.description`)}
+                  type="text"
+                  placeholder="Descrição (Opcional)"
+                  label="Descrição Geral"
+                  helperText={errors.backup?.description?.message}
+                  disabled={isEditMode()}
                 />
               </Container>
+
               {!isEditMode() && (
                 <button type="submit" disabled={!haveBackup}>
                   Validate
@@ -215,18 +256,7 @@ const FormBackup: FC<FormularyProps> = ({ nextStep, setFormValues, data }) => {
             </>
           )}
 
-          {data ? (
-            <Button
-              size="large"
-              sx={{ fontSize: "16px" }}
-              color="secondary"
-              variant="outlined"
-              onClick={() => console.log("clicked")}
-              disabled={!formValidate}
-            >
-              Save
-            </Button>
-          ) : (
+          {!data && (
             <Button
               size="large"
               sx={{ fontSize: "16px" }}

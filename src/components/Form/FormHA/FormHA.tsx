@@ -54,8 +54,7 @@ const FormHA: FC<FormularyProps> = ({ nextStep, setFormValues, data, id }) => {
                   label="Descrição (Opcional)"
                   placeholder="Insira uma descrição"
                   disabled={isEditMode()}
-                  // style={isEditStyleMode()}
-                  // ref={refFocus}
+                  autoFocus={true}
                 />
                 <Input
                   {...register(`ha.tested`)}
@@ -134,19 +133,7 @@ const FormHA: FC<FormularyProps> = ({ nextStep, setFormValues, data, id }) => {
             </>
           )}
 
-          {data ? (
-            <Button
-              size="large"
-              sx={{ fontSize: "16px" }}
-              color="secondary"
-              variant="outlined"
-              // onClick={updateData}
-              type="submit"
-              disabled={!formValidate}
-            >
-              Save
-            </Button>
-          ) : (
+          {!data && (
             <Button
               size="large"
               sx={{ fontSize: "16px" }}

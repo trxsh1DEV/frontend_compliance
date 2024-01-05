@@ -8,14 +8,7 @@ type inputProps = HTMLAttributes<HTMLInputElement> & {
 
 export const Input = forwardRef<HTMLInputElement, inputProps>(
   (
-    {
-      type = "text",
-      name = "",
-      label = "",
-      helperText = "",
-      autoFocus = false,
-      ...props
-    },
+    { type = "text", name = "", label = "", helperText = "", ...props },
     ref
   ) => {
     const inputId = useId();
@@ -30,7 +23,6 @@ export const Input = forwardRef<HTMLInputElement, inputProps>(
           ref={ref}
           hasError={hasError}
           {...props}
-          autoFocus={autoFocus}
         />
         {hasError && <HelperText>{helperText}</HelperText>}
       </InputContent>

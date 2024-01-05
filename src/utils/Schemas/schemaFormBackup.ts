@@ -119,6 +119,7 @@ export const schemaBackup = z.object({
     restoration: fieldsBackupSchema,
     policy: fieldsBackupSchema,
     isEditable: z.boolean(),
+    description: z.string().min(3, "Insira uma descrição válida"),
   }),
 });
 

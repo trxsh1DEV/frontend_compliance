@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { schemaHA } from "../../../utils/Schemas/schemaFormHA";
 import { FormularyProps, FormHAProps } from "../../../types/typesForm";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { updateCompliance } from "../../../services/compliance";
 
@@ -16,21 +16,22 @@ const useFormulary = ({
   nextStep,
   setFormValues,
   data,
-  id: complianceID,
+  id: complianceId,
 }: FormularyProps) => {
   const [formValidate, setFormValidate] = useState(false);
   const datas: TypesHA = { ha: { ...data } };
 
-  const refFocus = useRef<HTMLInputElement>(null);
+  // const refFocus = useRef<HTMLInputElement>(null);
 
   const handleFormSubmit = async (data: any) => {
     setFormValidate(true);
 
-    if (datas && complianceID) {
-      updateCompliance(data, complianceID, datas.ha.client);
-    }
-
     try {
+      if (datas && complianceId) {
+        updateCompliance(data, complianceId, datas.ha.client);
+        return;
+      }
+
       setFormValues((prevState: any) => ({
         ...prevState,
         ...data,
@@ -84,11 +85,11 @@ const useFormulary = ({
     !tested && setValue("ha.rto", 0);
   }, [setValue, tested]);
 
-  useEffect(() => {
-    if (haveHA) {
-      refFocus.current?.focus();
-    }
-  }, [haveHA]);
+  // useEffect(() => {
+  //   if (haveHA) {
+  //     refFocus.current?.focus();
+  //   }
+  // }, [haveHA, isEditable]);
 
   return {
     handleFormSubmit,
@@ -101,7 +102,7 @@ const useFormulary = ({
     tested,
     control,
     isEditable,
-    refFocus,
+    // refFocus,
   };
 };
 

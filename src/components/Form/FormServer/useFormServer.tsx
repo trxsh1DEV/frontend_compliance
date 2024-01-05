@@ -3,15 +3,32 @@ import { useFieldArray, useForm } from "react-hook-form";
 import { schemaServer } from "../../../utils/Schemas/schemaFormServer";
 import { FormServerProps, FormularyProps } from "../../../types/typesForm";
 import { useEffect, useState } from "react";
+import { updateCompliance } from "../../../services/compliance";
 
-const useFormulary = ({ nextStep, setFormValues, data }: FormularyProps) => {
+type TypesServer = FormServerProps & {
+  server: {
+    client: string; // Adicionando a propriedade client dentro do objeto ha
+  };
+};
+
+const useFormulary = ({
+  nextStep,
+  setFormValues,
+  data,
+  id: complianceId,
+}: FormularyProps) => {
   const [formValidate, setFormValidate] = useState(false);
-  const datas: FormServerProps = { server: { ...data } };
+  const datas: TypesServer = { server: { ...data } };
 
   const handleFormSubmit = async (data: any) => {
     setFormValidate(true);
 
     try {
+      if (datas && complianceId) {
+        updateCompliance(data, complianceId, datas.server.client);
+        return;
+      }
+
       setFormValues((prevState: any) => ({
         ...prevState,
         ...data,

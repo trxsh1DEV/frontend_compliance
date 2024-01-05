@@ -27,7 +27,7 @@ export const mobile = (props: any) => {
 
 export const compactSlidebar = (props: any) => {
   return css`
-    @media only screen and (max-width: 1020px) {
+    @media only screen and (max-width: 1200px) {
       ${props}
     }
   `;

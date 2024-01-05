@@ -13,7 +13,12 @@ import { FormularyProps } from "../../../types/typesForm";
 import { Button } from "@mui/material";
 import { Send } from "@mui/icons-material";
 
-const FormServer: FC<FormularyProps> = ({ nextStep, setFormValues, data }) => {
+const FormServer: FC<FormularyProps> = ({
+  nextStep,
+  setFormValues,
+  data,
+  id,
+}) => {
   const {
     errors,
     formValidate,
@@ -27,7 +32,7 @@ const FormServer: FC<FormularyProps> = ({ nextStep, setFormValues, data }) => {
     remove,
     monitoringServer,
     isEditable,
-  } = useFormulary({ nextStep, setFormValues, data });
+  } = useFormulary({ nextStep, setFormValues, data, id });
 
   const isEditMode = () => (!!data && !isEditable ? true : false);
 
@@ -178,6 +183,7 @@ const FormServer: FC<FormularyProps> = ({ nextStep, setFormValues, data }) => {
                   placeholder="Anotações de todos os servidores"
                   label="Descrição Geral"
                   helperText={errors.server?.description?.message}
+                  disabled={isEditMode()}
                 />
               </Container>
               <button
@@ -221,16 +227,18 @@ const FormServer: FC<FormularyProps> = ({ nextStep, setFormValues, data }) => {
                 Validate
               </button>
             )}
-            <Button
-              size="large"
-              sx={{ fontSize: "24px" }}
-              color="success"
-              variant="contained"
-              onClick={handleNext}
-              disabled={!formValidate}
-            >
-              <Send fontSize="inherit" />
-            </Button>
+            {!data && (
+              <Button
+                size="large"
+                sx={{ fontSize: "24px" }}
+                color="success"
+                variant="contained"
+                onClick={handleNext}
+                disabled={!formValidate}
+              >
+                <Send fontSize="inherit" />
+              </Button>
+            )}
           </ButtonContent>
         </FormContainer>
       </MainContainer>

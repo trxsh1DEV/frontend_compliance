@@ -22,6 +22,8 @@ const DetailsCompliance = () => {
   //   }
   // });
 
+  if (!selectedData) return <div>Nenhum dado encontrado</div>;
+
   switch (part) {
     case "backup":
       data.backup.client = id;
@@ -34,6 +36,7 @@ const DetailsCompliance = () => {
         />
       );
     case "server":
+      data.server.client = id;
       selectedData = data.server;
       return (
         <FormServer
@@ -68,7 +71,7 @@ const DetailsCompliance = () => {
       break;
   }
 
-  if (!selectedData) return <div>Nenhum dado encontrado</div>;
+  return <div>Problema ao acessar detalhes desse Compliance</div>;
 };
 
 export default DetailsCompliance;

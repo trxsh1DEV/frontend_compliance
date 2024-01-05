@@ -3,13 +3,33 @@ import { useForm } from "react-hook-form";
 import { schemaBackup } from "../../../utils/Schemas/schemaFormBackup";
 import { FormBackupProps, FormularyProps } from "../../../types/typesForm";
 import { useEffect, useState } from "react";
-const useFormulary = ({ nextStep, setFormValues, data }: FormularyProps) => {
+import { updateCompliance } from "../../../services/compliance";
+
+type TypesBackup = FormBackupProps & {
+  backup: {
+    client: string; // Adicionando a propriedade client dentro do objeto ha
+  };
+};
+
+const useFormulary = ({
+  nextStep,
+  setFormValues,
+  data,
+  id: complianceId,
+}: FormularyProps) => {
   const [formValidate, setFormValidate] = useState(false);
+
+  const datas: TypesBackup = { backup: { ...data } };
 
   const handleFormSubmit = async (data: any) => {
     setFormValidate(true);
 
     try {
+      if (datas && complianceId) {
+        updateCompliance(data, complianceId, datas.backup.client);
+        return;
+      }
+
       setFormValues((prevState: any) => ({
         ...prevState,
         ...data,
@@ -31,36 +51,36 @@ const useFormulary = ({ nextStep, setFormValues, data }: FormularyProps) => {
     defaultValues: {
       backup: {
         frequency: {
-          score: data?.frequency?.score || 0,
-          enabled: data?.frequency.enabled || false,
-          level: data?.frequency.level || "low",
-          description: data?.frequency.description || "",
+          score: datas?.backup?.frequency?.score || 0,
+          enabled: datas?.backup?.frequency?.enabled || false,
+          level: datas?.backup?.frequency?.level || "low",
+          description: datas?.backup?.frequency?.description || "",
         },
         storage: {
           local: {
-            description: data?.storage?.local?.description || "",
-            enabled: data?.storage?.local?.enabled || false,
-            qtde: data?.storage?.local?.qtde || 0,
-            score: data?.storage?.local?.score || 0,
+            description: datas?.backup?.storage?.local?.description || "",
+            enabled: datas?.backup?.storage?.local?.enabled || false,
+            qtde: datas?.backup?.storage?.local?.qtde || 0,
+            score: datas?.backup?.storage?.local?.score || 0,
           },
           remote: {
-            description: data?.storage?.remote?.description || "",
-            enabled: data?.storage?.remote?.enabled || false,
-            qtde: data?.storage?.remote?.qtde || 0,
-            score: data?.storage?.remote?.score || 0,
+            description: datas?.backup?.storage?.remote?.description || "",
+            enabled: datas?.backup?.storage?.remote?.enabled || false,
+            qtde: datas?.backup?.storage?.remote?.qtde || 0,
+            score: datas?.backup?.storage?.remote?.score || 0,
           },
         },
         policy: {
-          score: data?.policy?.score || 0,
-          enabled: data?.policy?.enabled || false,
-          description: data?.policy?.description || "",
+          score: datas?.backup?.policy?.score || 0,
+          enabled: datas?.backup?.policy?.enabled || false,
+          description: datas?.backup?.policy?.description || "",
         },
         restoration: {
-          score: data?.restoration?.score || 0,
-          enabled: data?.restoration?.enabled || false,
-          description: data?.restoration?.description || "",
+          score: datas?.backup?.restoration?.score || 0,
+          enabled: datas?.backup?.restoration?.enabled || false,
+          description: datas?.backup?.restoration?.description || "",
         },
-        enabled: data?.enabled || false,
+        enabled: datas?.backup?.enabled || false,
         isEditable: false,
       },
     },
