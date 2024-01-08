@@ -47,25 +47,23 @@ const Login = () => {
   return (
     <>
       <Container>
-        <FormContainer>
-          <Title>Register</Title>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <Input
-              {...register("email")}
-              label="Digite seu e-mail"
-              placeholder="ex: usuario@mybusiness.com.br"
-              helperText={errors.email?.message}
-            />
-            <Input
-              {...register("password")}
-              type="password"
-              label="Digite sua senha"
-              placeholder="Insira sua senha de acesso"
-              helperText={errors.password?.message}
-            />
+        <FormContainer onSubmit={handleSubmit(onSubmit)}>
+          <Title>Log-in</Title>
+          <Input
+            {...register("email")}
+            label="Digite seu e-mail"
+            placeholder="ex: usuario@mybusiness.com.br"
+            helperText={errors.email?.message}
+          />
+          <Input
+            {...register("password")}
+            type="password"
+            label="Digite sua senha"
+            placeholder="Insira sua senha de acesso"
+            helperText={errors.password?.message}
+          />
 
-            <Button type="submit">Entrar</Button>
-          </form>
+          <Button type="submit">Entrar</Button>
         </FormContainer>
       </Container>
     </>

@@ -24,7 +24,8 @@ export const DivButton = styled.div`
 `;
 
 export const TopContainer = styled.section`
-  background-color: gray;
+  /* background-color: gray; */
+  border: 2px solid azure;
 `;
 
 export const CenterContainer = styled.section`

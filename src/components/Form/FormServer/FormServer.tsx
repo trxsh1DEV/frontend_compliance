@@ -224,7 +224,7 @@ const FormServer: FC<FormularyProps> = ({
           <ButtonContent>
             {!isEditMode() && (
               <button type="submit" disabled={!haveServer}>
-                Validate
+                {data ? <span>Salvar</span> : <span>Validar</span>}
               </button>
             )}
             {!data && (

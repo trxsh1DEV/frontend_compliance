@@ -25,7 +25,6 @@ const FormHA: FC<FormularyProps> = ({ nextStep, setFormValues, data, id }) => {
     formValidate,
     control,
     isEditable,
-    // refFocus,
   } = useFormulary({ nextStep, setFormValues, data, id });
 
   const isEditMode = () => (!!data && !isEditable ? true : false);
@@ -54,7 +53,6 @@ const FormHA: FC<FormularyProps> = ({ nextStep, setFormValues, data, id }) => {
                   label="Descrição (Opcional)"
                   placeholder="Insira uma descrição"
                   disabled={isEditMode()}
-                  autoFocus={true}
                 />
                 <Input
                   {...register(`ha.tested`)}
@@ -84,7 +82,6 @@ const FormHA: FC<FormularyProps> = ({ nextStep, setFormValues, data, id }) => {
                   helperText={errors.ha?.score?.message}
                   label="Pontuação (Score)"
                   disabled={isEditMode()}
-                  // style={isEditStyleMode()}
                 />
                 <label id="multiple-select-label">Soluções</label>
                 <Controller

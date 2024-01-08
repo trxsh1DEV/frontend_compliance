@@ -30,7 +30,7 @@ export const Label = styled.label`
   color: gray;
   font-size: 2rem;
   margin-bottom: 0.8rem;
-  height: 30px;
+  /* height: 50px; */
   width: 100%;
   text-align: center;
 `;

@@ -4,7 +4,7 @@ import { requestUserToken, requestWithToken } from "../../utils/requestApi";
 import {
   BottomContainer,
   TopContainer,
-  CenterContainer,
+  // CenterContainer,
   WrapperGrid,
   ContentGrid,
   MainContainer,
@@ -50,19 +50,21 @@ export default function Client() {
       <MainContainer>
         <TopContainer>
           <WrapperGrid>
-            <ContentGrid>Responsável: {user.name}</ContentGrid>
+            <ContentGrid>Último operador: {user.name}</ContentGrid>
             <ContentGrid>E-mail: {user.email}</ContentGrid>
-            <ContentGrid>Razão S.{user.social_reason}</ContentGrid>
+            <ContentGrid>Razão S: {user.social_reason}</ContentGrid>
             <ContentGrid>
-              Ultima atualização: {formatDateString(user.createdAt)}
+              Ultima atualização: {formatDateString(compliance.updatedAt)}
             </ContentGrid>
-            <ContentGrid>Contato: 11 99999-9999</ContentGrid>
-            <ContentGrid>Tipo de contrato: Fixo</ContentGrid>
-            <ContentGrid>Problemas Critícos? No</ContentGrid>
-            <ContentGrid>CNPJ: 18.518.793/0001-09</ContentGrid>
+            <ContentGrid>Contato: {user.contact}</ContentGrid>
+            <ContentGrid>Tipo de contrato: {user.typeContract}</ContentGrid>
+            <ContentGrid>
+              Problemas Critícos? {user.criticalProblems ? "Sim" : "Não"}
+            </ContentGrid>
+            <ContentGrid>CNPJ: {user.cnpj}</ContentGrid>
           </WrapperGrid>
         </TopContainer>
-        <CenterContainer>asdas</CenterContainer>
+        {/* <CenterContainer>asdas</CenterContainer> */}
         <BottomContainer>
           <h1 style={{ textAlign: "center" }}>
             Pontuação Total -{" "}
@@ -170,7 +172,7 @@ export default function Client() {
         </BottomContainer>
         <Link to="/compliance/add" state={{ id: user._id }}>
           <button>
-            <Add />
+            <Add fontSize="large" />
           </button>
         </Link>
       </MainContainer>

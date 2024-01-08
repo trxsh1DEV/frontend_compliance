@@ -62,7 +62,7 @@ const Sidebar = () => {
       </NavLink>
       {tokenValid ? (
         <>
-          <NavLink onClick={signOut}>
+          <NavLink>
             <ListItemStyled>
               <UserCircleGear size={26} />
               <span>Meu perfil</span>

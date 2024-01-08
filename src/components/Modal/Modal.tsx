@@ -1,7 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import { Modal, Box } from "@mui/material";
 import { requestWithToken } from "../../utils/requestApi";
-import { TypeUsers } from "../../types/typeUsers";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -31,13 +30,18 @@ const style = {
 
 const schema = z.object({
   email: z.string().email(),
-  name: z.string().min(6),
-  social_reason: z.string(),
-  isAdmin: z.boolean().optional(),
+  name: z.string().min(6, "Minimo 6 caracteres"),
+  social_reason: z.string().optional(),
+  isAdmin: z.boolean(),
+  criticalProblems: z.boolean(),
+  cnpj: z.string().min(11, "Minimo 11 caracteres").optional(),
+  contact: z.string().min(8, "Minimo 8 caracteres"),
 });
 
+type FieldsClient = z.infer<typeof schema>;
+
 const CustomModal: FC<CustomModalProps> = ({ isOpen, onClose, id }) => {
-  const [data, setData] = useState<TypeUsers>();
+  const [data, setData] = useState<FieldsClient>();
 
   const onSubmit = async (data: any) => {
     try {
@@ -61,7 +65,7 @@ const CustomModal: FC<CustomModalProps> = ({ isOpen, onClose, id }) => {
     };
 
     fetchData();
-  }, [id, data]);
+  }, [id]);
   if (!data) return null;
 
   const {
@@ -73,10 +77,13 @@ const CustomModal: FC<CustomModalProps> = ({ isOpen, onClose, id }) => {
     criteriaMode: "all",
     mode: "all",
     defaultValues: {
-      email: data?.email,
-      name: data?.name,
+      email: data?.email || "",
+      name: data?.name || "",
       isAdmin: data?.isAdmin,
-      social_reason: data.social_reason,
+      social_reason: data?.social_reason || "",
+      criticalProblems: data?.criticalProblems || false,
+      cnpj: data?.cnpj || "",
+      contact: data?.contact || "",
     },
   });
 
@@ -97,16 +104,39 @@ const CustomModal: FC<CustomModalProps> = ({ isOpen, onClose, id }) => {
       </Container>
       <Container>
         <Input
-          {...register("social_reason")}
-          label="Razão social"
-          helperText={errors?.social_reason?.message}
+          {...register("cnpj")}
+          placeholder="Digite o CNPJ"
+          label="CNPJ"
+          helperText={errors.cnpj?.message}
         />
+        <Input
+          {...register("contact")}
+          placeholder="Digite um número para contato"
+          label="Número para contato"
+          helperText={errors.contact?.message}
+        />
+      </Container>
+      <Container>
+        <Input
+          {...register("social_reason")}
+          placeholder="Razão social (opcional)"
+          label="Razão social"
+          helperText={errors.social_reason?.message}
+        />
+      </Container>
 
+      <Container>
         <Input
           {...register("isAdmin")}
           type="checkbox"
           label="Administrador?"
           helperText={errors?.isAdmin?.message}
+        />
+        <Input
+          {...register("criticalProblems")}
+          label="Tem problemas críticos?"
+          helperText={errors?.criticalProblems?.message}
+          type="checkbox"
         />
       </Container>
 

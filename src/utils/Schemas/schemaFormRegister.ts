@@ -17,8 +17,15 @@ export const schemaRegister = z
       .min(8, "A senha deve conter mais de 8 caracteres")
       .max(30, "A senha deve conter menos de 30 caracteres"),
     isAdmin: z.boolean(),
-    createdAt: z.string().optional(),
     _id: z.string().optional(),
+    criticalProblems: z.boolean(),
+    typeContract: z.enum(["Fixo", "Avulso"], {
+      errorMap: () => {
+        return { message: "Informe Fixo ou Avulso" };
+      },
+    }),
+    cnpj: z.string(),
+    contact: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "As senhas não são iguais",

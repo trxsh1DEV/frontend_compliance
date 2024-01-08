@@ -4,6 +4,7 @@ import FormBackup from "../Form/FormBackup/FormBackup";
 import { useState } from "preact/hooks";
 import { combineInfra } from "../../types/typesForm";
 import FormServer from "../Form/FormServer/FormServer";
+import FormFirewall from "../Form/FormFirewall/FormFirewall";
 // import InfoPanel from "../InfoPanel/InfoPanel";
 
 const DetailsCompliance = () => {
@@ -46,8 +47,15 @@ const DetailsCompliance = () => {
         />
       );
     case "firewall":
+      data.firewall.client = id;
       selectedData = data.firewall;
-      break;
+      return (
+        <FormFirewall
+          data={selectedData}
+          setFormValues={setFormValues}
+          id={complianceId}
+        />
+      );
     case "ha":
       data.ha.client = id;
       selectedData = data.ha;

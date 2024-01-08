@@ -4,30 +4,48 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  width: 100vw;
+  height: 95vh;
+  width: 100%;
 `;
 
 export const Paragraph = styled.p`
   color: #dc6179;
 `;
 
-export const FormContainer = styled.div`
-  background-color: #fff;
+export const FormContainer = styled.form`
   width: 600px;
-  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
+  padding: 2.5rem;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 5px 0px 24px -3px #2596be;
+
+  & button {
+    width: 100%;
+    max-width: 17rem;
+  }
 `;
 
 export const Title = styled.h2`
   text-align: center;
-  color: #333;
-  margin-bottom: 20px;
+  font-size: 3.2rem;
+  border: none;
+  margin-bottom: 2.5rem;
 `;
 
-export const FormGroup = styled.div`
-  margin-bottom: 20px;
+export const ContainerForm = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 800px;
+  overflow: hidden;
+  gap: 2rem;
+  & + & {
+    margin-top: 1rem;
+  }
 `;
 
 export const Label = styled.label`
@@ -39,7 +57,6 @@ export const Label = styled.label`
 `;
 
 export const Input = styled.input`
-  width: 100%;
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ddd;
@@ -56,4 +73,5 @@ export const Button = styled.button`
   border-radius: 5px;
   cursor: pointer;
   margin-top: 2.5rem;
+  width: 100%;
 `;

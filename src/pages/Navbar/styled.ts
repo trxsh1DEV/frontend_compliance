@@ -8,6 +8,7 @@ export const SidebarContainer = styled.div`
   background-color: #333;
   padding-top: 20px;
   transition: 300ms all ease-in-out;
+  overflow: hidden;
 
   & {
     ${compactSlidebar({ width: "67px" })}
@@ -19,7 +20,9 @@ export const NavLink = styled(ReactRouterNavLink)`
   padding: 10px;
   color: #fff;
   text-decoration: none;
+  cursor: auto;
 `;
+
 export const ListItemStyled = styled.div`
   display: flex;
   align-items: center;
@@ -29,9 +32,10 @@ export const ListItemStyled = styled.div`
   padding: 10px;
   border-radius: 5px;
   transition: 300ms all ease-in;
+  cursor: pointer;
 
   &:hover {
-    opacity: 0.7; // Certifique-se de definir $soft-bg em algum lugar
+    opacity: 0.7;
   }
 
   & > span {

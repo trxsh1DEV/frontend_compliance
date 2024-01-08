@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "../../components/Input/Input";
 import { z } from "zod";
-import { Button, Container, FormContainer, FormGroup, Title } from "./styled";
+import { Button, Container, FormContainer, ContainerForm } from "./styled";
 import { requestWithToken } from "../../utils/requestApi";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -44,56 +44,87 @@ const RegisterForm = () => {
     <>
       <ToastContainer autoClose={2000} theme="dark" />
       <Container>
-        <FormContainer>
-          <Title>Register</Title>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <FormGroup>
-              <Input
-                {...register("name")}
-                placeholder="Nome da empresa"
-                label="Nome do cliente"
-                helperText={errors.name?.message}
-              />
-              <Input
-                {...register("social_reason")}
-                placeholder="Razão social"
-                label="Razão social"
-                helperText={errors.social_reason?.message}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Input
-                {...register("email")}
-                placeholder="E-mail"
-                label="E-mail do cliente"
-                helperText={errors.email?.message}
-              />
-              <Input
-                {...register("password")}
-                placeholder="Digite sua senha"
-                label="Digite uma senha forte"
-                type="password"
-                helperText={errors.password?.message}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Input
-                {...register("confirmPassword")}
-                placeholder="Confirme sua senha"
-                label="Redigite a sua senha"
-                type="password"
-                helperText={errors.confirmPassword?.message}
-              />
-              <Input
-                {...register("isAdmin")}
-                label="É administrador?"
-                type="checkbox"
-                helperText={errors.isAdmin?.message}
-              />
-            </FormGroup>
+        {/* <Title>Cadastrar Novo Cliente</Title> */}
+        <FormContainer onSubmit={handleSubmit(onSubmit)}>
+          <ContainerForm>
+            <Input
+              {...register("name")}
+              placeholder="Nome da empresa"
+              label="Nome do cliente"
+              helperText={errors.name?.message}
+            />
+            <Input
+              {...register("social_reason")}
+              placeholder="Razão social"
+              label="Razão social"
+              helperText={errors.social_reason?.message}
+            />
+          </ContainerForm>
 
-            <Button type="submit">Cadastrar</Button>
-          </form>
+          <ContainerForm>
+            <Input
+              {...register("email")}
+              placeholder="E-mail"
+              label="E-mail do cliente"
+              helperText={errors.email?.message}
+            />
+            <Input
+              {...register("typeContract")}
+              placeholder="Digite Fixo ou Avulso"
+              label="Tipo de contrato"
+              helperText={errors.typeContract?.message}
+            />
+          </ContainerForm>
+
+          <ContainerForm>
+            <Input
+              {...register("password")}
+              placeholder="Digite sua senha"
+              label="Digite uma senha forte"
+              type="password"
+              helperText={errors.password?.message}
+            />
+
+            <Input
+              {...register("confirmPassword")}
+              placeholder="Confirme sua senha"
+              label="Redigite a sua senha"
+              type="password"
+              helperText={errors.confirmPassword?.message}
+            />
+          </ContainerForm>
+
+          <ContainerForm>
+            <Input
+              {...register("cnpj")}
+              placeholder="Digite o CNPJ"
+              label="CNPJ"
+              helperText={errors.cnpj?.message}
+            />
+            <Input
+              {...register("contact")}
+              placeholder="Digite um número para contato"
+              label="Número para contato"
+              helperText={errors.contact?.message}
+            />
+          </ContainerForm>
+
+          <ContainerForm>
+            <Input
+              {...register("isAdmin")}
+              label="É administrador?"
+              type="checkbox"
+              helperText={errors.isAdmin?.message}
+            />
+            <Input
+              {...register("criticalProblems")}
+              label="Tem problemas críticos?"
+              type="checkbox"
+              helperText={errors.criticalProblems?.message}
+            />
+          </ContainerForm>
+
+          <Button type="submit">Cadastrar</Button>
         </FormContainer>
       </Container>
     </>

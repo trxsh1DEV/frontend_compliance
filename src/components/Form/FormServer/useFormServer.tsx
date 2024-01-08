@@ -28,6 +28,7 @@ const useFormulary = ({
         updateCompliance(data, complianceId, datas.server.client);
         return;
       }
+      // console.log("oi");
 
       setFormValues((prevState: any) => ({
         ...prevState,

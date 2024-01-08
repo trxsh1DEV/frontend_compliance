@@ -52,15 +52,6 @@ const FormBackup: FC<FormularyProps> = ({
                 />
               )}
               <Container>
-                {/* <Input
-                  {...register(`backup.frequency.description`)}
-                  type="text"
-                  placeholder="Descrição (Opcional)"
-                  label="Frequencia de Backup"
-                  helperText={errors.backup?.frequency?.description?.message}
-                  style={isEnabled(0)}
-                  disabled={isEditMode() || !!isEnabled(0)}
-                /> */}
                 <Input
                   {...register(`backup.frequency.level`)}
                   type="text"

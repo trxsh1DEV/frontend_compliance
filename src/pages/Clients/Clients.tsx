@@ -13,8 +13,12 @@ import { toast } from "react-toastify";
 import { UserPlus } from "phosphor-react";
 // import ModalCreate from "../../components/Modal/ModalCreate";
 
+type FieldsClient = FormRegisterProps & {
+  createdAt: string;
+};
+
 export default function Clients() {
-  const [data, setData] = useState<[FormRegisterProps]>();
+  const [data, setData] = useState<[FieldsClient]>();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [id, setId] = useState("");
 
@@ -42,7 +46,7 @@ export default function Clients() {
       type: "file",
     },
     { field: "name", type: "text", headerName: "Nome cliente", width: 150 },
-    { field: "email", type: "text", headerName: "email", width: 200 },
+    { field: "email", type: "text", headerName: "E-mail", width: 200 },
     {
       field: "social_reason",
       type: "text",
