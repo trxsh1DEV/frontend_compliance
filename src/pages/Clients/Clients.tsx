@@ -3,15 +3,13 @@ import { useEffect, useState } from "preact/hooks";
 import { requestWithToken } from "../../utils/requestApi";
 import { formatDateString } from "../../utils/formatDate";
 import { FormRegisterProps } from "../../types/typesForm";
-// import { columns } from "./DataClients";
 import { Box } from "@mui/material";
 import CustomModal from "../../components/Modal/Modal";
 import { Actions, DivButton, Image } from "./styled";
 import { Link } from "react-router-dom";
-import "./test.css";
 import { toast } from "react-toastify";
 import { UserPlus } from "phosphor-react";
-// import ModalCreate from "../../components/Modal/ModalCreate";
+import "./styleClients.css";
 
 type FieldsClient = FormRegisterProps & {
   createdAt: string;
@@ -23,11 +21,11 @@ export default function Clients() {
   const [id, setId] = useState("");
 
   const columns: GridColDef[] = [
-    { field: "_id", type: "text", headerName: "ID", width: 60 },
+    { field: "_id", type: "text", headerName: "ID", width: 70 },
     {
       field: "avatar",
       headerName: "Avatar",
-      width: 80,
+      width: 90,
       align: "center",
       renderCell: (params) => {
         return (
@@ -45,15 +43,15 @@ export default function Clients() {
       },
       type: "file",
     },
-    { field: "name", type: "text", headerName: "Nome cliente", width: 150 },
-    { field: "email", type: "text", headerName: "E-mail", width: 200 },
+    { field: "name", type: "text", headerName: "Nome cliente", width: 200 },
+    { field: "email", type: "text", headerName: "E-mail", width: 250 },
     {
       field: "social_reason",
       type: "text",
       headerName: "Razão Social",
       width: 180,
     },
-    { field: "createdAt", type: "text", headerName: "Criado Em", width: 120 },
+    { field: "createdAt", type: "text", headerName: "Criado Em", width: 150 },
     {
       field: "isAdmin",
       type: "boolean",
@@ -63,7 +61,7 @@ export default function Clients() {
     {
       field: "action",
       headerName: "Action",
-      width: 200,
+      width: 250,
       renderCell: (params) => {
         return (
           <Actions className="action">
@@ -137,8 +135,9 @@ export default function Clients() {
   }));
 
   return (
-    <Box width="100%">
+    <Box>
       <DataGrid
+        style={{ fontSize: "2rem" }}
         rows={rowsId}
         columns={columns}
         initialState={{

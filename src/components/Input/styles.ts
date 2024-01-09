@@ -3,6 +3,7 @@ import theme from "../../styles/theme";
 import { lighten } from "polished";
 
 export const InputStyle = styled.input<{ hasError: boolean }>`
+  font-size: 1.8rem;
   padding: 1rem;
   border-radius: 8px;
   border: 1px solid ${theme.colors.cyanPrimary};

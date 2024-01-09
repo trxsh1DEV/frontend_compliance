@@ -12,9 +12,10 @@ import {
   WrapperAvailable,
   Paragrafh,
   ArticleStyled,
+  DivAbsolute,
 } from "./styled";
 import { FormRegisterProps } from "../../types/typesForm";
-import { Add } from "@mui/icons-material";
+import { AddTask, CalculateRounded } from "@mui/icons-material";
 import { formatDateString } from "../../utils/formatDate";
 
 export default function Client() {
@@ -42,6 +43,10 @@ export default function Client() {
     navigate(`/clients/${id}/details`, {
       state: { data: compliance, part, id },
     });
+  };
+
+  const handleCalculate = () => {
+    console.log("oi");
   };
 
   if (!user || !compliance) return null;
@@ -72,7 +77,7 @@ export default function Client() {
           </h1>
           <WrapperGrid>
             <ContentGrid>
-              <h2>Servidores</h2>
+              <h3>Servidores</h3>
               <ArticleStyled>
                 Pontuação - <Bold>{compliance.server.points}%</Bold>
                 <WrapperAvailable>
@@ -86,7 +91,7 @@ export default function Client() {
               </ArticleStyled>
             </ContentGrid>
             <ContentGrid>
-              <h2>Backup</h2>
+              <h3>Backup</h3>
               <ArticleStyled>
                 Pontuação - <Bold>{compliance.backup.points}%</Bold>
                 <WrapperAvailable>
@@ -100,7 +105,7 @@ export default function Client() {
               </ArticleStyled>
             </ContentGrid>
             <ContentGrid>
-              <h2>High Available</h2>
+              <h3>High Available</h3>
               <ArticleStyled>
                 Pontuação - <Bold>{compliance.ha.points}%</Bold>
                 <WrapperAvailable>
@@ -112,7 +117,7 @@ export default function Client() {
               </ArticleStyled>
             </ContentGrid>
             <ContentGrid>
-              <h2>Firewall</h2>
+              <h3>Firewall</h3>
               <ArticleStyled>
                 Pontuação - <Bold>{compliance.firewall.points}%</Bold>
                 <WrapperAvailable>
@@ -126,7 +131,7 @@ export default function Client() {
               </ArticleStyled>
             </ContentGrid>
             <ContentGrid>
-              <h2>Inventário</h2>
+              <h3>Inventário</h3>
               <ArticleStyled>
                 Pontuação - <Bold>{compliance.inventory.points}%</Bold>
                 <WrapperAvailable>
@@ -140,7 +145,7 @@ export default function Client() {
               </ArticleStyled>
             </ContentGrid>
             <ContentGrid>
-              <h2>Segurança</h2>
+              <h3>Segurança</h3>
               <ArticleStyled>
                 Pontuação - <Bold>{compliance.security.points}%</Bold>
                 <WrapperAvailable>
@@ -154,7 +159,7 @@ export default function Client() {
               </ArticleStyled>
             </ContentGrid>
             <ContentGrid>
-              <h2>Serviços Outsourcing</h2>
+              <h3>Serviços Outsourcing</h3>
               <ArticleStyled>
                 Pontuação -{" "}
                 <Bold>{compliance.servicesOutsourcing.points}%</Bold>
@@ -171,10 +176,13 @@ export default function Client() {
           </WrapperGrid>
         </BottomContainer>
         <Link to="/compliance/add" state={{ id: user._id }}>
-          <button>
-            <Add fontSize="large" />
-          </button>
+          <DivAbsolute r="5" b="2">
+            <AddTask sx={{ fontSize: "5rem" }} />
+          </DivAbsolute>
         </Link>
+        <DivAbsolute r="17" b="2" onClick={handleCalculate}>
+          <CalculateRounded sx={{ fontSize: "5rem" }} />
+        </DivAbsolute>
       </MainContainer>
     </>
   );

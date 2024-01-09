@@ -8,16 +8,16 @@ export default createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
     outline: 0;
-    font-size: 1.8rem;
     color: #fff;
   }
   body {
     background: #212534;
     min-width: 100vw;
     min-height: 100vh;
+    overflow-x: hidden;
     font-family: ${theme.fonts.default};
     -webkit-font-smoothing: antialiased;
-    /* font-size: 1.8rem; */
+    font-size: 2rem;
   }
   html {
     font-size: 62.5%;
@@ -26,7 +26,7 @@ export default createGlobalStyle`
     font-weight: 500;
   }
 
-  h2 {
+  h3 {
     text-align: center;
     border-bottom: 1px solid #fff;
   }

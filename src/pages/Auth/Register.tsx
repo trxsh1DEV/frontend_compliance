@@ -80,7 +80,7 @@ const RegisterForm = () => {
             <Input
               {...register("password")}
               placeholder="Digite sua senha"
-              label="Digite uma senha forte"
+              label="Digite uma senha"
               type="password"
               helperText={errors.password?.message}
             />
@@ -103,7 +103,7 @@ const RegisterForm = () => {
             />
             <Input
               {...register("contact")}
-              placeholder="Digite um número para contato"
+              placeholder="Digite um número"
               label="Número para contato"
               helperText={errors.contact?.message}
             />

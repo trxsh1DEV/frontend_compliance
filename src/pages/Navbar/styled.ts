@@ -11,6 +11,7 @@ export const SidebarContainer = styled.nav`
   width: 70px;
   background-color: #333;
   padding-top: 20px;
+  margin-right: 70px;
   transition: 300ms all ease-in-out;
   overflow: hidden;
   z-index: 2;

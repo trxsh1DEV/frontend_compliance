@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+interface DivAbsoluteProps {
+  r?: string;
+  b?: string;
+}
+
 export const Image = styled.img`
   width: 25px;
   height: 25px;
@@ -43,7 +48,7 @@ export const MainContainer = styled.main`
 
 export const WrapperGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-auto-flow: row;
   gap: 30px 20px;
   padding: 15px;
@@ -65,11 +70,20 @@ export const ContentGrid = styled.div`
 `;
 
 export const Button = styled.button`
-  padding: 5px;
+  padding: 10px 25px;
   position: absolute;
-  background-color: #fff;
+  right: 5rem;
+  bottom: 2rem;
 `;
 
+export const DivAbsolute = styled.button<DivAbsoluteProps>`
+  position: absolute;
+  ${({ r, b }) =>
+    `
+    right: ${r}rem;
+    bottom: ${b}rem;
+  `}
+`;
 export const Bold = styled.b`
   font-size: 2rem;
   color: ${({ theme }) => theme.colors.rose};
