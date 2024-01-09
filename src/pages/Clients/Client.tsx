@@ -61,7 +61,6 @@ export default function Client() {
   };
 
   if (!user || !compliance) return null;
-  console.log(user, compliance);
 
   return (
     <>
