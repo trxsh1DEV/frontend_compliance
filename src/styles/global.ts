@@ -13,6 +13,8 @@ export default createGlobalStyle`
   }
   body {
     background: #212534;
+    min-width: 100vw;
+    min-height: 100vh;
     font-family: ${theme.fonts.default};
     -webkit-font-smoothing: antialiased;
     /* font-size: 1.8rem; */

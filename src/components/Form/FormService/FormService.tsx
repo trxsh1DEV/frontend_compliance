@@ -8,9 +8,7 @@ import { Input } from "../../Input/Input";
 import { FC } from "react";
 import useFormulary from "./useForm";
 import { FormularyProps } from "../../../types/typesForm";
-import { Button, FormHelperText, MenuItem, Select } from "@mui/material";
-import { Controller } from "react-hook-form";
-import { dataSecurityGPO, dataEnumNoneToAll } from "../../../utils/dataUtil";
+import { Button } from "@mui/material";
 
 const FormService: FC<FormularyProps> = ({
   nextStep,
@@ -25,9 +23,8 @@ const FormService: FC<FormularyProps> = ({
     handleSubmit,
     register,
     formValidate,
-    control,
     isEditable,
-    haveSecurity,
+    haveServices,
   } = useFormulary({ nextStep, setFormValues, data, id });
 
   const isEditMode = () => (!!data && !isEditable ? true : false);
@@ -36,95 +33,61 @@ const FormService: FC<FormularyProps> = ({
     <>
       <MainContainer>
         <FormContainer onSubmit={handleSubmit(handleFormSubmit)}>
-          <Heading2>Formulário Segurança da informação</Heading2>
+          <Heading2>Formulário Serviços Outsourcing</Heading2>
           <Input
             {...register(`enabled`)}
             type="checkbox"
-            label="Especificar segurança da organização?"
+            label="Tem serviços terceirizados?"
           />
 
-          {haveSecurity && (
+          {haveServices && (
             <>
               <Container>
                 <Input
-                  {...register(`accessAuditing`)}
-                  helperText={errors?.accessAuditing?.message}
-                  label="Auditoria de acessos?"
+                  {...register(`servers`)}
+                  helperText={errors?.servers?.message}
+                  label="Server(s)?"
                   type="checkbox"
                   disabled={isEditMode()}
                 />
                 <Input
-                  {...register(`policyPassword`)}
-                  helperText={errors?.policyPassword?.message}
-                  label="Política de senha?"
+                  {...register(`database`)}
+                  helperText={errors?.database?.message}
+                  label="Intranet?"
                   type="checkbox"
                   disabled={isEditMode()}
                 />
                 <Input
-                  {...register(`lgpd`)}
-                  helperText={errors?.lgpd?.message}
-                  label="De acordo com a LGPD?"
+                  {...register(`sites`)}
+                  helperText={errors?.sites?.message}
+                  label="Sites?"
                   type="checkbox"
                   disabled={isEditMode()}
                 />
               </Container>
 
               <Container>
-                <label id="gpo">Maturidade de GPO</label>
-                <Controller
-                  name="gpo"
-                  control={control}
-                  render={({ field }) => (
-                    <Select
-                      labelId="gpo"
-                      value={field.value}
-                      onChange={(e: any) => field.onChange(e.target.value)}
-                      sx={{
-                        color: "#fff",
-                        fontSize: "16px",
-                      }}
-                    >
-                      {dataSecurityGPO.map((item) => (
-                        <MenuItem
-                          className="menuItem"
-                          value={`${item}`}
-                          disabled={isEditMode()}
-                        >
-                          {item}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  )}
+                <Input
+                  {...register(`intranet`)}
+                  helperText={errors?.intranet?.message}
+                  label="Intranet?"
+                  type="checkbox"
+                  disabled={isEditMode()}
                 />
-                <FormHelperText>{errors?.gpo?.message}</FormHelperText>
-
-                <label id="antivirus">Antivirus nos terminais</label>
-                <Controller
-                  name="antivirus"
-                  control={control}
-                  render={({ field }) => (
-                    <Select
-                      labelId="antivirus"
-                      value={field.value}
-                      onChange={(e: any) => field.onChange(e.target.value)}
-                      sx={{
-                        color: "#fff",
-                        fontSize: "16px",
-                      }}
-                    >
-                      {dataEnumNoneToAll.map((item) => (
-                        <MenuItem
-                          className="menuItem"
-                          value={`${item}`}
-                          disabled={isEditMode()}
-                        >
-                          {item}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  )}
+                <Input
+                  {...register(`erp`)}
+                  helperText={errors?.erp?.message}
+                  label="ERP?"
+                  type="checkbox"
+                  disabled={isEditMode()}
                 />
-                <FormHelperText>{errors?.antivirus?.message}</FormHelperText>
+                <Input
+                  {...register(`fileserver`)}
+                  helperText={errors?.fileserver?.message}
+                  label="File Server?"
+                  type="checkbox"
+                  disabled={isEditMode()}
+                />
               </Container>
 
               <Container>
@@ -141,7 +104,7 @@ const FormService: FC<FormularyProps> = ({
                 <Input
                   {...register(`description`)}
                   helperText={errors?.description?.message}
-                  label="Pontuação (Score)"
+                  label="Descrição"
                   placeholder="Descrição"
                   disabled={isEditMode()}
                 />
@@ -156,7 +119,7 @@ const FormService: FC<FormularyProps> = ({
                 />
               )}
               {!isEditMode() && (
-                <button type="submit" disabled={!haveSecurity}>
+                <button type="submit" disabled={!haveServices}>
                   Validate
                 </button>
               )}

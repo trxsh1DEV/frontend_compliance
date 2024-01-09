@@ -2,31 +2,43 @@ import styled from "styled-components";
 import { NavLink as ReactRouterNavLink } from "react-router-dom";
 import { compactSlidebar } from "../../styles/theme";
 
-export const SidebarContainer = styled.div`
-  height: 100vh;
-  width: 200px;
+export const SidebarContainer = styled.nav`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  width: 70px;
   background-color: #333;
   padding-top: 20px;
   transition: 300ms all ease-in-out;
   overflow: hidden;
+  z-index: 2;
 
-  & {
-    ${compactSlidebar({ width: "67px" })}
+  &:hover {
+    width: 200px;
+    transition: 300ms all ease-in-out;
   }
+
+  /* & {
+    ${compactSlidebar({ width: "67px" })}
+  } */
 `;
 
 export const NavLink = styled(ReactRouterNavLink)`
-  display: block;
-  padding: 10px;
-  color: #fff;
   text-decoration: none;
   cursor: auto;
+  position: relative;
+  color: azure;
+  display: table;
+  width: 200px;
+  padding: 10px;
 `;
 
 export const ListItemStyled = styled.div`
   display: flex;
   align-items: center;
-  background-color: #444;
+  /* background-color: #444; */
   font-weight: 500;
   gap: 10px;
   padding: 10px;
@@ -35,10 +47,15 @@ export const ListItemStyled = styled.div`
   cursor: pointer;
 
   &:hover {
-    opacity: 0.7;
+    opacity: 0.95;
+    background-color: #444;
   }
 
   & > span {
     ${compactSlidebar({ display: "none" })}
   }
+`;
+
+export const Span = styled.span`
+  margin-left: 10px;
 `;

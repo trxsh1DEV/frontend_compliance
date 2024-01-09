@@ -40,7 +40,7 @@ export const InputContent = styled.div`
   align-items: center;
   width: 100%;
   flex-direction: column;
-  padding: 0.2rem;
+  padding: 0.4rem;
 `;
 
 export const HelperText = styled.p`

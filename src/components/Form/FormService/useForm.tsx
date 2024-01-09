@@ -1,13 +1,13 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { FormularyProps, FormSecurityProps } from "../../../types/typesForm";
+import { FormularyProps, FormServiceProps } from "../../../types/typesForm";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { updateCompliance } from "../../../services/compliance";
-import { schemaSecurity } from "../../../utils/Schemas/schemaFormSecurity";
+import { schemaServices } from "../../../utils/Schemas/schemaFormService";
 
 interface FieldsSecurity extends Omit<FormularyProps, "data"> {
-  data: FormSecurityProps;
+  data: FormServiceProps;
 }
 
 const useFormulary = ({
@@ -21,7 +21,7 @@ const useFormulary = ({
   const handleFormSubmit = async (data: any) => {
     setFormValidate(true);
     data = {
-      security: { ...data },
+      servicesOutsourcing: { ...data },
     };
 
     try {
@@ -46,16 +46,18 @@ const useFormulary = ({
     control,
     formState: { errors },
     setFocus,
-  } = useForm<FormSecurityProps>({
+  } = useForm<FormServiceProps>({
     mode: "all",
     criteriaMode: "all",
-    resolver: zodResolver(schemaSecurity),
+    resolver: zodResolver(schemaServices),
     defaultValues: {
-      accessAuditing: data?.accessAuditing || false,
-      antivirus: data?.antivirus || "None",
-      gpo: data?.gpo || "Nenhuma",
-      lgpd: data?.lgpd || false,
-      policyPassword: data?.policyPassword || false,
+      database: data?.database || false,
+      email: data?.email || false,
+      erp: data?.erp || false,
+      fileserver: data?.fileserver || false,
+      intranet: data?.intranet || false,
+      servers: data?.servers || false,
+      sites: data?.sites || false,
       description: data?.description || "",
       enabled: data?.enabled || false,
       isEditable: data?.isEditable || false,
@@ -63,23 +65,23 @@ const useFormulary = ({
     },
   });
 
-  const haveSecurity = watch("enabled");
+  const haveServices = watch("enabled");
   const isEditable = watch("isEditable");
 
   useEffect(() => {
-    setFocus("description");
-  }, [haveSecurity]);
+    setFocus("servers");
+  }, [haveServices]);
 
   const handleNext = () => {
     nextStep && nextStep();
   };
 
   useEffect(() => {
-    if (!haveSecurity || Object.keys(errors).length === 0) {
+    if (!haveServices || Object.keys(errors).length === 0) {
       return setFormValidate(true);
     }
     setFormValidate(false);
-  }, [errors, haveSecurity]);
+  }, [errors, haveServices]);
 
   return {
     handleFormSubmit,
@@ -90,7 +92,7 @@ const useFormulary = ({
     formValidate,
     control,
     isEditable,
-    haveSecurity,
+    haveServices,
   };
 };
 
