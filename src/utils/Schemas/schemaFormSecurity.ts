@@ -1,11 +1,13 @@
 import { z } from "zod";
 import { descriptionType, enumNoneAll, scoreType } from "./genericForm";
 
-export const schemaInventory = z.object({
+export const schemaSecurity = z.object({
   enabled: z.boolean(),
-  devices: z.array(z.string()),
-  contacts: z.boolean(),
-  agentInventory: enumNoneAll,
+  antivirus: enumNoneAll,
+  policyPassword: z.boolean(),
+  accessAuditing: z.boolean(),
+  gpo: z.enum(["Nenhuma", "Basica", "Avançada"]),
+  lgpd: z.boolean(),
   score: scoreType.min(1, "Maior que 0"),
   description: descriptionType,
   isEditable: z.boolean(),

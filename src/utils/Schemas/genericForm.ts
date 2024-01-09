@@ -7,3 +7,4 @@ export const scoreType = z
   .max(10, "Informe um valor menor que 11");
 
 export const descriptionType = z.optional(z.string());
+export const enumNoneAll = z.enum(["None", "Few", "Medium", "Many", "All"]);

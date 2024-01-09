@@ -7,6 +7,7 @@ import { combineInfra } from "../../types/typesForm";
 import Success from "../../pages/Success/Success";
 import { useLocation } from "react-router-dom";
 import FormHA from "../Form/FormHA/FormHA";
+import FormSecurity from "../Form/FormSecurity/FormSecurity";
 
 const AddCompliance = () => {
   const [step, setStep] = useState(1);
@@ -28,7 +29,7 @@ const AddCompliance = () => {
         <FormServer nextStep={nextStep} setFormValues={setFormValues} />
       )}
       {step === 1 && (
-        <FormHA nextStep={nextStep} setFormValues={setFormValues} />
+        <FormSecurity nextStep={nextStep} setFormValues={setFormValues} />
       )}
       {step === 4 && <Success infra={formValues} id={id} />}
     </div>

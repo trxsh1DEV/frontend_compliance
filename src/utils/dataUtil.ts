@@ -1,3 +1,5 @@
+import { enumNoneAll } from "./Schemas/genericForm";
+
 export const dataHAUtil = [
   "none",
   "redundancy",
@@ -25,4 +27,9 @@ export const dataInventoryDevices = [
   "Equipamentos",
   "Nenhum",
 ];
-export const dataInventoryAgent = ["None", "Few", "Medium", "Many", "All"];
+
+export const dataSecurityGPO = ["Nenhuma", "Basica", "Avançada"];
+
+export const dataInventoryAgent = enumNoneAll;
+
+export const dataEnumNoneToAll = ["None", "Few", "Medium", "Many", "All"];
