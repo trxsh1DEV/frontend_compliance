@@ -1,19 +1,13 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { FormularyProps, FormFirewallProps } from "../../../types/typesForm";
+import { FormularyProps, FormInventoryProps } from "../../../types/typesForm";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { updateCompliance } from "../../../services/compliance";
-import { schemaFirewall } from "../../../utils/Schemas/schemaFormFirewall";
-
-// type TypesHA = FormHAProps & {
-//   ha: {
-//     client: string;
-//   };
-// };
+import { schemaInventory } from "../../../utils/Schemas/schemaFormInventory";
 
 interface FieldsFirewall extends Omit<FormularyProps, "data"> {
-  data: FormFirewallProps;
+  data: FormInventoryProps;
 }
 
 const useFormulary = ({
@@ -24,12 +18,10 @@ const useFormulary = ({
 }: FieldsFirewall) => {
   const [formValidate, setFormValidate] = useState(false);
 
-  // const refFocus = useRef<HTMLInputElement>(null);
-
   const handleFormSubmit = async (data: any) => {
     setFormValidate(true);
     data = {
-      firewall: { ...data },
+      inventory: { ...data },
     };
 
     try {
@@ -54,43 +46,38 @@ const useFormulary = ({
     control,
     formState: { errors },
     setFocus,
-  } = useForm<FormFirewallProps>({
+  } = useForm<FormInventoryProps>({
     mode: "all",
     criteriaMode: "all",
-    resolver: zodResolver(schemaFirewall),
+    resolver: zodResolver(schemaInventory),
     defaultValues: {
-      manufacturer: data?.manufacturer.length > 1 ? data.manufacturer : "None",
-      rules: data?.rules || "None",
-      vpn: data?.vpn || "None",
+      agentInventory: data?.agentInventory || "None",
+      contacts: data?.contacts || false,
+      description: data?.description || "",
+      devices: data?.devices?.length > 3 ? data.devices : ["Nenhum"],
+      enabled: data?.enabled || false,
       isEditable: data?.isEditable || false,
       score: data?.score || 0,
-      backup: data?.backup || false,
-      description: data?.description || "",
-      enabled: data?.enabled || false,
-      ips: data?.ips || false,
-      monitoring: data?.monitoring || false,
-      restoration: data?.restoration || false,
-      segmentation: data?.restoration || false,
     },
   });
 
-  const haveFirewall = watch("enabled");
+  const haveInventory = watch("enabled");
   const isEditable = watch("isEditable");
 
   useEffect(() => {
-    setFocus("description");
-  }, [haveFirewall]);
+    setFocus("contacts");
+  }, [haveInventory]);
 
   const handleNext = () => {
     nextStep && nextStep();
   };
 
   useEffect(() => {
-    if (!haveFirewall || Object.keys(errors).length === 0) {
+    if (!haveInventory || Object.keys(errors).length === 0) {
       return setFormValidate(true);
     }
     setFormValidate(false);
-  }, [errors, haveFirewall]);
+  }, [errors, haveInventory]);
 
   return {
     handleFormSubmit,
@@ -101,7 +88,7 @@ const useFormulary = ({
     formValidate,
     control,
     isEditable,
-    haveFirewall,
+    haveInventory,
   };
 };
 

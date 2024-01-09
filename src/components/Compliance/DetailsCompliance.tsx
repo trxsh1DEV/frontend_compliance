@@ -5,6 +5,7 @@ import { useState } from "preact/hooks";
 import { combineInfra } from "../../types/typesForm";
 import FormServer from "../Form/FormServer/FormServer";
 import FormFirewall from "../Form/FormFirewall/FormFirewall";
+import FormInventory from "../Form/FormInventory/FormInventory";
 // import InfoPanel from "../InfoPanel/InfoPanel";
 
 const DetailsCompliance = () => {
@@ -67,14 +68,35 @@ const DetailsCompliance = () => {
         />
       );
     case "services":
-      selectedData = data.servicesOutsourcing;
-      break;
+      data.services.client = id;
+      selectedData = data.services;
+      return (
+        <FormFirewall
+          data={selectedData}
+          setFormValues={setFormValues}
+          id={complianceId}
+        />
+      );
     case "inventory":
+      data.inventory.client = id;
       selectedData = data.inventory;
-      break;
+      return (
+        <FormInventory
+          data={selectedData}
+          setFormValues={setFormValues}
+          id={complianceId}
+        />
+      );
     case "security":
-      selectedData = data.security;
-      break;
+      data.services.client = id;
+      selectedData = data.services;
+      return (
+        <FormFirewall
+          data={selectedData}
+          setFormValues={setFormValues}
+          id={complianceId}
+        />
+      );
     default:
       break;
   }

@@ -19,7 +19,7 @@ export const schemaFirewall = z.object({
   backup: z.boolean(),
   restoration: z.boolean(),
   monitoring: z.boolean(),
-  score: scoreType,
+  score: scoreType.min(1, "Maior que 0"),
   description: descriptionType,
   isEditable: z.boolean(),
 });

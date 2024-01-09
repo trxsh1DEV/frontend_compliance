@@ -4,11 +4,13 @@ import { schemaServer } from "../utils/Schemas/schemaFormServer";
 import { schemaHA } from "../utils/Schemas/schemaFormHA";
 import { schemaRegister } from "../utils/Schemas/schemaFormRegister";
 import { schemaFirewall } from "../utils/Schemas/schemaFormFirewall";
+import { schemaInventory } from "../utils/Schemas/schemaFormInventory";
 
 export type FormBackupProps = z.infer<typeof schemaBackup>;
 export type FormServerProps = z.infer<typeof schemaServer>;
 export type FormHAProps = z.infer<typeof schemaHA>;
 export type FormFirewallProps = z.infer<typeof schemaFirewall>;
+export type FormInventoryProps = z.infer<typeof schemaInventory>;
 
 export type clientType = {
   client: string;
@@ -25,7 +27,8 @@ export type IFirewall = {
       "Mikrotik",
       "Cisco",
       "SonicWall",
-      "PFsense"
+      "PFsense",
+      "Nenhum"
     ];
     rules: ["weak", "medium", "good"];
     segmentation: boolean;

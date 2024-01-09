@@ -7,6 +7,7 @@ export const FormContainer = styled.form`
   align-items: center;
   flex-direction: column;
   gap: 15px;
+  padding: 1rem;
 
   & button {
     width: 100%;

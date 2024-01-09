@@ -48,6 +48,7 @@ const useFormulary = ({
     control,
     setValue,
     formState: { errors },
+    setFocus,
   } = useForm<FormHAProps>({
     mode: "all",
     criteriaMode: "all",
@@ -85,11 +86,9 @@ const useFormulary = ({
     !tested && setValue("ha.rto", 0);
   }, [setValue, tested]);
 
-  // useEffect(() => {
-  //   if (haveHA) {
-  //     refFocus.current?.focus();
-  //   }
-  // }, [haveHA, isEditable]);
+  useEffect(() => {
+    setFocus("ha.description");
+  }, [haveHA]);
 
   return {
     handleFormSubmit,
