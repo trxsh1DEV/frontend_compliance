@@ -72,6 +72,7 @@ const CustomModal: FC<CustomModalProps> = ({ isOpen, onClose, id }) => {
     register,
     handleSubmit,
     formState: { errors },
+    setFocus,
   } = useForm({
     resolver: zodResolver(schema),
     criteriaMode: "all",
@@ -86,6 +87,10 @@ const CustomModal: FC<CustomModalProps> = ({ isOpen, onClose, id }) => {
       contact: data?.contact || "",
     },
   });
+
+  useEffect(() => {
+    setFocus("name");
+  }, []);
 
   const Formulario = (
     <FormContainer onSubmit={handleSubmit(onSubmit)}>

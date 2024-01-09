@@ -10,7 +10,10 @@ import useFormulary from "./useForm";
 import { FormularyProps } from "../../../types/typesForm";
 import { Button, FormHelperText, MenuItem, Select } from "@mui/material";
 import { Controller } from "react-hook-form";
-import { dataSecurityGPO, dataEnumNoneToAll } from "../../../utils/dataUtil";
+import {
+  dataSecurityGPO,
+  dataEnumNoneToAll,
+} from "../../../utils/data/dataUtil";
 
 const FormSecurity: FC<FormularyProps> = ({
   nextStep,
@@ -141,7 +144,7 @@ const FormSecurity: FC<FormularyProps> = ({
                 <Input
                   {...register(`description`)}
                   helperText={errors?.description?.message}
-                  label="Pontuação (Score)"
+                  label="Descrição"
                   placeholder="Descrição"
                   disabled={isEditMode()}
                 />

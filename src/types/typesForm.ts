@@ -8,7 +8,9 @@ import { schemaInventory } from "../utils/Schemas/schemaFormInventory";
 import { schemaSecurity } from "../utils/Schemas/schemaFormSecurity";
 import { schemaServices } from "../utils/Schemas/schemaFormService";
 
-export type FormBackupProps = z.infer<typeof schemaBackup>;
+export type FormBackupProps = z.infer<typeof schemaBackup> & {
+  points: number;
+};
 export type FormServerProps = z.infer<typeof schemaServer>;
 export type FormHAProps = z.infer<typeof schemaHA>;
 export type FormFirewallProps = z.infer<typeof schemaFirewall>;
@@ -41,6 +43,7 @@ export type IFirewall = {
     backup: boolean;
     restorarion: boolean;
     monitoring: boolean;
+    description?: string;
     score: number;
     weight: number;
     points: number;
@@ -59,6 +62,7 @@ export interface IInventory {
     )[];
     contacts: boolean;
     agentInventory: ["None", "Few", "Medium", "Many", "All"];
+    description?: string;
     score: number;
     weight: number;
     points: number;
@@ -72,6 +76,7 @@ export interface ISecurity {
     accessAuditing: boolean;
     gpo: ["None", "Basic", "Advanced"];
     lgpd: boolean;
+    description?: string;
     score: number;
     weight: number;
     points: number;
@@ -87,6 +92,7 @@ export interface IServices {
     erp: boolean;
     database: boolean;
     servers: boolean;
+    description?: string;
     score: number;
     weight: number;
     points: number;
@@ -116,3 +122,10 @@ export interface FormularyPropsBackup {
   setFormValues?: any;
   data?: FormBackupProps | any;
 }
+
+export type TypeComplianceFull = combineInfra & {
+  client: string;
+  updatedAt: string;
+  createdAt: string;
+  _id: string;
+};

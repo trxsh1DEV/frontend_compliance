@@ -1,6 +1,6 @@
 import { useEffect, useState } from "preact/hooks";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { requestUserToken, requestWithToken } from "../../utils/requestApi";
+import { requestWithToken } from "../../utils/requestApi";
 import {
   BottomContainer,
   TopContainer,
@@ -16,18 +16,20 @@ import {
 } from "./styled";
 import { FormRegisterProps } from "../../types/typesForm";
 import { AddTask, CalculateRounded } from "@mui/icons-material";
-import { formatDateString } from "../../utils/formatDate";
+import { formatDateString } from "../../utils/data/formatDate";
+import { toast } from "react-toastify";
+// import { handleCalculate } from "../../utils/calc/calculateScore";
 
 export default function Client() {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
   const navigate = useNavigate();
   const [user, setUser] = useState<FormRegisterProps>();
-  const [compliance, setCompliance] = useState<any>({});
+  const [compliance, setCompliance] = useState<any>();
 
   const fetchData = async () => {
     const resUser = requestWithToken.get(`clients/${id}`);
-    const resCompliance = requestUserToken.post("compliance/latest", {
+    const resCompliance = requestWithToken.post("compliance/latest", {
       client: id,
     });
     const [user, compliance] = await Promise.all([resUser, resCompliance]);
@@ -39,17 +41,28 @@ export default function Client() {
     fetchData();
   }, []);
 
+  const handleCalculate = async (id: string) => {
+    try {
+      await requestWithToken.get(`compliance/calculate/${id}`);
+      fetchData();
+      toast.success("Compliance calculado com sucesso!");
+    } catch (err: any) {
+      console.log(err.message);
+      toast.error(
+        `Falha ao calcular compliance: ${err?.response?.data?.errors[0]}`
+      );
+    }
+  };
+
   const handleDetails = (part: string) => {
     navigate(`/clients/${id}/details`, {
       state: { data: compliance, part, id },
     });
   };
 
-  const handleCalculate = () => {
-    console.log("oi");
-  };
-
   if (!user || !compliance) return null;
+  console.log(user, compliance);
+
   return (
     <>
       <MainContainer>
@@ -180,7 +193,11 @@ export default function Client() {
             <AddTask sx={{ fontSize: "5rem" }} />
           </DivAbsolute>
         </Link>
-        <DivAbsolute r="17" b="2" onClick={handleCalculate}>
+        <DivAbsolute
+          r="17"
+          b="2"
+          onClick={() => handleCalculate(compliance._id)}
+        >
           <CalculateRounded sx={{ fontSize: "5rem" }} />
         </DivAbsolute>
       </MainContainer>

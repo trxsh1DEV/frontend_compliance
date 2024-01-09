@@ -77,7 +77,7 @@ export const Button = styled.button`
 `;
 
 export const DivAbsolute = styled.button<DivAbsoluteProps>`
-  position: absolute;
+  position: fixed;
   ${({ r, b }) =>
     `
     right: ${r}rem;

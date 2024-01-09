@@ -12,8 +12,8 @@ import { Button, FormHelperText, MenuItem, Select } from "@mui/material";
 import { Controller } from "react-hook-form";
 import {
   dataInventoryDevices,
-  dataInventoryAgent,
-} from "../../../utils/dataUtil";
+  dataEnumNoneToAll,
+} from "../../../utils/data/dataUtil";
 
 const FormInventory: FC<FormularyProps> = ({
   nextStep,
@@ -89,7 +89,7 @@ const FormInventory: FC<FormularyProps> = ({
                         fontSize: "16px",
                       }}
                     >
-                      {dataInventoryAgent.map((item) => (
+                      {dataEnumNoneToAll.map((item) => (
                         <MenuItem
                           className="menuItem"
                           value={`${item}`}

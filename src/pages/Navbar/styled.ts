@@ -1,9 +1,8 @@
 import styled from "styled-components";
 import { NavLink as ReactRouterNavLink } from "react-router-dom";
-import { compactSlidebar } from "../../styles/theme";
 
 export const SidebarContainer = styled.nav`
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
@@ -20,10 +19,6 @@ export const SidebarContainer = styled.nav`
     width: 200px;
     transition: 300ms all ease-in-out;
   }
-
-  /* & {
-    ${compactSlidebar({ width: "67px" })}
-  } */
 `;
 
 export const NavLink = styled(ReactRouterNavLink)`
@@ -50,10 +45,6 @@ export const ListItemStyled = styled.div`
   &:hover {
     opacity: 0.95;
     background-color: #444;
-  }
-
-  & > span {
-    ${compactSlidebar({ display: "none" })}
   }
 `;
 

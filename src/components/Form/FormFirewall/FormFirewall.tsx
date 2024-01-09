@@ -13,7 +13,7 @@ import { Controller } from "react-hook-form";
 import {
   dataFirewallManufacturer,
   dataFirewallRulesAndVpn,
-} from "../../../utils/dataUtil";
+} from "../../../utils/data/dataUtil";
 
 const FormFirewall: FC<FormularyProps> = ({
   nextStep,

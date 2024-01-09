@@ -1,7 +1,7 @@
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useEffect, useState } from "preact/hooks";
 import { requestWithToken } from "../../utils/requestApi";
-import { formatDateString } from "../../utils/formatDate";
+import { formatDateString } from "../../utils/data/formatDate";
 import { FormRegisterProps } from "../../types/typesForm";
 import { Box } from "@mui/material";
 import CustomModal from "../../components/Modal/Modal";
