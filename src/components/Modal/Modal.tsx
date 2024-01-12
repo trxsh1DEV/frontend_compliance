@@ -34,8 +34,8 @@ const schema = z.object({
   social_reason: z.string().optional(),
   isAdmin: z.boolean(),
   criticalProblems: z.boolean(),
-  cnpj: z.string().min(11, "Minimo 11 caracteres").optional(),
-  contact: z.string().min(8, "Minimo 8 caracteres"),
+  cnpj: z.string().optional(),
+  contact: z.string().optional(),
 });
 
 type FieldsClient = z.infer<typeof schema>;
@@ -57,9 +57,10 @@ const CustomModal: FC<CustomModalProps> = ({ isOpen, onClose, id }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await requestWithToken.get(`clients/${id}`);
+        const res = await requestWithToken.get(`clients/show/${id}`);
         setData(res.data);
-      } catch (error) {
+      } catch (error: any) {
+        toast.error(`Erro ao buscar dados do usuário: ${error.message}`);
         console.error("Erro ao buscar dados:", error);
       }
     };

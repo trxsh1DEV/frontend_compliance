@@ -9,35 +9,18 @@ import {
 } from "phosphor-react";
 import { SidebarContainer, ListItemStyled, NavLink, Span } from "./styled";
 import Cookies from "js-cookie";
-import { useContext, useEffect, useState } from "preact/hooks";
-import { UserContext } from "../../Context/UserContext";
-import { requestWithToken } from "../../utils/requestApi";
-import { toast } from "react-toastify";
+import { useDecoded } from "../../Context/TokenContext";
+// import { useEffect } from "preact/hooks";
+// import { useDecoded } from "../../Context/TokenContext";
 
 const Sidebar = () => {
-  const [tokenValid, setToken] = useState<string | undefined>("");
-  const { user, setUser } = useContext(UserContext);
+  const tokenValid = Cookies.get("token");
+  const { decoded, updateDecoded } = useDecoded();
 
   const signOut = () => {
     Cookies.remove("token");
-    location.href = "/admin/login";
-  };
-
-  useEffect(() => {
-    if (Cookies.get("token")) {
-      setToken(Cookies.get("token"));
-      findUserLogged();
-    }
-  }, []);
-
-  const findUserLogged = async () => {
-    try {
-      const response = await requestWithToken.get("/clients/");
-      setUser(response.data);
-    } catch (err: any) {
-      console.log(err);
-      toast.error(err.message);
-    }
+    updateDecoded();
+    location.href = "/login";
   };
 
   return (
@@ -49,21 +32,21 @@ const Sidebar = () => {
         </ListItemStyled>
       </NavLink>
 
-      <NavLink to="/clients">
-        <ListItemStyled>
-          <UsersThree size={32} />
-          <Span>Clientes</Span>
-        </ListItemStyled>
-      </NavLink>
-
-      <NavLink to="/">
-        <ListItemStyled>
-          <Graph size={32} />
-          <Span>Dashboards</Span>
-        </ListItemStyled>
-      </NavLink>
-      {tokenValid ? (
+      {decoded?.isAdmin && (
         <>
+          <NavLink to="/clients/show">
+            <ListItemStyled>
+              <UsersThree size={32} />
+              <Span>Clientes</Span>
+            </ListItemStyled>
+          </NavLink>
+
+          <NavLink to="/">
+            <ListItemStyled>
+              <Graph size={32} />
+              <Span>Dashboards</Span>
+            </ListItemStyled>
+          </NavLink>
           <NavLink>
             <ListItemStyled>
               <UserCircleGear size={32} />
@@ -77,7 +60,32 @@ const Sidebar = () => {
             </ListItemStyled>
           </NavLink>
         </>
-      ) : (
+      )}
+
+      {decoded?.id && !decoded?.isAdmin && (
+        <>
+          <NavLink>
+            <ListItemStyled>
+              <UserCircleGear size={32} />
+              <Span>Pontuação</Span>
+            </ListItemStyled>
+          </NavLink>
+          <NavLink>
+            <ListItemStyled>
+              <UserCircleGear size={32} />
+              <Span>Meu perfil</Span>
+            </ListItemStyled>
+          </NavLink>
+          <NavLink onClick={signOut}>
+            <ListItemStyled>
+              <SignOut size={32} />
+              <Span>Quit</Span>
+            </ListItemStyled>
+          </NavLink>
+        </>
+      )}
+
+      {!tokenValid && (
         <NavLink to="/admin/login">
           <ListItemStyled>
             <SignIn size={32} />

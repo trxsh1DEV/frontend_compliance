@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import GlobalStyle from "./styles/global";
 import theme from "./styles/theme";
-// import InputPage from "./components/Input/Input";
 import { ThemeProvider } from "styled-components";
 import AddCompliance from "./components/MultiStep/NextStep";
 import Register from "./pages/Auth/Register";
@@ -12,39 +11,59 @@ import Sidebar from "./pages/Navbar/Navbar";
 import { AppContainer, MainContent } from "./app";
 import Clients from "./pages/Clients/Clients";
 import Client from "./pages/Clients/Client";
-import Cookies from "js-cookie";
-import UserContext from "./Context/UserContext";
 import DetailsCompliance from "./components/Compliance/DetailsCompliance";
+import { AdminRoute, PrivateRoute, isAuthenticated } from "./utils/redirects";
+import { DecodedProvider } from "./Context/TokenContext";
+import UnauthorizedPage from "./pages/Unhatorized";
+import NotFoundPage from "./pages/NotFound";
 
 export function App() {
-  const user = Cookies.get("token");
-  // console.log(user);
   return (
     <>
       <ThemeProvider theme={theme}>
         <BrowserRouter>
           <ToastContainer autoClose={2000} theme="dark" />
           <AppContainer>
-            <UserContext>
-              <Sidebar />
+            <DecodedProvider>
+              {isAuthenticated() && <Sidebar />}
               <MainContent>
                 <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/compliance/add" element={<AddCompliance />} />
-                  <Route path="/register" element={<Register />} />
-                  <Route path="/clients/:id" element={<Client />} />
-                  <Route
-                    path="/clients/:id/details"
-                    element={<DetailsCompliance />}
-                  />
-                  <Route
-                    path="/clients"
-                    element={user ? <Clients /> : <Login />}
-                  />
                   <Route path="/admin/login" element={<Login />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/unathorized" element={<UnauthorizedPage />} />
+                  <Route path="*" element={<NotFoundPage />} />
+                  <Route
+                    path="/"
+                    element={<PrivateRoute element={<Home />} />}
+                  />
+
+                  {/* <Route
+                    path="/clients"
+                    element={<PrivateRoute element={<Client />} />}
+                  /> */}
+                  <Route
+                    path="/clients/register"
+                    element={<AdminRoute element={<Register />} />}
+                  />
+                  <Route
+                    path="/clients/show"
+                    element={<AdminRoute element={<Clients />} />}
+                  />
+                  <Route
+                    path="/clients/show/:id"
+                    element={<PrivateRoute element={<Client />} />}
+                  />
+                  <Route
+                    path="/clients/show/:id/details"
+                    element={<PrivateRoute element={<DetailsCompliance />} />}
+                  />
+                  <Route
+                    path="/compliance/add"
+                    element={<PrivateRoute element={<AddCompliance />} />}
+                  />
                 </Routes>
               </MainContent>
-            </UserContext>
+            </DecodedProvider>
           </AppContainer>
         </BrowserRouter>
         <GlobalStyle />

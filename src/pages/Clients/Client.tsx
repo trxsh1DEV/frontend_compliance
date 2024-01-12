@@ -22,13 +22,13 @@ import { toast } from "react-toastify";
 
 export default function Client() {
   const location = useLocation();
-  const id = location.pathname.split("/")[2];
+  const id = location.pathname.split("/")[3];
   const navigate = useNavigate();
   const [user, setUser] = useState<FormRegisterProps>();
   const [compliance, setCompliance] = useState<any>();
 
   const fetchData = async () => {
-    const resUser = requestWithToken.get(`clients/${id}`);
+    const resUser = requestWithToken.get(`clients/show/${id}`);
     const resCompliance = requestWithToken.post("compliance/latest", {
       client: id,
     });

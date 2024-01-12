@@ -17,6 +17,7 @@
     "@mui/x-data-grid": "^6.18.5",
     "axios": "^1.6.2",
     "js-cookie": "^3.0.5",
+    "jwt-decode": "^4.0.0",
     "phosphor-react": "^1.4.1",
     "polished": "^4.2.2",
     "preact": "^10.19.1",

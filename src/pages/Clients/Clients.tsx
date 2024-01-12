@@ -65,9 +65,9 @@ export default function Clients() {
       renderCell: (params) => {
         return (
           <Actions className="action">
-            <Link to={`/clients/${params.row._id}`}>
+            <Link to={`/clients/show/${params.row._id}`}>
               <DivButton>
-                <Image src="view.svg" alt="" />
+                <Image src="../view.svg" alt="" />
               </DivButton>
             </Link>
 
@@ -75,13 +75,13 @@ export default function Clients() {
               className="edit"
               onClick={() => handleEdit(params.row._id)}
             >
-              <Image src="edit.svg" alt="" />
+              <Image src="../edit.svg" alt="" />
             </DivButton>
             <DivButton
               className="delete"
               onClick={() => handleDelete(params.row._id)}
             >
-              <Image src="delete.svg" alt="" />
+              <Image src="../delete.svg" alt="" />
             </DivButton>
           </Actions>
         );
@@ -91,10 +91,11 @@ export default function Clients() {
 
   const fetchData = async () => {
     try {
-      const res = await requestWithToken.get("clients/all");
+      const res = await requestWithToken.get("clients/show");
       setData(res.data);
     } catch (err: any) {
-      toast.error(`Erro ao buscar dados: ${err.response.data.errors[0]}`);
+      toast.error(`Erro ao buscar dados: ${err?.response?.data.errors[0]}`);
+      console.log(err);
     }
   };
 
@@ -109,7 +110,7 @@ export default function Clients() {
 
   const handleDelete = async (id: string) => {
     try {
-      await requestWithToken.delete(`clients/${id}`);
+      await requestWithToken.delete(`clients/show/${id}`);
       toast.success("Cliente deletado com sucesso");
       fetchData();
     } catch (err: any) {
@@ -156,7 +157,7 @@ export default function Clients() {
         disableColumnSelector
         disableColumnMenu
       />
-      <Link to="/register">
+      <Link to="/clients/register">
         <UserPlus size={32} />
       </Link>
       {modalIsOpen && (

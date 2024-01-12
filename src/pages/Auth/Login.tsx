@@ -36,7 +36,7 @@ const Login = () => {
     try {
       const res = await requestWithToken.post("auth/login", data);
       Cookie.set("token", res.data.token, { expires: 1 });
-      location.href = "/clients";
+      location.href = "/home";
       toast.success("Login realizado com sucesso");
     } catch (err: any) {
       console.log(err.response.data.errors[0]);
