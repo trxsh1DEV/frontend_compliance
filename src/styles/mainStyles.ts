@@ -18,3 +18,22 @@ export const ContentGrid = styled.div`
   /* max-height: 27rem; */
   overflow-y: auto;
 `;
+
+export const AppContainer = styled.div`
+  /* display: flex; */
+  width: 100%;
+  height: 100%;
+`;
+
+export const MainContent = styled.div`
+  /* flex: 1; */
+  padding: 20px;
+  margin-left: 70px;
+`;
+
+export const DivCentered = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;

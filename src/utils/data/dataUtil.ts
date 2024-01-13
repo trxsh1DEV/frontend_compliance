@@ -29,3 +29,18 @@ export const dataInventoryDevices = [
 export const dataSecurityGPO = ["Nenhuma", "Basica", "Avançada"];
 
 export const dataEnumNoneToAll = ["None", "Few", "Medium", "Many", "All"];
+
+export const dataUser = {
+  _id: "",
+  avatar: "",
+  cnpj: "",
+  compliances: [""],
+  contact: "",
+  criticalProblems: false,
+  email: "",
+  feedback: 1,
+  isAdmin: false,
+  name: "",
+  typeContract: "",
+  social_reason: "",
+};

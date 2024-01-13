@@ -5,7 +5,7 @@ import { formatDateString } from "../../utils/data/formatDate";
 import { FormRegisterProps } from "../../types/typesForm";
 import { Box } from "@mui/material";
 import CustomModal from "../../components/Modal/Modal";
-import { Actions, DivButton, Image } from "./styled";
+import { Actions, DivButton, ImageIcon } from "./styled";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { UserPlus } from "phosphor-react";
@@ -67,7 +67,7 @@ export default function Clients() {
           <Actions className="action">
             <Link to={`/clients/show/${params.row._id}`}>
               <DivButton>
-                <Image src="../view.svg" alt="" />
+                <ImageIcon src="../view.svg" alt="" />
               </DivButton>
             </Link>
 
@@ -75,13 +75,13 @@ export default function Clients() {
               className="edit"
               onClick={() => handleEdit(params.row._id)}
             >
-              <Image src="../edit.svg" alt="" />
+              <ImageIcon src="../edit.svg" alt="" />
             </DivButton>
             <DivButton
               className="delete"
               onClick={() => handleDelete(params.row._id)}
             >
-              <Image src="../delete.svg" alt="" />
+              <ImageIcon src="../delete.svg" alt="" />
             </DivButton>
           </Actions>
         );
@@ -110,10 +110,11 @@ export default function Clients() {
 
   const handleDelete = async (id: string) => {
     try {
-      await requestWithToken.delete(`clients/show/${id}`);
+      await requestWithToken.delete(`clients/${id}`);
       toast.success("Cliente deletado com sucesso");
       fetchData();
     } catch (err: any) {
+      console.log(err.message);
       toast.error(
         `Falha ao deletar usuário - ${err?.response?.data?.errors[0]}`
       );

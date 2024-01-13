@@ -3,9 +3,9 @@ import {
   House,
   UsersThree,
   Graph,
-  SignIn,
   SignOut,
   UserCircleGear,
+  SquaresFour,
 } from "phosphor-react";
 import { SidebarContainer, ListItemStyled, NavLink, Span } from "./styled";
 import Cookies from "js-cookie";
@@ -14,12 +14,10 @@ import { useDecoded } from "../../Context/TokenContext";
 // import { useDecoded } from "../../Context/TokenContext";
 
 const Sidebar = () => {
-  const tokenValid = Cookies.get("token");
-  const { decoded, updateDecoded } = useDecoded();
+  const { decoded } = useDecoded();
 
   const signOut = () => {
     Cookies.remove("token");
-    updateDecoded();
     location.href = "/login";
   };
 
@@ -34,7 +32,7 @@ const Sidebar = () => {
 
       {decoded?.isAdmin && (
         <>
-          <NavLink to="/clients/show">
+          <NavLink to="/admin/clients">
             <ListItemStyled>
               <UsersThree size={32} />
               <Span>Clientes</Span>
@@ -47,18 +45,6 @@ const Sidebar = () => {
               <Span>Dashboards</Span>
             </ListItemStyled>
           </NavLink>
-          <NavLink>
-            <ListItemStyled>
-              <UserCircleGear size={32} />
-              <Span>Meu perfil</Span>
-            </ListItemStyled>
-          </NavLink>
-          <NavLink onClick={signOut}>
-            <ListItemStyled>
-              <SignOut size={32} />
-              <Span>Quit</Span>
-            </ListItemStyled>
-          </NavLink>
         </>
       )}
 
@@ -66,33 +52,24 @@ const Sidebar = () => {
         <>
           <NavLink>
             <ListItemStyled>
-              <UserCircleGear size={32} />
+              <SquaresFour size={32} />
               <Span>Pontuação</Span>
-            </ListItemStyled>
-          </NavLink>
-          <NavLink>
-            <ListItemStyled>
-              <UserCircleGear size={32} />
-              <Span>Meu perfil</Span>
-            </ListItemStyled>
-          </NavLink>
-          <NavLink onClick={signOut}>
-            <ListItemStyled>
-              <SignOut size={32} />
-              <Span>Quit</Span>
             </ListItemStyled>
           </NavLink>
         </>
       )}
-
-      {!tokenValid && (
-        <NavLink to="/admin/login">
-          <ListItemStyled>
-            <SignIn size={32} />
-            <Span>Login</Span>
-          </ListItemStyled>
-        </NavLink>
-      )}
+      <NavLink to="/myprofile">
+        <ListItemStyled>
+          <UserCircleGear size={32} />
+          <Span>Meu perfil</Span>
+        </ListItemStyled>
+      </NavLink>
+      <NavLink onClick={signOut}>
+        <ListItemStyled>
+          <SignOut size={32} />
+          <Span>Quit</Span>
+        </ListItemStyled>
+      </NavLink>
     </SidebarContainer>
   );
 };

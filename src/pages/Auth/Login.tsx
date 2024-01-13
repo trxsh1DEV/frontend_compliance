@@ -36,8 +36,7 @@ const Login = () => {
     try {
       const res = await requestWithToken.post("auth/login", data);
       Cookie.set("token", res.data.token, { expires: 1 });
-      location.href = "/home";
-      toast.success("Login realizado com sucesso");
+      location.href = "/";
     } catch (err: any) {
       console.log(err.response.data.errors[0]);
       toast.error(`Erro ao tentar se conectar: ${err.response.data.errors[0]}`);

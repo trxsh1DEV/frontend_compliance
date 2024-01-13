@@ -8,7 +8,6 @@ export default createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
     outline: 0;
-    color: #fff;
   }
   body {
     background: #212534;
@@ -21,6 +20,7 @@ export default createGlobalStyle`
   }
   html {
     font-size: 62.5%;
+    color: #fff;
   }
   h1, h2, h3, h4, h5, h6, strong {
     font-weight: 500;

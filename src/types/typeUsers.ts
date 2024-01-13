@@ -6,7 +6,12 @@ export type TypeUsers = {
   social_reason?: string;
   email: string;
   avatar: string;
+  criticalProblems: boolean;
+  typeContract: string;
+  cnpj: string;
+  contact: string;
   isAdmin: boolean;
+  feedback: number;
   compliances: [string];
 };
 

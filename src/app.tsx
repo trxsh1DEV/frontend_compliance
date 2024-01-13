@@ -8,7 +8,7 @@ import Login from "./pages/Auth/Login";
 import { ToastContainer } from "react-toastify";
 import { Home } from "./pages/Home/Home";
 import Sidebar from "./pages/Navbar/Navbar";
-import { AppContainer, MainContent } from "./app";
+import { AppContainer, MainContent } from "./styles/mainStyles";
 import Clients from "./pages/Clients/Clients";
 import Client from "./pages/Clients/Client";
 import DetailsCompliance from "./components/Compliance/DetailsCompliance";
@@ -16,6 +16,7 @@ import { AdminRoute, PrivateRoute, isAuthenticated } from "./utils/redirects";
 import { DecodedProvider } from "./Context/TokenContext";
 import UnauthorizedPage from "./pages/Unhatorized";
 import NotFoundPage from "./pages/NotFound";
+import Profile from "./pages/Profile/Profile";
 
 export function App() {
   return (
@@ -37,24 +38,24 @@ export function App() {
                     element={<PrivateRoute element={<Home />} />}
                   />
 
-                  {/* <Route
-                    path="/clients"
-                    element={<PrivateRoute element={<Client />} />}
-                  /> */}
                   <Route
-                    path="/clients/register"
+                    path="/myprofile"
+                    element={<PrivateRoute element={<Profile />} />}
+                  />
+                  <Route
+                    path="/admin/clients/register"
                     element={<AdminRoute element={<Register />} />}
                   />
                   <Route
-                    path="/clients/show"
+                    path="/admin/clients"
                     element={<AdminRoute element={<Clients />} />}
                   />
                   <Route
-                    path="/clients/show/:id"
+                    path="/admin/clients/:id"
                     element={<PrivateRoute element={<Client />} />}
                   />
                   <Route
-                    path="/clients/show/:id/details"
+                    path="/admin/clients/:id/details"
                     element={<PrivateRoute element={<DetailsCompliance />} />}
                   />
                   <Route

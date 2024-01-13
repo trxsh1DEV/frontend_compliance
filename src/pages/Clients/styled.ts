@@ -6,7 +6,7 @@ interface DivAbsoluteProps {
   b?: string;
 }
 
-export const Image = styled.img`
+export const ImageIcon = styled.img`
   width: 25px;
   height: 25px;
   border-radius: 50%;
