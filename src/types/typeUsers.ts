@@ -11,7 +11,6 @@ export type TypeUsers = {
   cnpj: string;
   contact: string;
   isAdmin: boolean;
-  feedback: number;
   compliances: [string];
 };
 

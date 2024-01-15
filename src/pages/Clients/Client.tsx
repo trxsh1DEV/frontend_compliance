@@ -28,7 +28,7 @@ export default function Client() {
   const [compliance, setCompliance] = useState<any>();
 
   const fetchData = async () => {
-    const resUser = requestWithToken.get(`clients/show/${id}`);
+    const resUser = requestWithToken.get(`admin/clients/${id}`);
     const resCompliance = requestWithToken.post("compliance/latest", {
       client: id,
     });
@@ -55,7 +55,7 @@ export default function Client() {
   };
 
   const handleDetails = (part: string) => {
-    navigate(`/clients/${id}/details`, {
+    navigate(`admin/clients/${id}/details`, {
       state: { data: compliance, part, id },
     });
   };

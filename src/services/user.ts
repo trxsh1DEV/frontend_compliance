@@ -3,7 +3,7 @@ import { requestWithToken } from "../utils/requestApi";
 import { jwtDecode } from "jwt-decode";
 
 export const requestUsers = (id: string = "") => {
-  const res = requestWithToken.get(`clients/all/${id}`);
+  const res = requestWithToken.get(`admin/clients/${id}`);
   return res;
 };
 
@@ -23,3 +23,5 @@ export const decodedToken = (token: string): DecodedTokenProps | null => {
     return null;
   }
 };
+
+export const uploadFile = () => {};

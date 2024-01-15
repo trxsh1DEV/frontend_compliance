@@ -1,11 +1,14 @@
 import { toast } from "react-toastify";
 import { requestWithToken } from "../../utils/requestApi";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState, FC } from "react";
 import { TypeUsers } from "../../types/typeUsers";
 import {
+  ContainerImage,
+  FileInput,
   IconContainer,
   ProfileContainer,
   ProfileForm,
+  ProfileImage,
   ProfileInput,
   ProfileLabel,
   StyledRating,
@@ -13,8 +16,18 @@ import {
 import { EditNoteOutlined, SaveAsOutlined } from "@mui/icons-material";
 import { DivCentered } from "../../styles/mainStyles";
 
-const Profile = () => {
-  const [user, setUser] = useState<TypeUsers>({
+interface YourComponentProps {
+  handleUpdateField?: (fieldName: string, file: File | null) => void;
+}
+
+type TypeUserFields = TypeUsers & {
+  feedback: number;
+  updatedAt?: string;
+  createdAt?: string;
+};
+
+const Profile: FC<YourComponentProps> = () => {
+  const [user, setUser] = useState<TypeUserFields>({
     _id: "",
     avatar: "",
     cnpj: "",
@@ -22,17 +35,19 @@ const Profile = () => {
     contact: "",
     criticalProblems: false,
     email: "",
-    feedback: 1,
+    feedback: 3,
     isAdmin: false,
     name: "",
     typeContract: "",
     social_reason: "",
+    createdAt: "",
+    updatedAt: "",
   });
   const [isEditing, setIsEditing] = useState(false);
 
   const fetchData = async () => {
     try {
-      const res = await requestWithToken.get(`clients/`);
+      const res = await requestWithToken.get(`user/`);
       setUser(res.data);
     } catch (err: any) {
       toast.error("Falha ao obter dados do perfil");
@@ -44,41 +59,70 @@ const Profile = () => {
     fetchData();
   }, []);
 
-  const handleSubmit = async (event: any) => {
-    event.preventDefault();
-    console.log(user);
+  const handleEdit = async () => {
+    if (!isEditing) {
+      setIsEditing(true);
+    } else {
+      const { cnpj, contact, feedback, avatar } = user;
+      if (cnpj || contact || feedback) {
+        console.log(avatar);
+        await requestWithToken.patch(`user/`, {
+          cnpj,
+          contact,
+        });
+        toast.success("Cliente atualizado com sucesso!");
+      }
 
-    toast.success("Dados do perfil atualizados com sucesso!");
-  };
-  const handleEdit = () => {
-    setIsEditing(!isEditing);
-    console.log(user);
+      setIsEditing(false);
+    }
   };
 
   const handleUpdateField = (
     field: string,
-    value: string | number | boolean
+    value: string | number | boolean | object
   ): void => {
-    setUser((prevUserData: TypeUsers) => ({
+    setUser((prevUserData: TypeUserFields) => ({
       ...prevUserData,
       [field]: value,
     }));
   };
 
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const inputElement = e.target as HTMLInputElement;
+    const selectedFile = inputElement.files?.[0] || null;
+    if (selectedFile) {
+      handleUpdateField("avatar", selectedFile);
+    }
+  };
+
   return (
     <ProfileContainer>
       <h2 style={{ textAlign: "center", marginBottom: "3rem" }}>Meu Perfil</h2>
-      {user && (
-        <ProfileForm onSubmit={handleSubmit}>
+      {user.avatar && (
+        <ProfileForm>
+          <ContainerImage>
+            <ProfileImage src={user.avatar} alt="User image" />
+            {isEditing && (
+              <FileInput
+                type="file"
+                name="avatar"
+                accept="image/*"
+                onChange={handleChange}
+                readOnly={isEditing}
+              />
+            )}
+          </ContainerImage>
+
           <ProfileLabel>
             <span>Nome:</span>
-            <ProfileInput type="text" value={user.name} readOnly />
+            <ProfileInput type="text" name="name" value={user.name} readOnly />
           </ProfileLabel>
 
           <ProfileLabel>
             <span>Razão Social:</span>
             <ProfileInput
               type="text"
+              name="social_reason"
               value={user.social_reason || ""}
               readOnly
             />
@@ -86,13 +130,19 @@ const Profile = () => {
 
           <ProfileLabel>
             <span>Email:</span>
-            <ProfileInput type="text" value={user.email} readOnly />
+            <ProfileInput
+              type="text"
+              name="email"
+              value={user.email}
+              readOnly
+            />
           </ProfileLabel>
 
           <ProfileLabel>
             <span>Problemas Críticos:</span>
             <ProfileInput
               type="text"
+              name="criticalProblems"
               value={user.criticalProblems ? "Sim" : "Não"}
               readOnly
             />
@@ -100,7 +150,13 @@ const Profile = () => {
 
           <ProfileLabel>
             <span>CNPJ:</span>
-            <ProfileInput type="text" value={user.cnpj} readOnly={!isEditing} />
+            <ProfileInput
+              type="text"
+              name="cnpj"
+              value={user.cnpj}
+              readOnly={!isEditing}
+              onChange={(e: any) => handleUpdateField("cnpj", e.target.value)}
+            />
           </ProfileLabel>
 
           <ProfileLabel>
@@ -108,17 +164,20 @@ const Profile = () => {
             <ProfileInput
               type="text"
               value={user.contact}
+              name="contact"
+              onChange={(e: any) =>
+                handleUpdateField("contact", e.target.value)
+              }
               readOnly={!isEditing}
             />
           </ProfileLabel>
 
           <ProfileLabel>
             <span>Seu feedback do sistema:</span>
-            {/* <ProfileInput type="text" value={user.contact} readOnly /> */}
             <StyledRating
-              name="highlight-selected-only"
+              name="feedback"
               defaultValue={3}
-              value={3}
+              value={user.feedback || 3}
               IconContainerComponent={IconContainer}
               onClick={(e: any) => {
                 const value = Number(e.target?.value);

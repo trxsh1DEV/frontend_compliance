@@ -45,7 +45,7 @@ const CustomModal: FC<CustomModalProps> = ({ isOpen, onClose, id }) => {
 
   const onSubmit = async (data: any) => {
     try {
-      await requestWithToken.patch(`clients/${id}`, data);
+      await requestWithToken.patch(`admin/clients/${id}`, data);
       toast.success("Cliente atualizado com sucesso!");
     } catch (err: any) {
       toast.error(
@@ -57,7 +57,7 @@ const CustomModal: FC<CustomModalProps> = ({ isOpen, onClose, id }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await requestWithToken.get(`clients/show/${id}`);
+        const res = await requestWithToken.get(`admin/clients/${id}`);
         setData(res.data);
       } catch (error: any) {
         toast.error(`Erro ao buscar dados do usuário: ${error.message}`);

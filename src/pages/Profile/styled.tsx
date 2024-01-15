@@ -43,6 +43,31 @@ export const ProfileInput = styled.input`
   }
 `;
 
+export const ContainerImage = styled.div`
+  position: relative;
+  display: inline-block;
+  margin: 0 auto;
+  /* background-color: #eee; */
+`;
+
+export const ProfileImage = styled.img`
+  width: 180px;
+  height: 180px;
+  padding: 1rem;
+  border-radius: 50%;
+  background-color: aliceblue;
+`;
+
+export const FileInput = styled.input`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+`;
+
 export const StyledRating = styled(Rating)(({ theme }) => ({
   "& .MuiSvgIcon-root": {
     fontSize: "4rem !important",

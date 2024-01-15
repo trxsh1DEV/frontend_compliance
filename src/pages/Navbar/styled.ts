@@ -43,8 +43,9 @@ export const ListItemStyled = styled.div`
   cursor: pointer;
 
   &:hover {
-    opacity: 0.95;
+    opacity: 1 !important;
     background-color: #444;
+    color: #8086ff;
   }
 `;
 

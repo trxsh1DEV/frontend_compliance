@@ -65,7 +65,7 @@ export default function Clients() {
       renderCell: (params) => {
         return (
           <Actions className="action">
-            <Link to={`/clients/show/${params.row._id}`}>
+            <Link to={`/admin/clients/${params.row._id}`}>
               <DivButton>
                 <ImageIcon src="../view.svg" alt="" />
               </DivButton>
@@ -91,7 +91,7 @@ export default function Clients() {
 
   const fetchData = async () => {
     try {
-      const res = await requestWithToken.get("clients/show");
+      const res = await requestWithToken.get("admin/clients");
       setData(res.data);
     } catch (err: any) {
       toast.error(`Erro ao buscar dados: ${err?.response?.data.errors[0]}`);
@@ -110,7 +110,7 @@ export default function Clients() {
 
   const handleDelete = async (id: string) => {
     try {
-      await requestWithToken.delete(`clients/${id}`);
+      await requestWithToken.delete(`admin/clients/${id}`);
       toast.success("Cliente deletado com sucesso");
       fetchData();
     } catch (err: any) {
@@ -158,7 +158,7 @@ export default function Clients() {
         disableColumnSelector
         disableColumnMenu
       />
-      <Link to="/clients/register">
+      <Link to="admin/clients/register">
         <UserPlus size={32} />
       </Link>
       {modalIsOpen && (

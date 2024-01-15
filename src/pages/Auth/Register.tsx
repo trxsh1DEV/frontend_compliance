@@ -32,7 +32,7 @@ const RegisterForm = () => {
   const onSubmit = async (data: any) => {
     try {
       delete data.confirmPassword;
-      await requestWithToken.post("clients", data);
+      await requestWithToken.post("admin/clients", data);
       toast.success("Cliente cadastrado com sucesso!");
     } catch (err: any) {
       console.log(err.response.data.errors[0].split("x: ")[1]);
