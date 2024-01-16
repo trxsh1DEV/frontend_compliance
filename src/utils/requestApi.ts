@@ -1,7 +1,7 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-export const baseUrl = "http://localhost:5421/api/";
+export const baseUrl = "http://localhost:5421/";
 
 export const requestUserToken = axios.create({
   baseURL: baseUrl,

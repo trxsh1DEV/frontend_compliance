@@ -51,8 +51,8 @@ export const ContainerImage = styled.div`
 `;
 
 export const ProfileImage = styled.img`
-  width: 180px;
-  height: 180px;
+  width: 200px;
+  height: 200px;
   padding: 1rem;
   border-radius: 50%;
   background-color: aliceblue;

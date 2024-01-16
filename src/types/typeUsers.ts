@@ -5,7 +5,7 @@ export type TypeUsers = {
   name: string;
   social_reason?: string;
   email: string;
-  avatar: string;
+  avatar: string | Blob;
   criticalProblems: boolean;
   typeContract: string;
   cnpj: string;

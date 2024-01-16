@@ -63,17 +63,23 @@ const Profile: FC<YourComponentProps> = () => {
     if (!isEditing) {
       setIsEditing(true);
     } else {
-      const { cnpj, contact, feedback, avatar } = user;
-      if (cnpj || contact || feedback) {
-        console.log(avatar);
-        await requestWithToken.patch(`user/`, {
-          cnpj,
-          contact,
-        });
-        toast.success("Cliente atualizado com sucesso!");
-      }
+      try {
+        const { cnpj, contact, feedback } = user;
 
-      setIsEditing(false);
+        if (cnpj || contact || feedback) {
+          await requestWithToken.patch(`user/`, {
+            cnpj,
+            contact,
+          });
+          toast.success("Cliente atualizado com sucesso!");
+        }
+
+        setIsEditing(false);
+      } catch (err: any) {
+        toast.error(
+          `Falha ao atualizar a foto: ${err.response.data.errors[0]}`
+        );
+      }
     }
   };
 
@@ -87,11 +93,34 @@ const Profile: FC<YourComponentProps> = () => {
     }));
   };
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const inputElement = e.target as HTMLInputElement;
-    const selectedFile = inputElement.files?.[0] || null;
+  const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    const photoInput = e.target as HTMLInputElement;
+    // const selectedFile = photoInput.files?.[0];
+    const selectedFile = photoInput?.files?.[0];
+
     if (selectedFile) {
-      handleUpdateField("avatar", selectedFile);
+      const photoUrl = URL.createObjectURL(selectedFile);
+      handleUpdateField("avatar", photoUrl);
+      // console.log(user, photoUrl);
+
+      const formData = new FormData();
+      formData.append("avatar", selectedFile);
+      console.log(formData);
+
+      try {
+        // Substitua "/photos/" pela sua rota correta
+        await requestWithToken.post("/images", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+
+        toast.success("Foto atualizada com sucesso!");
+      } catch (err: any) {
+        toast.error(
+          `Falha ao atualizar a foto: ${err.response.data.errors[0]}`
+        );
+      }
     }
   };
 
@@ -101,14 +130,17 @@ const Profile: FC<YourComponentProps> = () => {
       {user.avatar && (
         <ProfileForm>
           <ContainerImage>
-            <ProfileImage src={user.avatar} alt="User image" />
+            <ProfileImage
+              crossorigin="anonymous"
+              src={user.avatar}
+              alt="User image"
+            />
             {isEditing && (
               <FileInput
                 type="file"
                 name="avatar"
                 accept="image/*"
                 onChange={handleChange}
-                readOnly={isEditing}
               />
             )}
           </ContainerImage>
