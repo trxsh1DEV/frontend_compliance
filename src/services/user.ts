@@ -23,5 +23,3 @@ export const decodedToken = (token: string): DecodedTokenProps | null => {
     return null;
   }
 };
-
-export const uploadFile = () => {};

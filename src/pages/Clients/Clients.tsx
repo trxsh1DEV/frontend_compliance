@@ -158,7 +158,7 @@ export default function Clients() {
         disableColumnSelector
         disableColumnMenu
       />
-      <Link to="admin/clients/register">
+      <Link to="/register">
         <UserPlus size={32} />
       </Link>
       {modalIsOpen && (

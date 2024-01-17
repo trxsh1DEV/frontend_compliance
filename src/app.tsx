@@ -43,7 +43,7 @@ export function App() {
                     element={<PrivateRoute element={<Profile />} />}
                   />
                   <Route
-                    path="/admin/clients/register"
+                    path="/register"
                     element={<AdminRoute element={<Register />} />}
                   />
                   <Route

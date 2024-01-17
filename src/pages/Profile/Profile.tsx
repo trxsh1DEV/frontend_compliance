@@ -70,6 +70,7 @@ const Profile: FC<YourComponentProps> = () => {
           await requestWithToken.patch(`user/`, {
             cnpj,
             contact,
+            feedback,
           });
           toast.success("Cliente atualizado com sucesso!");
         }
@@ -95,20 +96,17 @@ const Profile: FC<YourComponentProps> = () => {
 
   const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const photoInput = e.target as HTMLInputElement;
-    // const selectedFile = photoInput.files?.[0];
     const selectedFile = photoInput?.files?.[0];
 
     if (selectedFile) {
       const photoUrl = URL.createObjectURL(selectedFile);
       handleUpdateField("avatar", photoUrl);
-      // console.log(user, photoUrl);
 
       const formData = new FormData();
       formData.append("avatar", selectedFile);
       console.log(formData);
 
       try {
-        // Substitua "/photos/" pela sua rota correta
         await requestWithToken.post("/images", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
