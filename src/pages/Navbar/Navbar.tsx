@@ -10,8 +10,6 @@ import {
 import { SidebarContainer, ListItemStyled, NavLink, Span } from "./styled";
 import Cookies from "js-cookie";
 import { useDecoded } from "../../Context/TokenContext";
-// import { useEffect } from "preact/hooks";
-// import { useDecoded } from "../../Context/TokenContext";
 
 const Sidebar = () => {
   const { decoded } = useDecoded();
@@ -50,10 +48,10 @@ const Sidebar = () => {
 
       {decoded?.id && !decoded?.isAdmin && (
         <>
-          <NavLink>
+          <NavLink to="/compliance">
             <ListItemStyled>
               <SquaresFour size={32} />
-              <Span>Pontuação</Span>
+              <Span>Maturidade</Span>
             </ListItemStyled>
           </NavLink>
         </>

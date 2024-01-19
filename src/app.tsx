@@ -17,6 +17,7 @@ import { DecodedProvider } from "./Context/TokenContext";
 import UnauthorizedPage from "./pages/Unhatorized";
 import NotFoundPage from "./pages/NotFound";
 import Profile from "./pages/Profile/Profile";
+import Compliance from "./pages/Compliance/Compliance";
 
 export function App() {
   return (
@@ -33,14 +34,26 @@ export function App() {
                   <Route path="/login" element={<Login />} />
                   <Route path="/unathorized" element={<UnauthorizedPage />} />
                   <Route path="*" element={<NotFoundPage />} />
+
+                  {/* User Commom */}
                   <Route
                     path="/"
                     element={<PrivateRoute element={<Home />} />}
                   />
-
                   <Route
                     path="/myprofile"
                     element={<PrivateRoute element={<Profile />} />}
+                  />
+                  <Route
+                    path="/compliance"
+                    element={<PrivateRoute element={<Compliance />} />}
+                  />
+                  {/*  */}
+
+                  {/* Admin */}
+                  <Route
+                    path="/admin/clients/:id"
+                    element={<PrivateRoute element={<Client />} />}
                   />
                   <Route
                     path="/register"
@@ -49,10 +62,6 @@ export function App() {
                   <Route
                     path="/admin/clients"
                     element={<AdminRoute element={<Clients />} />}
-                  />
-                  <Route
-                    path="/admin/clients/:id"
-                    element={<PrivateRoute element={<Client />} />}
                   />
                   <Route
                     path="/admin/clients/:id/details"

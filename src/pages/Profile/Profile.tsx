@@ -104,7 +104,6 @@ const Profile: FC<YourComponentProps> = () => {
 
       const formData = new FormData();
       formData.append("avatar", selectedFile);
-      console.log(formData);
 
       try {
         await requestWithToken.post("/images", formData, {
