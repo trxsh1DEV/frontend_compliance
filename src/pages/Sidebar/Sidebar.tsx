@@ -6,6 +6,7 @@ import {
   SignOut,
   UserCircleGear,
   SquaresFour,
+  TreeStructure,
 } from "phosphor-react";
 import { SidebarContainer, ListItemStyled, NavLink, Span } from "./styled";
 import Cookies from "js-cookie";
@@ -62,6 +63,14 @@ const Sidebar = () => {
           <Span>Meu perfil</Span>
         </ListItemStyled>
       </NavLink>
+
+      <NavLink to="/infrastructure">
+        <ListItemStyled>
+          <TreeStructure size={32} />
+          <Span>Infraestrutura</Span>
+        </ListItemStyled>
+      </NavLink>
+
       <NavLink onClick={signOut}>
         <ListItemStyled>
           <SignOut size={32} />

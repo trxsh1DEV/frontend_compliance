@@ -30,6 +30,7 @@ export default function Clients() {
       renderCell: (params) => {
         return (
           <img
+            crossorigin="http//localhost:5421"
             src={params.row.avatar || "noavatar.png"}
             alt=""
             style={{

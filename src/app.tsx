@@ -7,7 +7,7 @@ import Register from "./pages/Auth/Register";
 import Login from "./pages/Auth/Login";
 import { ToastContainer } from "react-toastify";
 import { Home } from "./pages/Home/Home";
-import Sidebar from "./pages/Navbar/Navbar";
+import Sidebar from "./pages/Sidebar/Sidebar";
 import { AppContainer, MainContent } from "./styles/mainStyles";
 import Clients from "./pages/Clients/Clients";
 import Client from "./pages/Clients/Client";
@@ -18,6 +18,7 @@ import UnauthorizedPage from "./pages/Unhatorized";
 import NotFoundPage from "./pages/NotFound";
 import Profile from "./pages/Profile/Profile";
 import Compliance from "./pages/Compliance/Compliance";
+import Infrastructure from "./pages/Infrastructure/Infrastructure";
 
 export function App() {
   return (
@@ -47,6 +48,10 @@ export function App() {
                   <Route
                     path="/compliance"
                     element={<PrivateRoute element={<Compliance />} />}
+                  />
+                  <Route
+                    path="/infrastructure"
+                    element={<PrivateRoute element={<Infrastructure />} />}
                   />
                   {/*  */}
 

@@ -27,7 +27,7 @@ export const AppContainer = styled.div`
 
 export const MainContent = styled.div`
   /* flex: 1; */
-  padding: 20px;
+  /* padding: 20px; */
   margin-left: 70px;
 `;
 

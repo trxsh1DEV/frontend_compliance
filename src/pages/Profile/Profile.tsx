@@ -128,7 +128,7 @@ const Profile: FC<YourComponentProps> = () => {
         <ProfileForm>
           <ContainerImage>
             <ProfileImage
-              crossorigin="anonymous"
+              crossorigin="http//localhost:5421"
               src={user.avatar}
               alt="User image"
             />

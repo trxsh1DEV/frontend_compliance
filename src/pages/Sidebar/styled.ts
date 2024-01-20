@@ -34,7 +34,6 @@ export const NavLink = styled(ReactRouterNavLink)`
 export const ListItemStyled = styled.div`
   display: flex;
   align-items: center;
-  /* background-color: #444; */
   font-weight: 500;
   gap: 10px;
   padding: 10px;
@@ -50,5 +49,5 @@ export const ListItemStyled = styled.div`
 `;
 
 export const Span = styled.span`
-  margin-left: 10px;
+  margin-left: 8px;
 `;
