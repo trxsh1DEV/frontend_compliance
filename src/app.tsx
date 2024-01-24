@@ -7,7 +7,7 @@ import Register from "./pages/Auth/Register";
 import Login from "./pages/Auth/Login";
 import { ToastContainer } from "react-toastify";
 import { Home } from "./pages/Home/Home";
-import Sidebar from "./pages/Sidebar/Sidebar";
+import Sidebar from "./components/Sidebar/Sidebar";
 import { AppContainer, MainContent } from "./styles/mainStyles";
 import Clients from "./pages/Clients/Clients";
 import Client from "./pages/Clients/Client";
@@ -19,6 +19,8 @@ import NotFoundPage from "./pages/NotFound";
 import Profile from "./pages/Profile/Profile";
 import Compliance from "./pages/Compliance/Compliance";
 import Infrastructure from "./pages/Infrastructure/Infrastructure";
+import KickOff from "./pages/KickOff/KickOff";
+import Runbook from "./pages/Runbook/Runbook";
 
 export function App() {
   return (
@@ -53,6 +55,14 @@ export function App() {
                     path="/infrastructure"
                     element={<PrivateRoute element={<Infrastructure />} />}
                   />
+                  <Route
+                    path="/kickoff"
+                    element={<PrivateRoute element={<KickOff />} />}
+                  />
+                  <Route
+                    path="/runbook"
+                    element={<PrivateRoute element={<Runbook />} />}
+                  />
                   {/*  */}
 
                   {/* Admin */}
@@ -61,7 +71,7 @@ export function App() {
                     element={<PrivateRoute element={<Client />} />}
                   />
                   <Route
-                    path="/register"
+                    path="/admin/clients/register"
                     element={<AdminRoute element={<Register />} />}
                   />
                   <Route

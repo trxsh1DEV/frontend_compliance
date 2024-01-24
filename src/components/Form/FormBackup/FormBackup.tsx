@@ -80,17 +80,6 @@ const FormBackup: FC<FormularyProps> = ({
               </Container>
 
               <Container>
-                {/* <Input
-                  {...register(`backup.storage.local.description`)}
-                  type="text"
-                  placeholder="Descrição (Opcional)"
-                  label="Backup Local"
-                  helperText={
-                    errors.backup?.storage?.local?.description?.message
-                  }
-                  style={isEnabled(1)}
-                  disabled={isEditMode() || !!isEnabled(1)}
-                /> */}
                 <Input
                   {...register(`backup.storage.local.qtde`, {
                     valueAsNumber: true,
@@ -119,18 +108,6 @@ const FormBackup: FC<FormularyProps> = ({
               </Container>
 
               <Container>
-                {/* <Input
-                  {...register(`backup.storage.remote.description`)}
-                  type="text"
-                  placeholder="Descrição (Opcional)"
-                  label="Backup Remoto"
-                  helperText={
-                    errors.backup?.storage?.remote?.description?.message
-                  }
-                  style={isEnabled(2)}
-                  disabled={isEditMode() || !!isEnabled(2)}
-                /> */}
-
                 <Input
                   {...register(`backup.storage.remote.qtde`, {
                     valueAsNumber: true,
@@ -159,15 +136,6 @@ const FormBackup: FC<FormularyProps> = ({
                 />
               </Container>
               <Container>
-                {/* <Input
-                  {...register(`backup.policy.description`)}
-                  type="text"
-                  placeholder="Descrição (Opcional)"
-                  label="Politicas de Backup"
-                  helperText={errors.backup?.policy?.description?.message}
-                  style={isEnabled(3)}
-                  disabled={isEditMode() || !!isEnabled(3)}
-                /> */}
                 <Input
                   {...register(`backup.policy.score`, {
                     valueAsNumber: true,
@@ -200,34 +168,6 @@ const FormBackup: FC<FormularyProps> = ({
                   disabled={isEditMode()}
                 />
               </Container>
-
-              {/* <Container>
-                <Input
-                  {...register(`backup.restoration.description`)}
-                  type="text"
-                  placeholder="Descrição (Opcional)"
-                  label="Teste de restauração"
-                  helperText={errors.backup?.restoration?.description?.message}
-                  style={isEnabled(4)}
-                  disabled={isEditMode() || !!isEnabled(4)}
-                />
-                <Input
-                  {...register(`backup.restoration.score`, {
-                    valueAsNumber: true,
-                  })}
-                  label="T. de restauração (Points)"
-                  type="number"
-                  helperText={errors.backup?.restoration?.score?.message}
-                  style={isEnabled(4)}
-                  disabled={isEditMode() || !!isEnabled(4)}
-                />
-                <Input
-                  {...register(`backup.restoration.enabled`)}
-                  type="checkbox"
-                  disabled={isEditMode()}
-                />
-              </Container> */}
-
               <Container>
                 <Input
                   {...register(`backup.description`)}

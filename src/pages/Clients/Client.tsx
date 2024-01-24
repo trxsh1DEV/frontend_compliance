@@ -55,7 +55,7 @@ export default function Client() {
   };
 
   const handleDetails = (part: string) => {
-    navigate(`admin/clients/${id}/details`, {
+    navigate(`details`, {
       state: { data: compliance, part, id },
     });
   };

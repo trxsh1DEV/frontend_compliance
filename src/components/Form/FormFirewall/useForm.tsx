@@ -6,12 +6,6 @@ import { toast } from "react-toastify";
 import { updateCompliance } from "../../../services/compliance";
 import { schemaFirewall } from "../../../utils/Schemas/schemaFormFirewall";
 
-// type TypesHA = FormHAProps & {
-//   ha: {
-//     client: string;
-//   };
-// };
-
 interface FieldsFirewall extends Omit<FormularyProps, "data"> {
   data: FormFirewallProps;
 }
@@ -23,8 +17,6 @@ const useFormulary = ({
   id: complianceId,
 }: FieldsFirewall) => {
   const [formValidate, setFormValidate] = useState(false);
-
-  // const refFocus = useRef<HTMLInputElement>(null);
 
   const handleFormSubmit = async (data: any) => {
     setFormValidate(true);

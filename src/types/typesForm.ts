@@ -8,9 +8,7 @@ import { schemaInventory } from "../utils/Schemas/schemaFormInventory";
 import { schemaSecurity } from "../utils/Schemas/schemaFormSecurity";
 import { schemaServices } from "../utils/Schemas/schemaFormService";
 
-export type FormBackupProps = z.infer<typeof schemaBackup> & {
-  points: number;
-};
+export type FormBackupProps = z.infer<typeof schemaBackup>;
 export type FormServerProps = z.infer<typeof schemaServer>;
 export type FormHAProps = z.infer<typeof schemaHA>;
 export type FormFirewallProps = z.infer<typeof schemaFirewall>;
