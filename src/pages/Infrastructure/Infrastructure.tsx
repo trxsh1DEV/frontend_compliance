@@ -17,7 +17,7 @@ const HiddenTopFields = styled.section`
 `;
 
 export default function Infrastructure() {
-  const [urlSnapshot, setUrlSnapshot] = useState<string | null>(null);
+  const [urlSnapshot, setUrlSnapshot] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,6 +41,7 @@ export default function Infrastructure() {
             width="99%"
             height="100%"
             src={urlSnapshot}
+            // src="http://monitoramento.infonova.com.br:3000/d/ab04de8f-7579-4c26-891d-e064a9123665/servidorer-windows?orgId=1"
             frameBorder="0"
             allowFullScreen
           />

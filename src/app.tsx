@@ -21,6 +21,9 @@ import Compliance from "./pages/Compliance/Compliance";
 import Infrastructure from "./pages/Infrastructure/Infrastructure";
 import KickOff from "./pages/KickOff/KickOff";
 import Runbook from "./pages/Runbook/Runbook";
+import Inventory from "./pages/Inventory/Inventory";
+import Agreement from "./pages/Agreement/Agreement";
+import ServiceLevelAgreement from "./pages/SLA/ServiceLevelAgreement";
 
 export function App() {
   return (
@@ -62,6 +65,20 @@ export function App() {
                   <Route
                     path="/runbook"
                     element={<PrivateRoute element={<Runbook />} />}
+                  />
+                  <Route
+                    path="/agreement"
+                    element={<PrivateRoute element={<Agreement />} />}
+                  />
+                  <Route
+                    path="/sla"
+                    element={
+                      <PrivateRoute element={<ServiceLevelAgreement />} />
+                    }
+                  />
+                  <Route
+                    path="/inventory"
+                    element={<PrivateRoute element={<Inventory />} />}
                   />
                   {/*  */}
 

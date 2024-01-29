@@ -15,7 +15,7 @@ export type TypeUsers = {
 };
 
 export interface DecodedTokenProps extends JwtPayload {
-  id?: string;
-  isAdmin?: boolean;
+  id: string;
+  isAdmin: boolean;
   // Adicione outras propriedades conforme necessário
 }

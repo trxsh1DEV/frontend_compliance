@@ -9,6 +9,10 @@ import {
   TreeStructure,
   MicrosoftExcelLogo,
   MicrosoftWordLogo,
+  DesktopTower,
+  Handshake,
+  ClockClockwise,
+  AppWindow,
 } from "phosphor-react";
 import { SidebarContainer, ListItemStyled, NavLink, Span } from "./styled";
 import Cookies from "js-cookie";
@@ -90,6 +94,34 @@ const Sidebar = () => {
             <ListItemStyled>
               <MicrosoftWordLogo size={32} />
               <Span>Runbook</Span>
+            </ListItemStyled>
+          </NavLink>
+
+          <NavLink to="/inventory">
+            <ListItemStyled>
+              <DesktopTower size="32" />
+              <Span>Inventário</Span>
+            </ListItemStyled>
+          </NavLink>
+
+          <NavLink to="/agreement">
+            <ListItemStyled>
+              <Handshake size="32" />
+              <Span>Contrato</Span>
+            </ListItemStyled>
+          </NavLink>
+
+          <NavLink to="/sla">
+            <ListItemStyled>
+              <ClockClockwise size="32" />
+              <Span>SLA</Span>
+            </ListItemStyled>
+          </NavLink>
+
+          <NavLink to="/portal-milvus">
+            <ListItemStyled>
+              <AppWindow size="32" />
+              <Span>Gestor</Span>
             </ListItemStyled>
           </NavLink>
 
