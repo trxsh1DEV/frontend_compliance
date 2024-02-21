@@ -1,6 +1,6 @@
 import { useEffect, useState } from "preact/hooks";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { requestWithToken } from "../../utils/requestApi";
+import requestWithToken from "../../utils/auth/requestApi";
 import {
   BottomContainer,
   TopContainer,

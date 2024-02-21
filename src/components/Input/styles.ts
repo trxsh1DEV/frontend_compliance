@@ -1,6 +1,5 @@
 import styled, { css } from "styled-components";
 import theme from "../../styles/theme";
-import { lighten } from "polished";
 
 export const InputStyle = styled.input<{ hasError: boolean }>`
   font-size: 1.8rem;
@@ -13,7 +12,7 @@ export const InputStyle = styled.input<{ hasError: boolean }>`
 
   &:focus {
     border-color: ${theme.colors.cyanPrimary};
-    outline: 1px solid ${lighten(0.2, theme.colors.cyanPrimary)};
+    outline: 1px solid ${theme.colors.green_100};
   }
 
   &::placeholder {

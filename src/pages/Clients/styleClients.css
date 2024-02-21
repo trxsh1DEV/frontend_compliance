@@ -1,7 +1,4 @@
-.css-rtrcn9-MuiTablePagination-root p {
+.css-rtrcn9-MuiTablePagination-root p, .css-rtrcn9-MuiTablePagination-root button svg, .MuiSvgIcon-root {
   font-size: 1.6rem !important;
-}
-
-.css-rtrcn9-MuiTablePagination-root button svg {
-  font-size: 1.2rem !important;
+  color: #fff !important;
 }

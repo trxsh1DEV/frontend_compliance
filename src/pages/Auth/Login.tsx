@@ -2,11 +2,11 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button, Container, FormContainer, Title } from "./styled";
-import { requestWithToken } from "../../utils/requestApi";
+// import requestWithToken from "../../utils/requestApi";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Input } from "../../components/Input/Input";
-import Cookie from "js-cookie";
+// import Cookie from "js-cookie";
 
 const schema = z.object({
   email: z.string().email("E-mail inválido"),
@@ -34,8 +34,9 @@ const Login = () => {
 
   const onSubmit = async (data: any) => {
     try {
-      const res = await requestWithToken.post("auth/login", data);
-      Cookie.set("token", res.data.token, { expires: 1 });
+      console.log(data);
+      // const res = await requestWithToken.post("auth/login", data);
+      // Cookie.set("token", res.data.token, { expires: 1 });
       location.href = "/";
     } catch (err: any) {
       console.log(err.response.data.errors[0]);

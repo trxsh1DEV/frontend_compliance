@@ -31,6 +31,16 @@ export const NavLink = styled(ReactRouterNavLink)`
   padding: 10px;
 `;
 
+export const LinkA = styled.a`
+  text-decoration: none;
+  cursor: auto;
+  position: relative;
+  color: azure;
+  display: table;
+  width: 200px;
+  padding: 10px;
+`;
+
 export const ListItemStyled = styled.div`
   display: flex;
   align-items: center;

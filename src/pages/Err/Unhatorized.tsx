@@ -4,7 +4,7 @@ const UnauthorizedPage = () => {
   return (
     <Container>
       <Content>
-        <Title>401 - Unauthorized</Title>
+        <Title>403 - Unauthorized</Title>
         <Message>
           Desculpe, você não tem permissão para acessar esta página.
         </Message>

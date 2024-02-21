@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import { Modal, Box } from "@mui/material";
-import { requestWithToken } from "../../utils/requestApi";
+import requestWithToken from "../../utils/auth/requestApi";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -32,7 +32,7 @@ const schema = z.object({
   email: z.string().email(),
   name: z.string().min(6, "Minimo 6 caracteres"),
   social_reason: z.string().optional(),
-  isAdmin: z.boolean(),
+  // isAdmin: z.boolean(),
   criticalProblems: z.boolean(),
   cnpj: z.string().optional(),
   contact: z.string().optional(),
@@ -81,7 +81,7 @@ const CustomModal: FC<CustomModalProps> = ({ isOpen, onClose, id }) => {
     defaultValues: {
       email: data?.email || "",
       name: data?.name || "",
-      isAdmin: data?.isAdmin,
+      // isAdmin: data?.isAdmin,
       social_reason: data?.social_reason || "",
       criticalProblems: data?.criticalProblems || false,
       cnpj: data?.cnpj || "",
@@ -131,7 +131,7 @@ const CustomModal: FC<CustomModalProps> = ({ isOpen, onClose, id }) => {
         />
       </Container>
 
-      <Container>
+      {/* <Container>
         <Input
           {...register("isAdmin")}
           type="checkbox"
@@ -144,7 +144,7 @@ const CustomModal: FC<CustomModalProps> = ({ isOpen, onClose, id }) => {
           helperText={errors?.criticalProblems?.message}
           type="checkbox"
         />
-      </Container>
+      </Container> */}
 
       <button type="submit">Salvar</button>
     </FormContainer>

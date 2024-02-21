@@ -1,6 +1,6 @@
 import { useEffect, useState } from "preact/hooks";
 import styled from "styled-components";
-import { requestWithToken } from "../../utils/requestApi";
+import requestWithToken from "../../utils/auth/requestApi";
 
 const ContainerFull = styled.main`
   width: 99%;

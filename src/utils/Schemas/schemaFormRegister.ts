@@ -24,6 +24,12 @@ export const schemaRegister = z
         return { message: "Informe Fixo ou Avulso" };
       },
     }),
+    urls: z.object({
+      url_inventory: z.string().url("URL Inválida!"),
+      url_runbook: z.string().url("URL Inválida!"),
+      url_tickets: z.string().url("URL Inválida!"),
+      url_kickoff: z.string().url("URL Inválida!"),
+    }),
     cnpj: z.string(),
     contact: z.string(),
   })

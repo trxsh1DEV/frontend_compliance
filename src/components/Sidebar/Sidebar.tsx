@@ -14,17 +14,18 @@ import {
   ClockClockwise,
   AppWindow,
 } from "phosphor-react";
-import { SidebarContainer, ListItemStyled, NavLink, Span } from "./styled";
-import Cookies from "js-cookie";
-import { useDecoded } from "../../Context/TokenContext";
+import {
+  SidebarContainer,
+  ListItemStyled,
+  NavLink,
+  Span,
+  LinkA,
+} from "./styled";
+import { hasRole } from "../../config/tokenMethods";
+import { keycloakInstance } from "../../config/keycloakConf";
 
 const Sidebar = () => {
-  const { decoded } = useDecoded();
-
-  const signOut = () => {
-    Cookies.remove("token");
-    location.href = "/login";
-  };
+  const signOut = () => keycloakInstance?.logout();
 
   return (
     <SidebarContainer>
@@ -35,7 +36,7 @@ const Sidebar = () => {
         </ListItemStyled>
       </NavLink>
 
-      {decoded?.isAdmin && (
+      {hasRole("app-user") && hasRole("app-admin") && (
         <>
           <NavLink to="/admin/clients">
             <ListItemStyled>
@@ -67,7 +68,7 @@ const Sidebar = () => {
         </>
       )}
 
-      {decoded?.id && !decoded?.isAdmin && (
+      {hasRole("app-user") && !hasRole("app-admin") && (
         <>
           <NavLink to="/compliance">
             <ListItemStyled>
@@ -118,12 +119,16 @@ const Sidebar = () => {
             </ListItemStyled>
           </NavLink>
 
-          <NavLink to="/portal-milvus">
+          <LinkA
+            href="https://infonova.suport.cloud/login"
+            target="_blank"
+            rel="noreferrer"
+          >
             <ListItemStyled>
               <AppWindow size="32" />
               <Span>Gestor</Span>
             </ListItemStyled>
-          </NavLink>
+          </LinkA>
 
           <NavLink to="/myprofile">
             <ListItemStyled>

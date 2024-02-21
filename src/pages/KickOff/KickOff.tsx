@@ -1,28 +1,19 @@
 import { useEffect, useState } from "preact/hooks";
 import styled from "styled-components";
-import { requestWithToken } from "../../utils/requestApi";
+import requestWithToken from "../../utils/auth/requestApi";
 
 const ContainerFull = styled.main`
   width: 99%;
   height: 100vh;
 `;
 
-const HiddenBottomFields = styled.section`
-  position: absolute;
-  bottom: 0;
-  height: 25px;
-  width: 100%;
-  background-color: #333;
-  z-index: 1;
-`;
-
-export default function KickOff() {
+export default function Inventory() {
   const [urlData, setUrlData] = useState<any>();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await requestWithToken.get("/user");
+        let response = await requestWithToken.get("/user");
         setUrlData(response.data);
       } catch (err: any) {
         console.log(err.message);
@@ -30,6 +21,7 @@ export default function KickOff() {
     };
     fetchData();
   }, []);
+  console.log(urlData.urls.url_kickoff);
 
   return (
     <>
@@ -38,10 +30,11 @@ export default function KickOff() {
           <iframe
             width="100%"
             height="100%"
-            frameBorder="0"
             src={urlData.urls.url_kickoff}
-          />
-          <HiddenBottomFields />
+            frameborder="0"
+            style="border:0"
+            allowFullScreen
+          ></iframe>
         </ContainerFull>
       )}
     </>

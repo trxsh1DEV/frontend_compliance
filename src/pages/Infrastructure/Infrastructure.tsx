@@ -1,52 +1,50 @@
 import { useEffect, useState } from "preact/hooks";
-import { requestWithToken } from "../../utils/requestApi";
 import styled from "styled-components";
+import requestWithToken from "../../utils/auth/requestApi";
 
 const ContainerFull = styled.main`
-  width: 100%;
+  width: 99%;
   height: 100vh;
 `;
 
-const HiddenTopFields = styled.section`
+const HiddenBottomFields = styled.section`
   position: absolute;
-  top: 0;
-  height: 100px;
+  bottom: 0;
+  height: 25px;
   width: 100%;
-  background-color: #111;
+  background-color: #333;
   z-index: 1;
 `;
 
 export default function Infrastructure() {
-  const [urlSnapshot, setUrlSnapshot] = useState(null);
+  const [urlData, setUrlData] = useState<any>({});
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const urlData = await requestWithToken.get("/features/infrastructure");
-        setUrlSnapshot(urlData.data);
+        const response = await requestWithToken.get("/user");
+        console.log("oi");
+        setUrlData(response.data);
       } catch (err: any) {
         console.log(err.message);
       }
     };
-
     fetchData();
-  });
+  }, []);
 
   return (
     <>
-      <HiddenTopFields />
-      <ContainerFull>
-        {urlSnapshot && (
+      {urlData?.urls && (
+        <ContainerFull>
           <iframe
-            width="99%"
+            width="100%"
             height="100%"
-            src={urlSnapshot}
-            // src="http://monitoramento.infonova.com.br:3000/d/ab04de8f-7579-4c26-891d-e064a9123665/servidorer-windows?orgId=1"
             frameBorder="0"
-            allowFullScreen
+            src={urlData.urls.url_grafana}
           />
-        )}
-      </ContainerFull>
+          <HiddenBottomFields />
+        </ContainerFull>
+      )}
     </>
   );
 }

@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "../../components/Input/Input";
 import { z } from "zod";
 import { Button, Container, FormContainer, ContainerForm } from "./styled";
-import { requestWithToken } from "../../utils/requestApi";
+import requestWithToken from "../../utils/auth/requestApi";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { schemaRegister } from "../../utils/Schemas/schemaFormRegister";
@@ -23,7 +23,13 @@ const RegisterForm = () => {
       name: "",
       confirmPassword: "",
       email: "",
-      isAdmin: false,
+      urls: {
+        url_inventory: "",
+        url_kickoff: "",
+        url_runbook: "",
+        url_tickets: "",
+      },
+      // isAdmin: false,
       password: "",
       social_reason: "",
     },
@@ -106,6 +112,36 @@ const RegisterForm = () => {
               placeholder="Digite um número"
               label="Número para contato"
               helperText={errors.contact?.message}
+            />
+          </ContainerForm>
+
+          <ContainerForm>
+            <Input
+              {...register("urls.url_inventory")}
+              placeholder="Digite o CNPJ"
+              label="Dashboard Inventário"
+              helperText={errors.urls?.url_inventory?.message}
+            />
+            <Input
+              {...register("urls.url_tickets")}
+              placeholder="Digite o CNPJ"
+              label="Dashboard Chamados"
+              helperText={errors.urls?.url_tickets?.message}
+            />
+          </ContainerForm>
+
+          <ContainerForm>
+            <Input
+              {...register("urls.url_kickoff")}
+              placeholder="Digite o CNPJ"
+              label="URL Kickoff"
+              helperText={errors.urls?.url_kickoff?.message}
+            />
+            <Input
+              {...register("urls.url_runbook")}
+              placeholder="Digite o CNPJ"
+              label="URL Runbook"
+              helperText={errors.urls?.url_runbook?.message}
             />
           </ContainerForm>
 

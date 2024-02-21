@@ -1,5 +1,3 @@
-import { JwtPayload } from "jwt-decode";
-
 export type TypeUsers = {
   _id: string;
   name: string;
@@ -10,12 +8,6 @@ export type TypeUsers = {
   typeContract: string;
   cnpj: string;
   contact: string;
-  isAdmin: boolean;
+  isAdmin?: boolean;
   compliances: [string];
 };
-
-export interface DecodedTokenProps extends JwtPayload {
-  id: string;
-  isAdmin: boolean;
-  // Adicione outras propriedades conforme necessário
-}

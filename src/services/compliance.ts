@@ -1,13 +1,13 @@
 import { toast } from "react-toastify";
 import { combineInfra } from "../types/typesForm";
-import { baseUrl, requestWithToken } from "../utils/requestApi";
+import requestWithToken, { BASE_URL } from "../utils/auth/requestApi";
 
 export const updateCompliance = async (
   data: any,
   complianceId: string,
   client: string
 ) => {
-  const url = `${baseUrl}compliance/${complianceId}`;
+  const url = `${BASE_URL}compliance/${complianceId}`;
   data.client = client;
 
   try {
@@ -27,7 +27,7 @@ export const postCompliance = async (
   id: string,
   route?: string
 ) => {
-  const apiUrl = `${baseUrl}${route}`;
+  const apiUrl = `${BASE_URL}${route}`;
   if (!data) return;
   console.log(data);
   data.client = id;
