@@ -13,7 +13,8 @@ export const Paragraph = styled.p`
 `;
 
 export const FormContainer = styled.form`
-  width: 600px;
+  width: fit-content !important;
+  max-width: 900px;
   display: flex;
   justify-content: center;
   align-items: center;

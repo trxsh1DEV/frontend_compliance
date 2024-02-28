@@ -36,7 +36,7 @@ const Sidebar = () => {
         </ListItemStyled>
       </NavLink>
 
-      {hasRole("app-user") && hasRole("app-admin") && (
+      {hasRole("app-admin") && (
         <>
           <NavLink to="/admin/clients">
             <ListItemStyled>

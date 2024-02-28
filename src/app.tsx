@@ -22,11 +22,11 @@ import ServiceLevelAgreement from "./pages/SLA/ServiceLevelAgreement";
 import AddCompliance from "./components/MultiStep/NextStep";
 import Register from "./pages/Auth/Register";
 import Home from "./pages/Home/Home";
-import { getToken, isAuthenticated } from "./config/tokenMethods";
 import { AdminRoute, PrivateRoute } from "./utils/auth/redirects";
 import Sidebar from "./components/Sidebar/Sidebar";
-await getToken();
-// import Sidebar from "./components/Sidebar/Sidebar";
+import { isAuthenticated } from "./config/tokenMethods";
+// import { ReactKeycloakProvider } from "@react-keycloak/web";
+// <ReactKeycloakProvider />
 
 export function App() {
   return (

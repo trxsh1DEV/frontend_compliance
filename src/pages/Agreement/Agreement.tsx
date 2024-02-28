@@ -33,7 +33,7 @@ export default function Agreement() {
             frameborder="0"
           /> */}
           <iframe
-            src="https://infonovatecnologia-my.sharepoint.com/personal/yago_sousa_infonova_com_br/_layouts/15/embed.aspx?UniqueId=03e16ea0-b1f5-41da-8748-fd3414e25c5e"
+            src={`${urlData.urls.url_agreement}`}
             width="100%"
             height="100%"
             frameborder="0"

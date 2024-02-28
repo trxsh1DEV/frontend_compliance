@@ -8,7 +8,7 @@ const ContainerFull = styled.main`
 `;
 
 export default function ServiceLevelAgreement() {
-  const [urlData, setUrlData] = useState<any>();
+  const [urlData, setUrlData] = useState<any>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,13 +26,13 @@ export default function ServiceLevelAgreement() {
     <>
       {urlData && (
         <ContainerFull>
-          {/* <iframe
-            src={`${urlData.urls.url_inventory}`}
+          <iframe
+            src={`${urlData.urls.url_sla}`}
             width="100%"
             height="100%"
             frameborder="0"
-          /> */}
-          <iframe
+          />
+          {/* <iframe
             src="https://infonovatecnologia-my.sharepoint.com/personal/yago_sousa_infonova_com_br/_layouts/15/embed.aspx?UniqueId=03e16ea0-b1f5-41da-8748-fd3414e25c5e"
             width="100%"
             height="100%"
@@ -40,7 +40,7 @@ export default function ServiceLevelAgreement() {
             scrolling="no"
             allowFullScreen
             title="pdf_test.pdf"
-          ></iframe>
+          ></iframe> */}
         </ContainerFull>
       )}
     </>

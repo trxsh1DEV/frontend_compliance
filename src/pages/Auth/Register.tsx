@@ -29,7 +29,7 @@ const RegisterForm = () => {
         url_runbook: "",
         url_tickets: "",
       },
-      // isAdmin: false,
+      isAdmin: false,
       password: "",
       social_reason: "",
     },
@@ -59,44 +59,19 @@ const RegisterForm = () => {
               label="Nome do cliente"
               helperText={errors.name?.message}
             />
-            <Input
-              {...register("social_reason")}
-              placeholder="Razão social"
-              label="Razão social"
-              helperText={errors.social_reason?.message}
-            />
-          </ContainerForm>
 
-          <ContainerForm>
             <Input
               {...register("email")}
               placeholder="E-mail"
               label="E-mail do cliente"
               helperText={errors.email?.message}
             />
-            <Input
-              {...register("typeContract")}
-              placeholder="Digite Fixo ou Avulso"
-              label="Tipo de contrato"
-              helperText={errors.typeContract?.message}
-            />
-          </ContainerForm>
-
-          <ContainerForm>
-            <Input
-              {...register("password")}
-              placeholder="Digite sua senha"
-              label="Digite uma senha"
-              type="password"
-              helperText={errors.password?.message}
-            />
 
             <Input
-              {...register("confirmPassword")}
-              placeholder="Confirme sua senha"
-              label="Redigite a sua senha"
-              type="password"
-              helperText={errors.confirmPassword?.message}
+              {...register("social_reason")}
+              placeholder="Razão social"
+              label="Razão social"
+              helperText={errors.social_reason?.message}
             />
           </ContainerForm>
 
@@ -113,39 +88,42 @@ const RegisterForm = () => {
               label="Número para contato"
               helperText={errors.contact?.message}
             />
+            <Input
+              {...register("urls.url_inventory")}
+              placeholder="Digite uma URL"
+              label="Dashboard de inventários"
+              helperText={errors.contact?.message}
+            />
           </ContainerForm>
 
           <ContainerForm>
             <Input
-              {...register("urls.url_inventory")}
-              placeholder="Digite o CNPJ"
-              label="Dashboard Inventário"
-              helperText={errors.urls?.url_inventory?.message}
-            />
-            <Input
               {...register("urls.url_tickets")}
-              placeholder="Digite o CNPJ"
+              placeholder="Digite uma URL"
               label="Dashboard Chamados"
               helperText={errors.urls?.url_tickets?.message}
             />
-          </ContainerForm>
-
-          <ContainerForm>
             <Input
               {...register("urls.url_kickoff")}
-              placeholder="Digite o CNPJ"
+              placeholder="Digite uma URL"
               label="URL Kickoff"
               helperText={errors.urls?.url_kickoff?.message}
             />
             <Input
               {...register("urls.url_runbook")}
-              placeholder="Digite o CNPJ"
+              placeholder="Digite uma URL"
               label="URL Runbook"
               helperText={errors.urls?.url_runbook?.message}
             />
           </ContainerForm>
 
           <ContainerForm>
+            <Input
+              {...register("typeContract")}
+              placeholder="Digite Fixo ou Avulso"
+              label="Tipo de contrato"
+              helperText={errors.typeContract?.message}
+            />
             <Input
               {...register("isAdmin")}
               label="É administrador?"

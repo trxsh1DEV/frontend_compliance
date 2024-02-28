@@ -3,7 +3,7 @@ import { initKeycloak, keycloakInstance } from "./keycloakConf";
 export const getToken = async () => {
   try {
     const keycloak = await initKeycloak();
-    console.log(keycloak);
+    console.log("oi");
     return keycloak;
   } catch (error) {
     throw error;

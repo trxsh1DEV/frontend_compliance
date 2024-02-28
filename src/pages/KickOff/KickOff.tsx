@@ -7,8 +7,8 @@ const ContainerFull = styled.main`
   height: 100vh;
 `;
 
-export default function Inventory() {
-  const [urlData, setUrlData] = useState<any>();
+export default function ServiceLevelAgreement() {
+  const [urlData, setUrlData] = useState<any>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,20 +21,17 @@ export default function Inventory() {
     };
     fetchData();
   }, []);
-  console.log(urlData.urls.url_kickoff);
 
   return (
     <>
       {urlData && (
         <ContainerFull>
           <iframe
+            src={`${urlData.urls.url_kickoff}`}
             width="100%"
             height="100%"
-            src={urlData.urls.url_kickoff}
             frameborder="0"
-            style="border:0"
-            allowFullScreen
-          ></iframe>
+          />
         </ContainerFull>
       )}
     </>
