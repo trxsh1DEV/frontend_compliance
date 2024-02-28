@@ -40,9 +40,9 @@ export function App() {
             <MainContent>
               <Routes>
                 <Route path="*" element={<NotFoundPage />} />
-                <Route path="/unathorized" element={<UnauthorizedPage />} />
+                <Route path="/unauthorized" element={<UnauthorizedPage />} />
 
-                <Route path="/" element={<AdminRoute element={<Home />} />} />
+                <Route path="/" element={<PrivateRoute element={<Home />} />} />
                 <Route
                   path="/myprofile"
                   element={<PrivateRoute element={<Profile />} />}

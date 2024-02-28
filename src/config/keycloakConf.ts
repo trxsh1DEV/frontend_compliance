@@ -1,11 +1,11 @@
 import Keycloak from "keycloak-js";
 import { TypeKeycloakInstance } from "../types/typesToken";
 
-let keycloakInstance: TypeKeycloakInstance | null = null; // Variável para armazenar a instância do Keycloak
+let keycloakInstance: TypeKeycloakInstance | any = null; // Variável para armazenar a instância do Keycloak
 
 const initKeycloak = async () => {
   try {
-    const keycloak: any = new Keycloak({
+    const keycloak = new Keycloak({
       url: "https://portalcliente.infonova.com.br:8081/", // URL do Keycloak
       realm: "Demo-Realm",
       clientId: "nodejs-microservice",
@@ -14,7 +14,7 @@ const initKeycloak = async () => {
     const authenticated = await keycloak.init({
       onLoad: "login-required",
       scope: "openid",
-      checkLoginIframe: false,
+      checkLoginIframe: true,
     });
 
     if (authenticated) {
