@@ -19,6 +19,7 @@ export default function Clients() {
   const [data, setData] = useState<[FieldsClient]>();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [id, setId] = useState("");
+  // console.log(data);
 
   const columns: GridColDef[] = [
     { field: "_id", type: "text", headerName: "ID", width: 70 },
@@ -52,7 +53,7 @@ export default function Clients() {
       headerName: "Razão Social",
       width: 180,
     },
-    { field: "createdAt", type: "text", headerName: "Criado Em", width: 150 },
+    { field: "createdAt", type: "text", headerName: "Criado Em", width: 130 },
     {
       field: "isAdmin",
       type: "boolean",
@@ -62,7 +63,7 @@ export default function Clients() {
     {
       field: "action",
       headerName: "Action",
-      width: 250,
+      width: 220,
       renderCell: (params) => {
         return (
           <Actions className="action">

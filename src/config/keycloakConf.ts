@@ -18,7 +18,7 @@ const initKeycloak = async () => {
     });
 
     if (authenticated) {
-      console.log("Usuário autenticado");
+      console.log(keycloak);
       keycloakInstance = keycloak; // Armazena a instância do Keycloak
       return keycloak;
     } else {

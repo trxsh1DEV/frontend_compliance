@@ -110,6 +110,7 @@ export type combineInfra =
 
 export interface FormularyProps {
   nextStep?: () => void;
+  previousStep?: () => void;
   setFormValues?: any;
   data?: any;
   id?: string;

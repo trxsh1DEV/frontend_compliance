@@ -12,6 +12,7 @@ interface FieldsSecurity extends Omit<FormularyProps, "data"> {
 
 const useFormulary = ({
   nextStep,
+  previousStep,
   setFormValues,
   data,
   id: complianceId,
@@ -76,6 +77,10 @@ const useFormulary = ({
     nextStep && nextStep();
   };
 
+  const handlePrevious = () => {
+    previousStep && previousStep();
+  };
+
   useEffect(() => {
     if (!haveServices || Object.keys(errors).length === 0) {
       return setFormValidate(true);
@@ -89,6 +94,7 @@ const useFormulary = ({
     register,
     errors,
     handleNext,
+    handlePrevious,
     formValidate,
     control,
     isEditable,

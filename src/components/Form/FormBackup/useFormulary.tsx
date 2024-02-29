@@ -14,6 +14,7 @@ type TypesBackup = FormBackupProps & {
 const useFormulary = ({
   nextStep,
   setFormValues,
+  previousStep,
   data,
   id: complianceId,
 }: FormularyProps) => {
@@ -116,6 +117,9 @@ const useFormulary = ({
   const handleNext = () => {
     nextStep && nextStep();
   };
+  const handlePrevious = () => {
+    previousStep && previousStep();
+  };
 
   const isEnabled = (n: number) => {
     return fieldsEnabled[n] ? "" : { cursor: "not-allowed" };
@@ -138,6 +142,7 @@ const useFormulary = ({
     formValidate,
     haveBackup,
     isEditable,
+    handlePrevious,
   };
 };
 

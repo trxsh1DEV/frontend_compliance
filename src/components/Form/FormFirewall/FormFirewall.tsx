@@ -19,6 +19,7 @@ const FormFirewall: FC<FormularyProps> = ({
   nextStep,
   setFormValues,
   data,
+  previousStep,
   id,
 }) => {
   const {
@@ -31,7 +32,8 @@ const FormFirewall: FC<FormularyProps> = ({
     control,
     isEditable,
     haveFirewall,
-  } = useFormulary({ nextStep, setFormValues, data, id });
+    handlePrevious,
+  } = useFormulary({ nextStep, previousStep, setFormValues, data, id });
 
   const isEditMode = () => (!!data && !isEditable ? true : false);
 
@@ -221,6 +223,18 @@ const FormFirewall: FC<FormularyProps> = ({
               disabled={!formValidate}
             >
               Next
+            </Button>
+          )}
+
+          {!data && (
+            <Button
+              size="large"
+              sx={{ fontSize: "16px" }}
+              color="secondary"
+              variant="outlined"
+              onClick={handlePrevious}
+            >
+              Previous
             </Button>
           )}
         </FormContainer>

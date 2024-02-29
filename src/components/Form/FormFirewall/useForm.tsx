@@ -13,6 +13,7 @@ interface FieldsFirewall extends Omit<FormularyProps, "data"> {
 const useFormulary = ({
   nextStep,
   setFormValues,
+  previousStep,
   data,
   id: complianceId,
 }: FieldsFirewall) => {
@@ -77,6 +78,10 @@ const useFormulary = ({
     nextStep && nextStep();
   };
 
+  const handlePrevious = () => {
+    previousStep && previousStep();
+  };
+
   useEffect(() => {
     if (!haveFirewall || Object.keys(errors).length === 0) {
       return setFormValidate(true);
@@ -94,6 +99,7 @@ const useFormulary = ({
     control,
     isEditable,
     haveFirewall,
+    handlePrevious,
   };
 };
 

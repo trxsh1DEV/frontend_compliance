@@ -12,6 +12,7 @@ import { Button } from "@mui/material";
 
 const FormBackup: FC<FormularyProps> = ({
   nextStep,
+  previousStep,
   setFormValues,
   data,
   id,
@@ -25,8 +26,9 @@ const FormBackup: FC<FormularyProps> = ({
     register,
     isEnabled,
     haveBackup,
+    handlePrevious,
     isEditable,
-  } = useFormulary({ nextStep, setFormValues, data, id });
+  } = useFormulary({ nextStep, previousStep, setFormValues, data, id });
   const isEditMode = () => (!!data && !isEditable ? true : false);
 
   return (
@@ -156,7 +158,7 @@ const FormBackup: FC<FormularyProps> = ({
                   {...register(`backup.restoration.score`, {
                     valueAsNumber: true,
                   })}
-                  label="T. de restauração (Points)"
+                  label="Restauração (Points)"
                   type="number"
                   helperText={errors.backup?.restoration?.score?.message}
                   style={isEnabled(4)}
@@ -197,6 +199,17 @@ const FormBackup: FC<FormularyProps> = ({
               disabled={!formValidate}
             >
               Next
+            </Button>
+          )}
+          {!data && (
+            <Button
+              size="large"
+              sx={{ fontSize: "16px" }}
+              color="secondary"
+              variant="outlined"
+              onClick={handlePrevious}
+            >
+              Previous
             </Button>
           )}
         </FormContainer>

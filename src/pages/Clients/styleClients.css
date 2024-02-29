@@ -1,4 +1,19 @@
-.css-rtrcn9-MuiTablePagination-root p, .css-rtrcn9-MuiTablePagination-root button svg, .MuiSvgIcon-root {
-  font-size: 1.6rem !important;
+#app>div.sc-hKgKIp.lluyfj>div>div>form>div>svg {
+  font-size: 4.6rem !important;
+  color: #fff !important;
+}
+
+[data-field*="isAdmin"]>svg, .MuiTablePagination-root.css-rtrcn9-MuiTablePagination-root>div>p, .MuiTablePagination-actions {
+  font-size: 2rem !important;
+  color: #fff !important;
+}
+
+/* [data-testid="KeyboardArrowRightIcon"] {
+  font-size: 2rem !important;
+  color: #fff !important;
+} */
+
+.MuiTablePagination-actions>button, .MuiTablePagination-actions>button>svg {
+  font-size: 2.5rem !important;
   color: #fff !important;
 }

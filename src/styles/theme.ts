@@ -10,6 +10,8 @@ const theme = {
     cyanPrimary: "#1BA9D4",
     violet: "#8305BD",
     rose: "#E305C9",
+    cyanSecondary: "#0799b3",
+    purple: "#646cff",
   },
   fonts: {
     default: "'Urbanist', sans-serif",

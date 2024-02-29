@@ -22,6 +22,9 @@ const AddCompliance = () => {
   const nextStep = () => {
     setStep(step + 1);
   };
+  const previousStep = () => {
+    setStep(step - 1);
+  };
 
   return (
     <div className="container">
@@ -29,26 +32,50 @@ const AddCompliance = () => {
         <FormHA nextStep={nextStep} setFormValues={setFormValues} />
       )}
       {step === 2 && (
-        <FormBackup nextStep={nextStep} setFormValues={setFormValues} />
+        <FormBackup
+          nextStep={nextStep}
+          previousStep={previousStep}
+          setFormValues={setFormValues}
+        />
       )}
 
       {step === 3 && (
-        <FormFirewall nextStep={nextStep} setFormValues={setFormValues} />
+        <FormFirewall
+          nextStep={nextStep}
+          previousStep={previousStep}
+          setFormValues={setFormValues}
+        />
       )}
 
       {step === 4 && (
-        <FormSecurity nextStep={nextStep} setFormValues={setFormValues} />
+        <FormSecurity
+          nextStep={nextStep}
+          previousStep={previousStep}
+          setFormValues={setFormValues}
+        />
       )}
 
       {step === 5 && (
-        <FormInventory nextStep={nextStep} setFormValues={setFormValues} />
+        <FormInventory
+          nextStep={nextStep}
+          previousStep={previousStep}
+          setFormValues={setFormValues}
+        />
       )}
       {step === 6 && (
-        <FormService nextStep={nextStep} setFormValues={setFormValues} />
+        <FormService
+          nextStep={nextStep}
+          previousStep={previousStep}
+          setFormValues={setFormValues}
+        />
       )}
 
       {step === 7 && (
-        <FormServer nextStep={nextStep} setFormValues={setFormValues} />
+        <FormServer
+          nextStep={nextStep}
+          previousStep={previousStep}
+          setFormValues={setFormValues}
+        />
       )}
       {step === 8 && <Success infra={formValues} id={id} />}
     </div>

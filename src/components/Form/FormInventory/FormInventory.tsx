@@ -17,6 +17,7 @@ import {
 
 const FormInventory: FC<FormularyProps> = ({
   nextStep,
+  previousStep,
   setFormValues,
   data,
   id,
@@ -25,13 +26,14 @@ const FormInventory: FC<FormularyProps> = ({
     errors,
     handleFormSubmit,
     handleNext,
+    handlePrevious,
     handleSubmit,
     register,
     formValidate,
     control,
     isEditable,
     haveInventory,
-  } = useFormulary({ nextStep, setFormValues, data, id });
+  } = useFormulary({ nextStep, previousStep, setFormValues, data, id });
 
   const isEditMode = () => (!!data && !isEditable ? true : false);
 
@@ -163,6 +165,18 @@ const FormInventory: FC<FormularyProps> = ({
               disabled={!formValidate}
             >
               Next
+            </Button>
+          )}
+
+          {!data && (
+            <Button
+              size="large"
+              sx={{ fontSize: "16px" }}
+              color="secondary"
+              variant="outlined"
+              onClick={handlePrevious}
+            >
+              Previous
             </Button>
           )}
         </FormContainer>

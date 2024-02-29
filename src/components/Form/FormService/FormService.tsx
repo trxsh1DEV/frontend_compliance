@@ -12,6 +12,7 @@ import { Button } from "@mui/material";
 
 const FormService: FC<FormularyProps> = ({
   nextStep,
+  previousStep,
   setFormValues,
   data,
   id,
@@ -20,12 +21,13 @@ const FormService: FC<FormularyProps> = ({
     errors,
     handleFormSubmit,
     handleNext,
+    handlePrevious,
     handleSubmit,
     register,
     formValidate,
     isEditable,
     haveServices,
-  } = useFormulary({ nextStep, setFormValues, data, id });
+  } = useFormulary({ nextStep, previousStep, setFormValues, data, id });
 
   const isEditMode = () => (!!data && !isEditable ? true : false);
 
@@ -136,6 +138,18 @@ const FormService: FC<FormularyProps> = ({
               disabled={!formValidate}
             >
               Next
+            </Button>
+          )}
+
+          {!data && (
+            <Button
+              size="large"
+              sx={{ fontSize: "16px" }}
+              color="secondary"
+              variant="outlined"
+              onClick={handlePrevious}
+            >
+              Previous
             </Button>
           )}
         </FormContainer>

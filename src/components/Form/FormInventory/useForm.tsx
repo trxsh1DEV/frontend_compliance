@@ -12,6 +12,7 @@ interface FieldsFirewall extends Omit<FormularyProps, "data"> {
 
 const useFormulary = ({
   nextStep,
+  previousStep,
   setFormValues,
   data,
   id: complianceId,
@@ -72,6 +73,10 @@ const useFormulary = ({
     nextStep && nextStep();
   };
 
+  const handlePrevious = () => {
+    previousStep && previousStep();
+  };
+
   useEffect(() => {
     if (!haveInventory || Object.keys(errors).length === 0) {
       return setFormValidate(true);
@@ -89,6 +94,7 @@ const useFormulary = ({
     control,
     isEditable,
     haveInventory,
+    handlePrevious,
   };
 };
 

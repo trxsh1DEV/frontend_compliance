@@ -10,7 +10,7 @@ import useFormulary from "./useFormHA";
 import { FormularyProps } from "../../../types/typesForm";
 import { Button, FormHelperText, MenuItem, Select } from "@mui/material";
 import { Controller } from "react-hook-form";
-import "./style.css";
+import "../style.css";
 import { dataHAUtil } from "../../../utils/data/dataUtil";
 
 const FormHA: FC<FormularyProps> = ({ nextStep, setFormValues, data, id }) => {

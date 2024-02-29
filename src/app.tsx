@@ -25,8 +25,6 @@ import Home from "./pages/Home/Home";
 import { AdminRoute, PrivateRoute } from "./utils/auth/redirects";
 import Sidebar from "./components/Sidebar/Sidebar";
 import { isAuthenticated } from "./config/tokenMethods";
-// import { ReactKeycloakProvider } from "@react-keycloak/web";
-// <ReactKeycloakProvider />
 
 export function App() {
   return (
