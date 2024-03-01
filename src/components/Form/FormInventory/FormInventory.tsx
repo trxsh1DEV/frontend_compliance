@@ -14,6 +14,7 @@ import {
   dataInventoryDevices,
   dataEnumNoneToAll,
 } from "../../../utils/data/dataUtil";
+import { TextArea } from "../../Input/TextArea";
 
 const FormInventory: FC<FormularyProps> = ({
   nextStep,
@@ -58,7 +59,7 @@ const FormInventory: FC<FormularyProps> = ({
                   type="checkbox"
                   disabled={isEditMode()}
                 />
-                <Input
+                <TextArea
                   {...register(`description`)}
                   helperText={errors?.description?.message}
                   label="Descrição"

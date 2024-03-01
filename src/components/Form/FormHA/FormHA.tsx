@@ -12,6 +12,7 @@ import { Button, FormHelperText, MenuItem, Select } from "@mui/material";
 import { Controller } from "react-hook-form";
 import "../style.css";
 import { dataHAUtil } from "../../../utils/data/dataUtil";
+import { TextArea } from "../../Input/TextArea";
 
 const FormHA: FC<FormularyProps> = ({ nextStep, setFormValues, data, id }) => {
   const {
@@ -47,14 +48,6 @@ const FormHA: FC<FormularyProps> = ({ nextStep, setFormValues, data, id }) => {
             <>
               <Container>
                 <Input
-                  {...register(`ha.description`)}
-                  type="text"
-                  helperText={errors.ha?.description?.message}
-                  label="Descrição (Opcional)"
-                  placeholder="Insira uma descrição"
-                  disabled={isEditMode()}
-                />
-                <Input
                   {...register(`ha.tested`)}
                   type="checkbox"
                   disabled={isEditMode()}
@@ -69,11 +62,9 @@ const FormHA: FC<FormularyProps> = ({ nextStep, setFormValues, data, id }) => {
                   helperText={errors.ha?.rto?.message}
                   disabled={isEditMode() || !tested}
                   style={tested ? "" : { cursor: "not-allowed" }}
-                  label="Tempo de RTO (em horas)"
+                  label="RTO (em horas)"
                   placeholder="Ex: 1, 24 (convertido em horas)"
                 />
-              </Container>
-              <Container>
                 <Input
                   {...register(`ha.score`, {
                     valueAsNumber: true,
@@ -83,6 +74,8 @@ const FormHA: FC<FormularyProps> = ({ nextStep, setFormValues, data, id }) => {
                   label="Pontuação (Score)"
                   disabled={isEditMode()}
                 />
+              </Container>
+              <Container>
                 <label id="multiple-select-label">Soluções</label>
                 <Controller
                   name="ha.solutions"
@@ -112,6 +105,15 @@ const FormHA: FC<FormularyProps> = ({ nextStep, setFormValues, data, id }) => {
                   )}
                 />
                 <FormHelperText>{errors.ha?.solutions?.message}</FormHelperText>
+              </Container>
+              <Container>
+                <TextArea
+                  {...register(`ha.description`)}
+                  helperText={errors.ha?.description?.message}
+                  label="Descrição (Opcional)"
+                  placeholder="Insira uma descrição"
+                  disabled={isEditMode()}
+                />
               </Container>
 
               {data && (

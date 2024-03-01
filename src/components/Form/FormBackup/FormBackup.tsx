@@ -9,6 +9,7 @@ import { FC } from "react";
 import useFormulary from "./useFormulary";
 import { FormularyProps } from "../../../types/typesForm";
 import { Button } from "@mui/material";
+import { TextArea } from "../../Input/TextArea";
 
 const FormBackup: FC<FormularyProps> = ({
   nextStep,
@@ -171,12 +172,11 @@ const FormBackup: FC<FormularyProps> = ({
                 />
               </Container>
               <Container>
-                <Input
+                <TextArea
                   {...register(`backup.description`)}
-                  type="text"
-                  placeholder="Descrição (Opcional)"
-                  label="Descrição Geral"
                   helperText={errors.backup?.description?.message}
+                  label="Descrição (Opcional)"
+                  placeholder="Insira uma descrição"
                   disabled={isEditMode()}
                 />
               </Container>

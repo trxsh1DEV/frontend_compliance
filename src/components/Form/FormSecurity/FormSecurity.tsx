@@ -14,6 +14,7 @@ import {
   dataSecurityGPO,
   dataEnumNoneToAll,
 } from "../../../utils/data/dataUtil";
+import { TextArea } from "../../Input/TextArea";
 
 const FormSecurity: FC<FormularyProps> = ({
   nextStep,
@@ -143,7 +144,7 @@ const FormSecurity: FC<FormularyProps> = ({
                   disabled={isEditMode()}
                 />
 
-                <Input
+                <TextArea
                   {...register(`description`)}
                   helperText={errors?.description?.message}
                   label="Descrição"

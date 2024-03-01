@@ -12,6 +12,7 @@ import { Minus, Plus } from "phosphor-react";
 import { FormularyProps } from "../../../types/typesForm";
 import { Button } from "@mui/material";
 import { Send } from "@mui/icons-material";
+import { TextArea } from "../../Input/TextArea";
 
 const FormServer: FC<FormularyProps> = ({
   nextStep,
@@ -177,7 +178,7 @@ const FormServer: FC<FormularyProps> = ({
                 </div>
               ))}
               <Container>
-                <Input
+                <TextArea
                   {...register(`server.description`)}
                   type="text"
                   placeholder="Anotações de todos os servidores"

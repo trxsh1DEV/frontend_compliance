@@ -11,8 +11,35 @@ export const InputStyle = styled.input<{ hasError: boolean }>`
   max-width: 300px;
 
   &:focus {
-    border-color: ${theme.colors.cyanPrimary};
-    outline: 1px solid ${theme.colors.green_100};
+    border: 0;
+    outline: 2px solid #fff;
+  }
+
+  &::placeholder {
+    color: gray;
+  }
+
+  ${({ hasError }) =>
+    hasError &&
+    css`
+      border-color: ${theme.colors.errorLight};
+    `}
+`;
+
+export const TextAreaStyle = styled.textarea<{ hasError: boolean }>`
+  font-size: 1.8rem;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid ${theme.colors.cyanPrimary};
+  margin: 0;
+  width: 400px;
+  height: 150px;
+  max-width: 600px;
+  resize: none;
+
+  &:focus {
+    border: 0;
+    outline: 2px solid #fff;
   }
 
   &::placeholder {

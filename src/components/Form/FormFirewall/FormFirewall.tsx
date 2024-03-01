@@ -14,6 +14,7 @@ import {
   dataFirewallManufacturer,
   dataFirewallRulesAndVpn,
 } from "../../../utils/data/dataUtil";
+import { TextArea } from "../../Input/TextArea";
 
 const FormFirewall: FC<FormularyProps> = ({
   nextStep,
@@ -178,7 +179,7 @@ const FormFirewall: FC<FormularyProps> = ({
               </Container>
 
               <Container>
-                <Input
+                <TextArea
                   {...register(`description`)}
                   type="text"
                   helperText={errors?.description?.message}

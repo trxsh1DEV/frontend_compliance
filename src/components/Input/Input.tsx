@@ -10,7 +10,6 @@ import {
   Slider,
   SwitchLabel,
 } from "./styles";
-import "./Input.css";
 
 type inputProps = HTMLAttributes<HTMLInputElement> & {
   label?: string;
