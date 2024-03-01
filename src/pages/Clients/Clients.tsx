@@ -101,6 +101,25 @@ export default function Clients() {
     }
   };
 
+  // const handleUpdateData = (updatedData: any) => {
+  //   setData((prevData): any => {
+  //     // Encontrar o índice do usuário atualizado
+  //     const index = prevData?.findIndex((user) => user._id === updatedData._id);
+  //     // Clonar o array de dados
+  //     if (index !== -1 && index && prevData) {
+  //       // Clonar o array de dados
+  //       const newData = [...prevData];
+  //       // Substituir os dados antigos pelos novos dados atualizados
+  //       newData[index] = updatedData;
+  //       return newData;
+  //     } else {
+  //       // Se o índice for -1, significa que o item não foi encontrado,
+  //       // então retornamos os dados existentes sem fazer alterações
+  //       return prevData;
+  //     }
+  //   });
+  // };
+
   const handleEdit = (id: string) => {
     setId(id);
     setModalIsOpen(true);
@@ -164,12 +183,12 @@ export default function Clients() {
         <UserPlus size={32} />
       </Link>
       {modalIsOpen && (
-        <CustomModal isOpen={modalIsOpen} onClose={handleCloseModal} id={id} />
-        // <ModalCreate
-        //   isOpen={modalIsOpen}
-        //   onClose={handleCloseModal}
-        //   columns={columns}
-        // />
+        <CustomModal
+          isOpen={modalIsOpen}
+          onClose={handleCloseModal}
+          id={id}
+          onUpdate={fetchData}
+        />
       )}
     </Box>
   );

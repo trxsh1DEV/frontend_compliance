@@ -7,6 +7,7 @@ import requestWithToken from "../../utils/auth/requestApi";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { schemaRegister } from "../../utils/Schemas/schemaFormRegister";
+import { useEffect } from "preact/hooks";
 
 type formRegisterType = z.infer<typeof schemaRegister>;
 
@@ -14,6 +15,8 @@ const RegisterForm = () => {
   const {
     register,
     handleSubmit,
+    reset,
+    setFocus,
     formState: { errors },
   } = useForm<formRegisterType>({
     criteriaMode: "all",
@@ -21,7 +24,6 @@ const RegisterForm = () => {
     resolver: zodResolver(schemaRegister),
     defaultValues: {
       name: "",
-      confirmPassword: "",
       email: "",
       urls: {
         url_inventory: "",
@@ -30,21 +32,23 @@ const RegisterForm = () => {
         url_tickets: "",
       },
       isAdmin: false,
-      password: "",
       social_reason: "",
     },
   });
 
   const onSubmit = async (data: any) => {
     try {
-      delete data.confirmPassword;
       await requestWithToken.post("admin/clients", data);
+      reset();
       toast.success("Cliente cadastrado com sucesso!");
     } catch (err: any) {
-      console.log(err.response.data.errors[0].split("x: ")[1]);
+      console.log(err.response.data.errors[0]);
       toast.error(`Erro ao cadastrar cliente: ${err.message}`);
     }
   };
+  useEffect(() => {
+    setFocus("name");
+  }, [onSubmit]);
 
   return (
     <>
@@ -58,6 +62,7 @@ const RegisterForm = () => {
               placeholder="Nome da empresa"
               label="Nome do cliente"
               helperText={errors.name?.message}
+              autoFocus={true}
             />
 
             <Input

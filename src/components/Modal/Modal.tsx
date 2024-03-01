@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 interface CustomModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onUpdate: () => void;
   // formComponent: React.ReactNode;
   id: string;
 }
@@ -40,13 +41,21 @@ const schema = z.object({
 
 type FieldsClient = z.infer<typeof schema>;
 
-const CustomModal: FC<CustomModalProps> = ({ isOpen, onClose, id }) => {
+const ModalEditUser: FC<CustomModalProps> = ({
+  isOpen,
+  onClose,
+  id,
+  onUpdate,
+}) => {
   const [data, setData] = useState<FieldsClient>();
 
   const onSubmit = async (data: any) => {
     try {
       await requestWithToken.patch(`admin/clients/${id}`, data);
       toast.success("Cliente atualizado com sucesso!");
+      // Chame a função onUpdate fornecida por Clients para atualizar os dados
+      onUpdate();
+      onClose();
     } catch (err: any) {
       toast.error(
         `Falha ao atualizar usuário ${err?.response?.data?.errors[0]}`
@@ -60,7 +69,9 @@ const CustomModal: FC<CustomModalProps> = ({ isOpen, onClose, id }) => {
         const res = await requestWithToken.get(`admin/clients/${id}`);
         setData(res.data);
       } catch (error: any) {
-        toast.error(`Erro ao buscar dados do usuário: ${error.message}`);
+        toast.error(
+          `Erro ao buscar dados do usuário: ${error?.response?.data?.errors[0]}`
+        );
         console.error("Erro ao buscar dados:", error);
       }
     };
@@ -93,7 +104,7 @@ const CustomModal: FC<CustomModalProps> = ({ isOpen, onClose, id }) => {
     setFocus("name");
   }, []);
 
-  const Formulario = (
+  const Form = (
     <FormContainer onSubmit={handleSubmit(onSubmit)}>
       <Container>
         <Input
@@ -158,10 +169,10 @@ const CustomModal: FC<CustomModalProps> = ({ isOpen, onClose, id }) => {
         aria-describedby="Modal updated of the user"
         key={id}
       >
-        <Box sx={style}>{Formulario}</Box>
+        <Box sx={style}>{Form}</Box>
       </Modal>
     </>
   );
 };
 
-export default CustomModal;
+export default ModalEditUser;
