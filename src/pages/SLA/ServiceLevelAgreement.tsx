@@ -28,21 +28,16 @@ export default function ServiceLevelAgreement() {
       {urlData && (
         <ContainerFull>
           <iframe
-            src={`${urlData.urls.url_sla}`}
-            // src="https://infonovatecnologia-my.sharepoint.com/:x:/g/personal/yago_sousa_infonova_com_br/ETMP1Cg1TcNGoMU530k3BCIBm_MF1-DtO6QPVTfyU3ERbw?e=loEebA&action=embedview"
-            width="100%"
-            height="100%"
-            frameborder="0"
-          />
-          {/* <iframe
-            src="https://infonovatecnologia-my.sharepoint.com/personal/yago_sousa_infonova_com_br/_layouts/15/embed.aspx?UniqueId=03e16ea0-b1f5-41da-8748-fd3414e25c5e"
+            // "https://infonovatecnologia-my.sharepoint.com/personal/yago_sousa_infonova_com_br/_layouts/15/embed.aspx?UniqueId=03e16ea0-b1f5-41da-8748-fd3414e25c5e&action=embedview"
+            src={`${urlData.urls.url_sla}&action=embedview`}
             width="100%"
             height="100%"
             frameborder="0"
             scrolling="no"
             allowFullScreen
             title="pdf_test.pdf"
-          ></iframe> */}
+          ></iframe>
+          {/* https://infonovatecnologia-my.sharepoint.com/personal/yago_sousa_infonova_com_br/_layouts/15/embed.aspx?UniqueId=03e16ea0-b1f5-41da-8748-fd3414e25c5e */}
         </ContainerFull>
       )}
     </>

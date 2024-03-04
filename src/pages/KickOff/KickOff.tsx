@@ -27,7 +27,10 @@ export default function ServiceLevelAgreement() {
       {urlData && (
         <ContainerFull>
           <iframe
-            src={`${urlData.urls.url_kickoff}`}
+            src={`${urlData.urls.url_kickoff}&action=embedview`}
+            // src={
+            //   "https://infonovatecnologia.sharepoint.com/:x:/g/Ea_xKPZsS15Ht1RGZygmEcwBzpVjIn30cyusdMabyWEIRQ?e=XpdgZC&action=embedview"
+            // }
             width="100%"
             height="100%"
             frameborder="0"

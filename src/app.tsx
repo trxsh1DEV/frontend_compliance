@@ -4,7 +4,6 @@ import theme from "./styles/theme";
 import { ThemeProvider } from "styled-components";
 import { ToastContainer } from "react-toastify";
 import { AppContainer, MainContent } from "./styles/mainStyles";
-// import About from "./pages/About";
 
 import Clients from "./pages/Clients/Clients";
 import Client from "./pages/Clients/Client";
@@ -24,7 +23,7 @@ import Register from "./pages/Auth/Register";
 import Home from "./pages/Home/Home";
 import { AdminRoute, PrivateRoute } from "./utils/auth/redirects";
 import Sidebar from "./components/Sidebar/Sidebar";
-import { isAuthenticated } from "./config/tokenMethods";
+import UserService from "./config/keycloakConf";
 
 export function App() {
   return (
@@ -33,14 +32,14 @@ export function App() {
         <BrowserRouter>
           <ToastContainer autoClose={2000} theme="dark" />
           <AppContainer>
-            {/* <DecodedProvider> */}
-            {isAuthenticated() && <Sidebar />}
+            {UserService.isLoggedIn() && <Sidebar />}
             <MainContent>
               <Routes>
                 <Route path="*" element={<NotFoundPage />} />
                 <Route path="/unauthorized" element={<UnauthorizedPage />} />
 
                 <Route path="/" element={<PrivateRoute element={<Home />} />} />
+                <Route path="/test" element={<div>test</div>} />
                 <Route
                   path="/myprofile"
                   element={<PrivateRoute element={<Profile />} />}

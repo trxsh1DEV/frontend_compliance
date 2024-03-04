@@ -1,13 +1,13 @@
 import { Navigate } from "react-router-dom";
-import { hasRole, isAuthenticated } from "../../config/tokenMethods";
+import UserService from "../../config/keycloakConf";
 
 export const PrivateRoute = ({ element }: any) => {
-  return isAuthenticated() && element;
+  return UserService.isLoggedIn() ? element : UserService.doLogin();
 };
 
 export const AdminRoute = ({ element }: any) => {
   // Verifica se o usuário está autenticado e tem a role de admin
-  const isAuthenticatedAdmin = hasRole("app-admin");
+  const isAuthenticatedAdmin = UserService.hasRole(["app-admin"]);
 
   return isAuthenticatedAdmin ? element : <Navigate to="/unauthorized" />;
 };
