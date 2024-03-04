@@ -4,7 +4,7 @@ import requestWithToken from "../../utils/auth/requestApi";
 import { formatDateString } from "../../utils/data/formatDate";
 import { FormRegisterProps } from "../../types/typesForm";
 import { Box } from "@mui/material";
-import CustomModal from "../../components/Modal/Modal";
+import CustomModal from "../../components/Modal/ModalEdit";
 import { Actions, DivButton, ImageIcon } from "./styled";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";

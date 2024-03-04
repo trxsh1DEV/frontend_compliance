@@ -21,6 +21,7 @@ export default function ServiceLevelAgreement() {
     };
     fetchData();
   }, []);
+  // console.log(`${urlData.urls.url_sla}+&action=embedview`);
 
   return (
     <>
@@ -28,6 +29,7 @@ export default function ServiceLevelAgreement() {
         <ContainerFull>
           <iframe
             src={`${urlData.urls.url_sla}`}
+            // src="https://infonovatecnologia-my.sharepoint.com/:x:/g/personal/yago_sousa_infonova_com_br/ETMP1Cg1TcNGoMU530k3BCIBm_MF1-DtO6QPVTfyU3ERbw?e=loEebA&action=embedview"
             width="100%"
             height="100%"
             frameborder="0"

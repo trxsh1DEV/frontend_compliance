@@ -7,7 +7,7 @@ export const Container = styled.div`
   max-width: 800px;
   overflow: hidden;
   gap: 2rem;
-  & + & {
+  /* & + & {
     margin-top: 1rem;
-  }
+  } */
 `;

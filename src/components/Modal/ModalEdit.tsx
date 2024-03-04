@@ -8,6 +8,7 @@ import { Input } from "../Input/Input";
 import { Container } from "./styled";
 import { FormContainer } from "../Form/styleForm";
 import { toast } from "react-toastify";
+import { schemaRegister } from "../../utils/Schemas/schemaFormRegister";
 
 interface CustomModalProps {
   isOpen: boolean;
@@ -29,17 +30,7 @@ const style = {
   p: 4,
 };
 
-const schema = z.object({
-  email: z.string().email(),
-  name: z.string().min(6, "Minimo 6 caracteres"),
-  social_reason: z.string().optional(),
-  isAdmin: z.boolean(),
-  criticalProblems: z.boolean(),
-  cnpj: z.string().optional(),
-  contact: z.string().optional(),
-});
-
-type FieldsClient = z.infer<typeof schema>;
+type FieldsClient = z.infer<typeof schemaRegister>;
 
 const ModalEditUser: FC<CustomModalProps> = ({
   isOpen,
@@ -79,6 +70,7 @@ const ModalEditUser: FC<CustomModalProps> = ({
     fetchData();
   }, [id]);
   if (!data) return null;
+  data.typeContract;
 
   const {
     register,
@@ -86,7 +78,7 @@ const ModalEditUser: FC<CustomModalProps> = ({
     formState: { errors },
     setFocus,
   } = useForm({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(schemaRegister),
     criteriaMode: "all",
     mode: "all",
     defaultValues: {
@@ -97,6 +89,13 @@ const ModalEditUser: FC<CustomModalProps> = ({
       criticalProblems: data?.criticalProblems || false,
       cnpj: data?.cnpj || "",
       contact: data?.contact || "",
+      typeContract: data?.typeContract || "",
+      urls: data?.urls || {
+        url_inventory: "",
+        url_kickoff: "",
+        url_runbook: "",
+        url_tickets: "",
+      },
     },
   });
 
@@ -139,6 +138,37 @@ const ModalEditUser: FC<CustomModalProps> = ({
           placeholder="Razão social (opcional)"
           label="Razão social"
           helperText={errors.social_reason?.message}
+        />
+        <Input
+          {...register("typeContract")}
+          placeholder="Avulso ou Fixo"
+          label="Tipo de contrato"
+          helperText={errors.social_reason?.message}
+        />
+      </Container>
+
+      <Container>
+        <Input
+          {...register("urls.url_inventory")}
+          label="Administrador?"
+          helperText={errors?.isAdmin?.message}
+        />
+        <Input
+          {...register("urls.url_tickets")}
+          label="Tem problemas críticos?"
+          helperText={errors?.criticalProblems?.message}
+        />
+      </Container>
+      <Container>
+        <Input
+          {...register("urls.url_runbook")}
+          label="Administrador?"
+          helperText={errors?.isAdmin?.message}
+        />
+        <Input
+          {...register("urls.url_kickoff")}
+          label="Tem problemas críticos?"
+          helperText={errors?.criticalProblems?.message}
         />
       </Container>
 

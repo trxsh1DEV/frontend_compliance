@@ -12,9 +12,9 @@ const initKeycloak = async () => {
     });
 
     const authenticated = await keycloak.init({
-      onLoad: "login-required",
+      onLoad: "check-sso",
       scope: "openid",
-      checkLoginIframe: true,
+      checkLoginIframe: false,
     });
 
     if (authenticated) {
