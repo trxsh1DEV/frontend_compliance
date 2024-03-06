@@ -28,7 +28,6 @@ export default function ServiceLevelAgreement() {
       {urlData && (
         <ContainerFull>
           <iframe
-            // "https://infonovatecnologia-my.sharepoint.com/personal/yago_sousa_infonova_com_br/_layouts/15/embed.aspx?UniqueId=03e16ea0-b1f5-41da-8748-fd3414e25c5e&action=embedview"
             src={`${urlData.urls.url_sla}&action=embedview`}
             width="100%"
             height="100%"
@@ -37,7 +36,6 @@ export default function ServiceLevelAgreement() {
             allowFullScreen
             title="pdf_test.pdf"
           ></iframe>
-          {/* https://infonovatecnologia-my.sharepoint.com/personal/yago_sousa_infonova_com_br/_layouts/15/embed.aspx?UniqueId=03e16ea0-b1f5-41da-8748-fd3414e25c5e */}
         </ContainerFull>
       )}
     </>

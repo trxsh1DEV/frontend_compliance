@@ -21,19 +21,14 @@ export default function Agreement() {
     };
     fetchData();
   }, []);
+  // console.log(urlData.urls.url_agreement);
 
   return (
     <>
       {urlData && (
         <ContainerFull>
-          {/* <iframe
-            src={`${urlData.urls.url_inventory}`}
-            width="100%"
-            height="100%"
-            frameborder="0"
-          /> */}
           <iframe
-            src={`${urlData.urls.url_agreement}`}
+            src={`${urlData.urls.url_agreement}&action=embedview`}
             width="100%"
             height="100%"
             frameborder="0"

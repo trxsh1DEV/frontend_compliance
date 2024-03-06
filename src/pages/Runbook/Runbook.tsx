@@ -28,7 +28,6 @@ export default function Runbook() {
         <ContainerFull>
           <iframe
             src={`${urlData.urls.url_runbook}&action=embedview`}
-            // src={`https://infonovatecnologia.sharepoint.com/:w:/g/EbvdDDOiOtFKragq7UkeINIBmWliYIW7ciZ4FvtGO88XLw?e=64K8y3&action=embedview`}
             width="100%"
             height="100%"
             frameborder="0"

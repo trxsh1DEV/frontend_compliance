@@ -1,5 +1,4 @@
 import { useEffect, useState } from "preact/hooks";
-import { useLocation, useNavigate } from "react-router-dom";
 import requestWithToken from "../../utils/auth/requestApi";
 import {
   BottomContainer,
@@ -16,15 +15,12 @@ import {
 } from "./styled";
 
 export default function Compliance() {
-  const location = useLocation();
-  const id = location.pathname.split("/")[3];
-  const navigate = useNavigate();
+  // const location = useLocation();
+  // const id = location.pathname.split("/")[3];
   const [compliance, setCompliance] = useState<any>();
 
   const fetchData = async () => {
-    const resCompliance = await requestWithToken.post("compliance/latest", {
-      client: id,
-    });
+    const resCompliance = await requestWithToken.post("compliance/latest");
     setCompliance(resCompliance.data);
   };
 
@@ -32,11 +28,12 @@ export default function Compliance() {
     fetchData();
   }, []);
 
-  const handleDetails = (part: string) => {
-    navigate(`admin/clients/${id}/details`, {
-      state: { data: compliance, part, id },
-    });
-  };
+  // const handleDetails = (part: string) => {
+  //   console.log(id);
+  //   navigate(`admin/clients/${id}/details`, {
+  //     state: { data: compliance, part, id },
+  //   });
+  // };
 
   if (!compliance) return null;
 
@@ -62,9 +59,7 @@ export default function Compliance() {
                 <Paragrafh>
                   Descrição: {compliance.server.description}.
                 </Paragrafh>
-                <DivButton onClick={() => handleDetails("server")}>
-                  Veja mais!
-                </DivButton>
+                <DivButton>Veja mais!</DivButton>
               </ArticleStyled>
             </ContentGrid>
             <ContentGrid>
@@ -78,9 +73,7 @@ export default function Compliance() {
                 <Paragrafh>
                   Descrição: {compliance.backup.description}.
                 </Paragrafh>
-                <DivButton onClick={() => handleDetails("backup")}>
-                  Veja mais!
-                </DivButton>
+                <DivButton>Veja mais!</DivButton>
               </ArticleStyled>
             </ContentGrid>
             <ContentGrid>
@@ -92,9 +85,7 @@ export default function Compliance() {
                   operacional.
                 </WrapperAvailable>
                 <Paragrafh>Descrição: {compliance.ha.description}.</Paragrafh>
-                <DivButton onClick={() => handleDetails("ha")}>
-                  Veja mais!
-                </DivButton>
+                <DivButton>Veja mais!</DivButton>
               </ArticleStyled>
             </ContentGrid>
             <ContentGrid>
@@ -108,9 +99,7 @@ export default function Compliance() {
                 <Paragrafh>
                   Descrição: {compliance.firewall.description}.
                 </Paragrafh>
-                <DivButton onClick={() => handleDetails("firewall")}>
-                  Veja mais!
-                </DivButton>
+                <DivButton>Veja mais!</DivButton>
               </ArticleStyled>
             </ContentGrid>
             <ContentGrid>
@@ -124,9 +113,7 @@ export default function Compliance() {
                 <Paragrafh>
                   Descrição: {compliance.inventory.description}.
                 </Paragrafh>
-                <DivButton onClick={() => handleDetails("inventory")}>
-                  Veja mais!
-                </DivButton>
+                <DivButton>Veja mais!</DivButton>
               </ArticleStyled>
             </ContentGrid>
             <ContentGrid>
@@ -140,9 +127,7 @@ export default function Compliance() {
                 <Paragrafh>
                   Descrição: {compliance.security.description}.
                 </Paragrafh>
-                <DivButton onClick={() => handleDetails("security")}>
-                  Veja mais!
-                </DivButton>
+                <DivButton>Veja mais!</DivButton>
               </ArticleStyled>
             </ContentGrid>
             <ContentGrid>
@@ -157,9 +142,7 @@ export default function Compliance() {
                 <Paragrafh>
                   Descrição: {compliance.servicesOutsourcing.description}.
                 </Paragrafh>
-                <DivButton onClick={() => handleDetails("services")}>
-                  Veja mais!
-                </DivButton>
+                <DivButton>Veja mais!</DivButton>
               </ArticleStyled>
             </ContentGrid>
           </WrapperGrid>
