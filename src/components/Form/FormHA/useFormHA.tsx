@@ -60,7 +60,7 @@ const useFormulary = ({
         rto: datas?.ha?.rto || 0,
         score: datas?.ha?.score || 0,
         description: datas.ha.description || "",
-        solutions: datas?.ha?.solutions || ["none"],
+        solutions: datas?.ha?.solutions || 1,
         tested: datas?.ha?.tested || false,
         isEditable: false,
       },

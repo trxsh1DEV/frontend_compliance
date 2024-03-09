@@ -6,6 +6,39 @@ export const dataHAUtil = [
   "cluster",
 ];
 
+export const multipleOption = [
+  { label: "Baixa", value: 1 },
+  { label: "Media", value: 4 },
+  { label: "Alta", value: 3 },
+];
+
+export const customStyles = {
+  control: (provided: any, state: any) => ({
+    ...provided,
+    background: "transparent",
+    opacity: state.isDisabled ? 0.7 : 1,
+    border: "1px solid #1BA9D4",
+    width: "245px",
+  }),
+  menu: (provided: any) => ({
+    ...provided,
+    color: "#fff",
+    backgroundColor: "#343434",
+  }),
+  option: (provided: any, state: any) => ({
+    ...provided,
+    backgroundColor: state.isFocused ? "#0799b3" : "#343434",
+  }),
+  singleValue: (provided: any) => ({
+    ...provided,
+    color: "#fff",
+  }),
+  input: (provided: any) => ({
+    ...provided,
+    color: "#fff",
+  }),
+};
+
 export const dataFirewallManufacturer = [
   "Sophos",
   "Fortigate",

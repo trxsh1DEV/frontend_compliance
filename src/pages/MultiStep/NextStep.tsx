@@ -1,20 +1,20 @@
 import { useState } from "preact/hooks";
 
-import FormBackup from "../Form/FormBackup/FormBackup";
-import FormServer from "../Form/FormServer/FormServer";
+import FormBackup from "../../components/Form/FormBackup/FormBackup";
+import FormServer from "../../components/Form/FormServer/FormServer";
 import { combineInfra } from "../../types/typesForm";
-// import FormHA from "../Form/FormHA/FormHA";
-import Success from "../../pages/Success/Success";
+import Success from "../Success/Success";
 import { useLocation } from "react-router-dom";
-import FormSecurity from "../Form/FormSecurity/FormSecurity";
-import FormService from "../Form/FormService/FormService";
-import FormHA from "../Form/FormHA/FormHA";
-import FormFirewall from "../Form/FormFirewall/FormFirewall";
-import FormInventory from "../Form/FormInventory/FormInventory";
+import FormSecurity from "../../components/Form/FormSecurity/FormSecurity";
+import FormService from "../../components/Form/FormService/FormService";
+import FormHA from "../../components/Form/FormHA/FormHA";
+import FormFirewall from "../../components/Form/FormFirewall/FormFirewall";
+import FormInventory from "../../components/Form/FormInventory/FormInventory";
 
 const AddCompliance = () => {
   const [step, setStep] = useState(1);
   const [formValues, setFormValues] = useState<combineInfra>();
+  // console.log(formValues);
   const {
     state: { id },
   } = useLocation();

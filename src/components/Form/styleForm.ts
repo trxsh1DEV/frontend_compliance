@@ -27,16 +27,13 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  /* overflow: hidden; */
   max-width: 800px;
-  overflow: hidden;
   gap: 2rem;
-  & + & {
-    margin-top: 1rem;
-  }
 `;
 
 export const Heading2 = styled.h2`
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   text-align: center;
 `;
 

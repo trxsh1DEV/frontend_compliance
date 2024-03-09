@@ -18,7 +18,7 @@ import Runbook from "./pages/Runbook/Runbook";
 import Inventory from "./pages/Inventory/Inventory";
 import Agreement from "./pages/Agreement/Agreement";
 import ServiceLevelAgreement from "./pages/SLA/ServiceLevelAgreement";
-import AddCompliance from "./components/MultiStep/NextStep";
+import AddCompliance from "./pages/MultiStep/NextStep";
 import Register from "./pages/Auth/Register";
 import Home from "./pages/Home/Home";
 import { AdminRoute, PrivateRoute } from "./utils/auth/redirects";

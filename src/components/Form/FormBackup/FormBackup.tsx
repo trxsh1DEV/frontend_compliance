@@ -5,11 +5,15 @@ import {
   Heading2,
 } from "../styleForm";
 import { Input } from "../../Input/Input";
-import { FC } from "react";
+import { FC, useId } from "react";
 import useFormulary from "./useFormulary";
 import { FormularyProps } from "../../../types/typesForm";
-import { Button } from "@mui/material";
+import { Button, FormHelperText } from "@mui/material";
 import { TextArea } from "../../Input/TextArea";
+import { InputContent, Label } from "../../Input/styles";
+import { Controller } from "react-hook-form";
+import ReactSelect from "react-select";
+import { customStyles, multipleOption } from "../../../utils/data/dataUtil";
 
 const FormBackup: FC<FormularyProps> = ({
   nextStep,
@@ -24,6 +28,7 @@ const FormBackup: FC<FormularyProps> = ({
     handleFormSubmit,
     handleNext,
     handleSubmit,
+    control,
     register,
     isEnabled,
     haveBackup,
@@ -31,6 +36,7 @@ const FormBackup: FC<FormularyProps> = ({
     isEditable,
   } = useFormulary({ nextStep, previousStep, setFormValues, data, id });
   const isEditMode = () => (!!data && !isEditable ? true : false);
+  const inputId = useId();
 
   return (
     <>
@@ -54,33 +60,6 @@ const FormBackup: FC<FormularyProps> = ({
                   label="Deseja Editar?"
                 />
               )}
-              <Container>
-                <Input
-                  {...register(`backup.frequency.level`)}
-                  type="text"
-                  placeholder="Informe 'low' | 'medium' | 'high'"
-                  label="Frequencia de Backup"
-                  helperText={errors.backup?.frequency?.level?.message}
-                  style={isEnabled(0)}
-                  disabled={isEditMode() || !!isEnabled(0)}
-                />
-                <Input
-                  {...register(`backup.frequency.score`, {
-                    valueAsNumber: true,
-                  })}
-                  label="Pontuação"
-                  type="number"
-                  helperText={errors.backup?.frequency?.score?.message}
-                  style={isEnabled(0)}
-                  disabled={isEditMode() || !!isEnabled(0)}
-                />
-
-                <Input
-                  {...register(`backup.frequency.enabled`)}
-                  type="checkbox"
-                  disabled={isEditMode()}
-                />
-              </Container>
 
               <Container>
                 <Input
@@ -88,21 +67,31 @@ const FormBackup: FC<FormularyProps> = ({
                     valueAsNumber: true,
                   })}
                   type="number"
-                  label="Quantidade de backups"
+                  label="Backup Local (Qtd)"
                   helperText={errors.backup?.storage?.local?.qtde?.message}
                   style={isEnabled(1)}
                   disabled={isEditMode() || !!isEnabled(1)}
                 />
-                <Input
-                  {...register(`backup.storage.local.score`, {
-                    valueAsNumber: true,
-                  })}
-                  label="Pontuação"
-                  type="number"
-                  helperText={errors.backup?.storage?.local?.score?.message}
-                  style={isEnabled(1)}
-                  disabled={isEditMode() || !!isEnabled(1)}
-                />
+                <InputContent>
+                  <Label htmlFor={inputId}>Maturidade</Label>
+                  <Controller
+                    name="backup.storage.remote.qtde"
+                    control={control}
+                    render={({ field }) => (
+                      <ReactSelect
+                        name={field.name}
+                        inputId={inputId}
+                        options={multipleOption}
+                        onChange={(val: any) => field.onChange(val.value)}
+                        styles={customStyles}
+                        isDisabled={isEditMode() || !!isEnabled(1)}
+                      />
+                    )}
+                  />
+                  <FormHelperText>
+                    {errors.backup?.storage?.remote?.message}
+                  </FormHelperText>
+                </InputContent>
                 <Input
                   {...register(`backup.storage.local.enabled`)}
                   type="checkbox"
@@ -116,61 +105,39 @@ const FormBackup: FC<FormularyProps> = ({
                     valueAsNumber: true,
                   })}
                   type="number"
-                  label="Quantidade de backups"
+                  label="Backup Remoto (Qtd)"
                   helperText={errors.backup?.storage?.remote?.qtde?.message}
                   style={isEnabled(2)}
                   disabled={isEditMode() || !!isEnabled(2)}
                 />
 
-                <Input
-                  {...register(`backup.storage.remote.score`, {
-                    valueAsNumber: true,
-                  })}
-                  label="Pontuação"
-                  type="number"
-                  helperText={errors.backup?.storage?.remote?.score?.message}
-                  style={isEnabled(2)}
-                  disabled={isEditMode() || !!isEnabled(2)}
-                />
+                <InputContent>
+                  <Label htmlFor={inputId}>Maturidade</Label>
+                  <Controller
+                    name="backup.storage.remote.qtde"
+                    control={control}
+                    render={({ field }) => (
+                      <ReactSelect
+                        name={field.name}
+                        inputId={inputId}
+                        options={multipleOption}
+                        onChange={(val: any) => field.onChange(val.value)}
+                        styles={customStyles}
+                        isDisabled={isEditMode() || !!isEnabled(2)}
+                      />
+                    )}
+                  />
+                  <FormHelperText>
+                    {errors.backup?.storage?.remote?.message}
+                  </FormHelperText>
+                </InputContent>
                 <Input
                   {...register(`backup.storage.remote.enabled`)}
                   type="checkbox"
                   disabled={isEditMode()}
                 />
               </Container>
-              <Container>
-                <Input
-                  {...register(`backup.policy.score`, {
-                    valueAsNumber: true,
-                  })}
-                  label="Politicas Backup (Points)"
-                  type="number"
-                  helperText={errors.backup?.policy?.score?.message}
-                  style={isEnabled(3)}
-                  disabled={isEditMode() || !!isEnabled(3)}
-                />
-                <Input
-                  {...register(`backup.policy.enabled`)}
-                  type="checkbox"
-                  disabled={isEditMode()}
-                />
 
-                <Input
-                  {...register(`backup.restoration.score`, {
-                    valueAsNumber: true,
-                  })}
-                  label="Restauração (Points)"
-                  type="number"
-                  helperText={errors.backup?.restoration?.score?.message}
-                  style={isEnabled(4)}
-                  disabled={isEditMode() || !!isEnabled(4)}
-                />
-                <Input
-                  {...register(`backup.restoration.enabled`)}
-                  type="checkbox"
-                  disabled={isEditMode()}
-                />
-              </Container>
               <Container>
                 <TextArea
                   {...register(`backup.description`)}

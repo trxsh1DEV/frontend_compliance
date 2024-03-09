@@ -44,6 +44,7 @@ const useFormulary = ({
     handleSubmit,
     watch,
     setValue,
+    control,
     formState: { errors },
   } = useForm<FormBackupProps>({
     mode: "onBlur",
@@ -131,6 +132,7 @@ const useFormulary = ({
     }
     setFormValidate(false);
   }, [errors, haveBackup]);
+  console.log(errors);
 
   return {
     handleFormSubmit,
@@ -138,6 +140,7 @@ const useFormulary = ({
     register,
     errors,
     handleNext,
+    control,
     isEnabled,
     formValidate,
     haveBackup,

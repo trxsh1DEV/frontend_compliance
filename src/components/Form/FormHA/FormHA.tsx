@@ -5,14 +5,16 @@ import {
   Heading2,
 } from "../styleForm";
 import { Input } from "../../Input/Input";
-import { FC } from "react";
+import { FC, useId } from "react";
 import useFormulary from "./useFormHA";
 import { FormularyProps } from "../../../types/typesForm";
-import { Button, FormHelperText, MenuItem, Select } from "@mui/material";
+import { Button, FormHelperText } from "@mui/material";
 import { Controller } from "react-hook-form";
 import "../style.css";
-import { dataHAUtil } from "../../../utils/data/dataUtil";
+import { customStyles, multipleOption } from "../../../utils/data/dataUtil";
 import { TextArea } from "../../Input/TextArea";
+import ReactSelect from "react-select";
+import { InputContent, Label } from "../../Input/styles";
 
 const FormHA: FC<FormularyProps> = ({ nextStep, setFormValues, data, id }) => {
   const {
@@ -29,9 +31,7 @@ const FormHA: FC<FormularyProps> = ({ nextStep, setFormValues, data, id }) => {
   } = useFormulary({ nextStep, setFormValues, data, id });
 
   const isEditMode = () => (!!data && !isEditable ? true : false);
-  // console.log(refFocus);
-  // const isEditStyleMode = () =>
-  //   !!data && !isEditable ? { cursor: "not-allowed" } : "";
+  const inputId = useId();
 
   return (
     <>
@@ -65,48 +65,37 @@ const FormHA: FC<FormularyProps> = ({ nextStep, setFormValues, data, id }) => {
                   label="RTO (em horas)"
                   placeholder="Ex: 1, 24 (convertido em horas)"
                 />
+                <InputContent>
+                  <Label htmlFor={inputId}>Maturidade</Label>
+                  <Controller
+                    name="ha.solutions"
+                    control={control}
+                    render={({ field }) => (
+                      <ReactSelect
+                        name={field.name}
+                        inputId={inputId}
+                        options={multipleOption}
+                        onChange={(val: any) => field.onChange(val.value)}
+                        styles={customStyles}
+                        // defaultValue={multipleOption[0]}
+                      />
+                    )}
+                  />
+                  <FormHelperText>
+                    {errors.ha?.solutions?.message}
+                  </FormHelperText>
+                </InputContent>
+              </Container>
+              <Container>
                 <Input
                   {...register(`ha.score`, {
                     valueAsNumber: true,
                   })}
                   type="number"
-                  helperText={errors.ha?.score?.message}
+                  helperText={errors?.ha?.score?.message}
                   label="Pontuação (Score)"
                   disabled={isEditMode()}
                 />
-              </Container>
-              <Container>
-                <label id="multiple-select-label">Soluções</label>
-                <Controller
-                  name="ha.solutions"
-                  control={control}
-                  render={({ field }) => (
-                    <Select
-                      labelId="multiple-select-label"
-                      multiple
-                      value={field.value}
-                      onChange={(e: any) => field.onChange(e.target.value)}
-                      // label="Selecionar Opções"
-                      sx={{
-                        color: "#fff",
-                        fontSize: "16px",
-                      }}
-                    >
-                      {dataHAUtil.map((item) => (
-                        <MenuItem
-                          className="menuItem"
-                          value={`${item}`}
-                          disabled={isEditMode()}
-                        >
-                          {item}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  )}
-                />
-                <FormHelperText>{errors.ha?.solutions?.message}</FormHelperText>
-              </Container>
-              <Container>
                 <TextArea
                   {...register(`ha.description`)}
                   helperText={errors.ha?.description?.message}

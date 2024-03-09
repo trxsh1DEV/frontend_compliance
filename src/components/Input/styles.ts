@@ -66,6 +66,7 @@ export const Label = styled.label`
 export const InputContent = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   width: 100%;
   flex-direction: column;
   padding: 0.4rem;
@@ -83,9 +84,7 @@ export const HelperText = styled.p`
 
 export const SwitchLabel = styled.label`
   position: relative;
-  display: inline-block;
-  width: 7.5rem;
-  padding-top: 2rem;
+  padding-top: 2.5rem;
 `;
 
 export const HiddenToggle = styled.input`
