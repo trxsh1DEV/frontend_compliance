@@ -52,23 +52,25 @@ const useFormulary = ({
     criteriaMode: "all",
     resolver: zodResolver(schemaFirewall),
     defaultValues: {
-      manufacturer: data?.manufacturer.length > 1 ? data.manufacturer : "None",
-      rules: data?.rules || "None",
-      vpn: data?.vpn || "None",
       isEditable: data?.isEditable || false,
-      score: data?.score || 0,
-      backup: data?.backup || false,
       description: data?.description || "",
       enabled: data?.enabled || false,
-      ips: data?.ips || false,
-      monitoring: data?.monitoring || false,
-      restoration: data?.restoration || false,
-      segmentation: data?.restoration || false,
+      nextGeneration: {
+        enabled: data?.nextGeneration.enabled || false,
+        score: data?.nextGeneration.score || 1,
+      },
+      troughput: {
+        enabled: data?.troughput?.enabled || false,
+        score: data?.troughput?.score || 1,
+      },
     },
   });
 
   const haveFirewall = watch("enabled");
   const isEditable = watch("isEditable");
+  const fieldsEnabled = watch(["nextGeneration.enabled", "troughput.enabled"]);
+
+  const isEnabled = (n: number) => !fieldsEnabled[n];
 
   useEffect(() => {
     setFocus("description");
@@ -98,6 +100,7 @@ const useFormulary = ({
     formValidate,
     control,
     isEditable,
+    isEnabled,
     haveFirewall,
     handlePrevious,
   };

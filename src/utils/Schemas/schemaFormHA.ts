@@ -7,7 +7,8 @@ export const schemaHA = z.object({
       enabled: z.boolean(),
       solutions: z
         .number({ invalid_type_error: "Insira um número válido" })
-        .min(1),
+        .min(1)
+        .max(3),
       tested: z.boolean(),
       rto: z.number(),
       score: scoreType,

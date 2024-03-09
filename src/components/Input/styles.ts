@@ -31,8 +31,8 @@ export const TextAreaStyle = styled.textarea<{ hasError: boolean }>`
   padding: 1rem;
   border-radius: 8px;
   border: 1px solid ${theme.colors.cyanPrimary};
-  margin: 0;
-  width: 400px;
+  margin-left: 3rem;
+  width: 350px;
   height: 150px;
   max-width: 600px;
   resize: none;
@@ -84,7 +84,7 @@ export const HelperText = styled.p`
 
 export const SwitchLabel = styled.label`
   position: relative;
-  padding-top: 2.5rem;
+  margin-top: 0.8rem;
 `;
 
 export const HiddenToggle = styled.input`

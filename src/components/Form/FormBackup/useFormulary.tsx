@@ -23,6 +23,7 @@ const useFormulary = ({
   const datas: TypesBackup = { backup: { ...data } };
 
   const handleFormSubmit = async (data: any) => {
+    console.log(data);
     setFormValidate(true);
 
     try {
@@ -52,35 +53,17 @@ const useFormulary = ({
     resolver: zodResolver(schemaBackup),
     defaultValues: {
       backup: {
-        frequency: {
-          score: datas?.backup?.frequency?.score || 0,
-          enabled: datas?.backup?.frequency?.enabled || false,
-          level: datas?.backup?.frequency?.level || "low",
-          description: datas?.backup?.frequency?.description || "",
-        },
         storage: {
           local: {
-            description: datas?.backup?.storage?.local?.description || "",
             enabled: datas?.backup?.storage?.local?.enabled || false,
             qtde: datas?.backup?.storage?.local?.qtde || 0,
             score: datas?.backup?.storage?.local?.score || 0,
           },
           remote: {
-            description: datas?.backup?.storage?.remote?.description || "",
             enabled: datas?.backup?.storage?.remote?.enabled || false,
             qtde: datas?.backup?.storage?.remote?.qtde || 0,
             score: datas?.backup?.storage?.remote?.score || 0,
           },
-        },
-        policy: {
-          score: datas?.backup?.policy?.score || 0,
-          enabled: datas?.backup?.policy?.enabled || false,
-          description: datas?.backup?.policy?.description || "",
-        },
-        restoration: {
-          score: datas?.backup?.restoration?.score || 0,
-          enabled: datas?.backup?.restoration?.enabled || false,
-          description: datas?.backup?.restoration?.description || "",
         },
         enabled: datas?.backup?.enabled || false,
         isEditable: false,
@@ -90,29 +73,20 @@ const useFormulary = ({
 
   // const isEnabled = watch('backup.frequ');
   const fieldsEnabled = watch([
-    "backup.frequency.enabled",
     "backup.storage.local.enabled",
     "backup.storage.remote.enabled",
-    "backup.policy.enabled",
-    "backup.restoration.enabled",
+    // "backup.frequency.enabled",
+    // "backup.policy.enabled",
+    // "backup.restoration.enabled",
   ]);
   const haveBackup = watch("backup.enabled");
   const isEditable = watch("backup.isEditable");
 
   useEffect(() => {
-    const resetInput = { score: 0, qtde: 0, description: "", enabled: false };
+    const resetInput = { score: 0, qtde: 0, enabled: false };
 
-    !fieldsEnabled[0] &&
-      setValue("backup.frequency", {
-        description: "",
-        enabled: false,
-        score: 0,
-        level: undefined,
-      });
-    !fieldsEnabled[1] && setValue("backup.storage.local", resetInput);
-    !fieldsEnabled[2] && setValue("backup.storage.remote", resetInput);
-    !fieldsEnabled[3] && setValue("backup.policy.score", 0);
-    !fieldsEnabled[4] && setValue("backup.restoration.score", 0);
+    !fieldsEnabled[0] && setValue("backup.storage.local", resetInput);
+    !fieldsEnabled[1] && setValue("backup.storage.remote", resetInput);
   }, [setValue, fieldsEnabled]);
 
   const handleNext = () => {
@@ -132,7 +106,6 @@ const useFormulary = ({
     }
     setFormValidate(false);
   }, [errors, haveBackup]);
-  console.log(errors);
 
   return {
     handleFormSubmit,

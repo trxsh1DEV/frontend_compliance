@@ -7,14 +7,14 @@ import Success from "../Success/Success";
 import { useLocation } from "react-router-dom";
 import FormSecurity from "../../components/Form/FormSecurity/FormSecurity";
 import FormService from "../../components/Form/FormService/FormService";
-import FormHA from "../../components/Form/FormHA/FormHA";
+// import FormHA from "../../components/Form/FormHA/FormHA";
 import FormFirewall from "../../components/Form/FormFirewall/FormFirewall";
 import FormInventory from "../../components/Form/FormInventory/FormInventory";
 
 const AddCompliance = () => {
   const [step, setStep] = useState(1);
   const [formValues, setFormValues] = useState<combineInfra>();
-  // console.log(formValues);
+  console.log(formValues);
   const {
     state: { id },
   } = useLocation();
@@ -29,9 +29,6 @@ const AddCompliance = () => {
   return (
     <div className="container">
       {step === 1 && (
-        <FormHA nextStep={nextStep} setFormValues={setFormValues} />
-      )}
-      {step === 2 && (
         <FormBackup
           nextStep={nextStep}
           previousStep={previousStep}
@@ -39,7 +36,7 @@ const AddCompliance = () => {
         />
       )}
 
-      {step === 3 && (
+      {step === 2 && (
         <FormFirewall
           nextStep={nextStep}
           previousStep={previousStep}

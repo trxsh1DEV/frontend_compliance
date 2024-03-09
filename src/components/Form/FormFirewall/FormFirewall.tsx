@@ -8,13 +8,14 @@ import { Input } from "../../Input/Input";
 import { FC } from "react";
 import useFormulary from "./useForm";
 import { FormularyProps } from "../../../types/typesForm";
-import { Button, FormHelperText, MenuItem, Select } from "@mui/material";
-import { Controller } from "react-hook-form";
-import {
-  dataFirewallManufacturer,
-  dataFirewallRulesAndVpn,
-} from "../../../utils/data/dataUtil";
+import { Button, FormHelperText } from "@mui/material";
+// import { Controller } from "react-hook-form";
 import { TextArea } from "../../Input/TextArea";
+import { InputContent } from "../../Input/styles";
+import { Label } from "../../Input/styles";
+import { Controller } from "react-hook-form";
+import { customStyles, multipleOption } from "../../../utils/data/dataUtil";
+import ReactSelect from "react-select";
 
 const FormFirewall: FC<FormularyProps> = ({
   nextStep,
@@ -31,6 +32,7 @@ const FormFirewall: FC<FormularyProps> = ({
     register,
     formValidate,
     control,
+    isEnabled,
     isEditable,
     haveFirewall,
     handlePrevious,
@@ -51,131 +53,71 @@ const FormFirewall: FC<FormularyProps> = ({
 
           {haveFirewall && (
             <>
+              {data && (
+                <Input
+                  {...register(`isEditable`)}
+                  type="checkbox"
+                  helperText={errors.isEditable?.message}
+                  label="Deseja Editar?"
+                />
+              )}
+
               <Container>
-                <label id="manufacturer">Fabricante</label>
-                <Controller
-                  name="manufacturer"
-                  control={control}
-                  render={({ field }) => (
-                    <Select
-                      labelId="manufacturer"
-                      value={field.value}
-                      onChange={(e: any) => field.onChange(e.target.value)}
-                      sx={{
-                        color: "#fff",
-                        fontSize: "16px",
-                      }}
-                    >
-                      {dataFirewallManufacturer.map((item) => (
-                        <MenuItem
-                          className="menuItem"
-                          value={`${item}`}
-                          disabled={isEditMode()}
-                        >
-                          {item}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  )}
+                <Input
+                  {...register(`nextGeneration.enabled`)}
+                  type="checkbox"
+                  helperText={errors.nextGeneration?.message}
+                  label="Next Generation?"
                 />
-                <FormHelperText>{errors?.rules?.message}</FormHelperText>
-
-                <label id="Regras">Regras</label>
-                <Controller
-                  name="rules"
-                  control={control}
-                  render={({ field }) => (
-                    <Select
-                      labelId="Regras"
-                      value={field.value}
-                      onChange={(e: any) => field.onChange(e.target.value)}
-                      sx={{
-                        color: "#fff",
-                        fontSize: "16px",
-                      }}
-                    >
-                      {dataFirewallRulesAndVpn.map((item) => (
-                        <MenuItem
-                          className="menuItem"
-                          value={`${item}`}
-                          disabled={isEditMode()}
-                        >
-                          {item}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  )}
-                />
-                <FormHelperText>{errors?.rules?.message}</FormHelperText>
-
-                <label id="vpn">VPN?</label>
-                <Controller
-                  name="vpn"
-                  control={control}
-                  render={({ field }) => (
-                    <Select
-                      labelId="vpn"
-                      value={field.value}
-                      onChange={(e: any) => field.onChange(e.target.value)}
-                      sx={{
-                        color: "#fff",
-                        fontSize: "16px",
-                      }}
-                    >
-                      {dataFirewallRulesAndVpn.map((item) => (
-                        <MenuItem
-                          className="menuItem"
-                          value={`${item}`}
-                          disabled={isEditMode()}
-                        >
-                          {item}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  )}
-                />
-                <FormHelperText>{errors?.vpn?.message}</FormHelperText>
+                <InputContent>
+                  <Label htmlFor={"score-0"}>Maturidade</Label>
+                  <Controller
+                    name="nextGeneration.score"
+                    control={control}
+                    render={({ field }) => (
+                      <ReactSelect
+                        name={field.name}
+                        inputId={"score-0"}
+                        options={multipleOption}
+                        onChange={(val: any) => field.onChange(val.value)}
+                        styles={customStyles}
+                        isDisabled={isEditMode() || isEnabled(0)}
+                      />
+                    )}
+                  />
+                  <FormHelperText>
+                    {errors.nextGeneration?.message}
+                  </FormHelperText>
+                </InputContent>
               </Container>
 
               <Container>
                 <Input
-                  {...register(`ips`)}
-                  helperText={errors?.ips?.message}
-                  label="Firewall Possui IPS?"
+                  {...register(`troughput.enabled`)}
                   type="checkbox"
-                  disabled={isEditMode()}
+                  helperText={errors.troughput?.message}
+                  label={`\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0Troughput\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0`}
                 />
-                <Input
-                  {...register(`backup`)}
-                  helperText={errors?.backup?.message}
-                  label="Possui Backup?"
-                  type="checkbox"
-                  disabled={isEditMode()}
-                />
-                <Input
-                  {...register(`monitoring`)}
-                  helperText={errors?.monitoring?.message}
-                  label="Monitoramento?"
-                  type="checkbox"
-                  disabled={isEditMode()}
-                />
-              </Container>
-
-              <Container>
-                <Input
-                  {...register(`restoration`)}
-                  helperText={errors?.restoration?.message}
-                  label="Teste de restauração?"
-                  type="checkbox"
-                  disabled={isEditMode()}
-                />
-                <Input
-                  {...register(`segmentation`)}
-                  helperText={errors?.segmentation?.message}
-                  label="Possui redes segmentadas?"
-                  type="checkbox"
-                  disabled={isEditMode()}
-                />
+                <InputContent>
+                  <Label htmlFor={"score-1"}>Maturidade</Label>
+                  <Controller
+                    name="troughput.score"
+                    control={control}
+                    render={({ field }) => (
+                      <ReactSelect
+                        name={field.name}
+                        inputId={"score-1"}
+                        options={multipleOption}
+                        onChange={(val: any) => field.onChange(val.value)}
+                        styles={customStyles}
+                        isDisabled={isEditMode() || isEnabled(1)}
+                      />
+                    )}
+                  />
+                  <FormHelperText>
+                    {errors.nextGeneration?.message}
+                  </FormHelperText>
+                </InputContent>
               </Container>
 
               <Container>
@@ -185,15 +127,6 @@ const FormFirewall: FC<FormularyProps> = ({
                   helperText={errors?.description?.message}
                   label="Descrição (Opcional)"
                   placeholder="Insira uma descrição"
-                  disabled={isEditMode()}
-                />
-                <Input
-                  {...register(`score`, {
-                    valueAsNumber: true,
-                  })}
-                  type="number"
-                  helperText={errors?.score?.message}
-                  label="Pontuação (Score)"
                   disabled={isEditMode()}
                 />
               </Container>

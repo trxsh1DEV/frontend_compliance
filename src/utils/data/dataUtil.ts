@@ -8,7 +8,7 @@ export const dataHAUtil = [
 
 export const multipleOption = [
   { label: "Baixa", value: 1 },
-  { label: "Media", value: 4 },
+  { label: "Media", value: 2 },
   { label: "Alta", value: 3 },
 ];
 

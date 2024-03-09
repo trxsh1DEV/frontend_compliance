@@ -5,7 +5,7 @@ import {
   Heading2,
 } from "../styleForm";
 import { Input } from "../../Input/Input";
-import { FC, useId } from "react";
+import { FC } from "react";
 import useFormulary from "./useFormulary";
 import { FormularyProps } from "../../../types/typesForm";
 import { Button, FormHelperText } from "@mui/material";
@@ -36,7 +36,6 @@ const FormBackup: FC<FormularyProps> = ({
     isEditable,
   } = useFormulary({ nextStep, previousStep, setFormValues, data, id });
   const isEditMode = () => (!!data && !isEditable ? true : false);
-  const inputId = useId();
 
   return (
     <>
@@ -69,27 +68,27 @@ const FormBackup: FC<FormularyProps> = ({
                   type="number"
                   label="Backup Local (Qtd)"
                   helperText={errors.backup?.storage?.local?.qtde?.message}
-                  style={isEnabled(1)}
-                  disabled={isEditMode() || !!isEnabled(1)}
+                  style={isEnabled(0)}
+                  disabled={isEditMode() || !!isEnabled(0)}
                 />
                 <InputContent>
-                  <Label htmlFor={inputId}>Maturidade</Label>
+                  <Label htmlFor={"score-0"}>Maturidade</Label>
                   <Controller
-                    name="backup.storage.remote.qtde"
+                    name="backup.storage.local.score"
                     control={control}
                     render={({ field }) => (
                       <ReactSelect
                         name={field.name}
-                        inputId={inputId}
+                        inputId={"score-0"}
                         options={multipleOption}
                         onChange={(val: any) => field.onChange(val.value)}
                         styles={customStyles}
-                        isDisabled={isEditMode() || !!isEnabled(1)}
+                        isDisabled={isEditMode() || !!isEnabled(0)}
                       />
                     )}
                   />
                   <FormHelperText>
-                    {errors.backup?.storage?.remote?.message}
+                    {errors.backup?.storage?.local?.message}
                   </FormHelperText>
                 </InputContent>
                 <Input
@@ -107,23 +106,22 @@ const FormBackup: FC<FormularyProps> = ({
                   type="number"
                   label="Backup Remoto (Qtd)"
                   helperText={errors.backup?.storage?.remote?.qtde?.message}
-                  style={isEnabled(2)}
-                  disabled={isEditMode() || !!isEnabled(2)}
+                  style={isEnabled(1)}
+                  disabled={isEditMode() || !!isEnabled(1)}
                 />
-
                 <InputContent>
-                  <Label htmlFor={inputId}>Maturidade</Label>
+                  <Label htmlFor={"score-1"}>Maturidade</Label>
                   <Controller
-                    name="backup.storage.remote.qtde"
+                    name="backup.storage.remote.score"
                     control={control}
                     render={({ field }) => (
                       <ReactSelect
                         name={field.name}
-                        inputId={inputId}
+                        inputId={"score-1"}
                         options={multipleOption}
                         onChange={(val: any) => field.onChange(val.value)}
                         styles={customStyles}
-                        isDisabled={isEditMode() || !!isEnabled(2)}
+                        isDisabled={isEditMode() || !!isEnabled(1)}
                       />
                     )}
                   />
