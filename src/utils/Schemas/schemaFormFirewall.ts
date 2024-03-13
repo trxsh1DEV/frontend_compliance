@@ -10,7 +10,18 @@ export const schemaFirewall = z.object({
   enabled: z.boolean(),
   nextGeneration: OptionsBoolean,
   troughput: OptionsBoolean,
-  //
+  documentedRules: OptionsBoolean,
+  failOver: OptionsBoolean,
+  loadBalance: OptionsBoolean,
+  highAvailability: OptionsBoolean,
+  updateSo: OptionsBoolean,
+  monitoring: OptionsBoolean,
+  links: z.object({
+    qtde: z.number().min(1, "Firewall deve ter no mínimo um link"),
+    score: scoreType,
+  }),
+  vpn: OptionsBoolean,
+  license: OptionsBoolean,
   description: descriptionType,
   isEditable: z.boolean(),
   // manufacturer: z.enum([

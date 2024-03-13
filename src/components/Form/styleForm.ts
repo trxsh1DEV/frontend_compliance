@@ -25,11 +25,13 @@ export const MainContainer = styled.div`
 
 export const Container = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
+  flex: 1;
+  width: 100%;
   /* overflow: hidden; */
   max-width: 800px;
-  gap: 2rem;
+  gap: 1rem;
 `;
 
 export const Heading2 = styled.h2`

@@ -53,14 +53,14 @@ export const TextAreaStyle = styled.textarea<{ hasError: boolean }>`
     `}
 `;
 
-export const Label = styled.label`
+export const Label = styled.label<{ sizeWidth: string }>`
   color: gray;
   font-size: 2rem;
-  margin-bottom: 0.8rem;
-  width: 100%;
+  margin-bottom: 0.5rem;
+  height: 100%;
+  /* width: ${(props) => props.sizeWidth}; */
   text-align: center;
   letter-spacing: 0.12rem;
-  /* height: 50px; */
 `;
 
 export const InputContent = styled.div`
@@ -70,11 +70,12 @@ export const InputContent = styled.div`
   width: 100%;
   flex-direction: column;
   padding: 0.4rem;
+  /* background-color: red; */
 `;
 
 export const HelperText = styled.p`
   color: ${theme.colors.errorLight};
-  font-size: 1.2rem;
+  font-size: 1rem;
   padding-top: 0.5rem;
   width: 100%;
   text-align: center;
@@ -84,7 +85,11 @@ export const HelperText = styled.p`
 
 export const SwitchLabel = styled.label`
   position: relative;
-  margin-top: 0.8rem;
+  display: flex;
+  justify-content: center;
+  /* margin-top: 1.2rem; */
+  width: 100%;
+  /* min-width: 200px; */
 `;
 
 export const HiddenToggle = styled.input`

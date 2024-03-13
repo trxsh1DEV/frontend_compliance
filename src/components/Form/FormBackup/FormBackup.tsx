@@ -84,6 +84,7 @@ const FormBackup: FC<FormularyProps> = ({
                         onChange={(val: any) => field.onChange(val.value)}
                         styles={customStyles}
                         isDisabled={isEditMode() || !!isEnabled(0)}
+                        defaultValue={multipleOption[0]}
                       />
                     )}
                   />
@@ -122,6 +123,7 @@ const FormBackup: FC<FormularyProps> = ({
                         onChange={(val: any) => field.onChange(val.value)}
                         styles={customStyles}
                         isDisabled={isEditMode() || !!isEnabled(1)}
+                        defaultValue={multipleOption[0]}
                       />
                     )}
                   />

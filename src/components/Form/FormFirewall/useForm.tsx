@@ -63,12 +63,54 @@ const useFormulary = ({
         enabled: data?.troughput?.enabled || false,
         score: data?.troughput?.score || 1,
       },
+      documentedRules: {
+        enabled: data?.documentedRules?.enabled || false,
+        score: data?.documentedRules?.score || 1,
+      },
+      failOver: {
+        enabled: data?.failOver?.enabled || false,
+        score: data?.failOver?.score || 1,
+      },
+      loadBalance: {
+        enabled: data?.loadBalance?.enabled || false,
+        score: data?.loadBalance?.score || 1,
+      },
+      highAvailability: {
+        enabled: data?.highAvailability?.enabled || false,
+        score: data?.highAvailability?.score || 1,
+      },
+      monitoring: {
+        enabled: data?.monitoring?.enabled || false,
+        score: data?.monitoring?.score || 1,
+      },
+      links: {
+        qtde: data?.links?.qtde || 1,
+        score: data?.links?.score || 1,
+      },
+      vpn: {
+        enabled: data?.vpn?.enabled || false,
+        score: data?.vpn?.score || 1,
+      },
+      license: {
+        enabled: data?.license?.enabled || false,
+        score: data?.license?.score || 1,
+      },
     },
   });
 
   const haveFirewall = watch("enabled");
   const isEditable = watch("isEditable");
-  const fieldsEnabled = watch(["nextGeneration.enabled", "troughput.enabled"]);
+  const fieldsEnabled = watch([
+    "nextGeneration.enabled",
+    "troughput.enabled",
+    "documentedRules.enabled",
+    "failOver.enabled",
+    "loadBalance.enabled",
+    "highAvailability.enabled",
+    "monitoring.enabled",
+    "vpn.enabled",
+    "license.enabled",
+  ]);
 
   const isEnabled = (n: number) => !fieldsEnabled[n];
 
@@ -90,6 +132,8 @@ const useFormulary = ({
     }
     setFormValidate(false);
   }, [errors, haveFirewall]);
+
+  console.log(errors);
 
   return {
     handleFormSubmit,

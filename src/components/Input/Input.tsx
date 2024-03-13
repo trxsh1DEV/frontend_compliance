@@ -14,18 +14,28 @@ import {
 type inputProps = HTMLAttributes<HTMLInputElement> & {
   label?: string;
   helperText?: string;
+  sizeWidth?: string;
 };
 
 export const Input = forwardRef<HTMLInputElement, inputProps>(
   (
-    { type = "text", name = "", label = "", helperText = "", ...props },
+    {
+      type = "text",
+      name = "",
+      sizeWidth = "100%",
+      label = "\u00A0",
+      helperText = "",
+      ...props
+    },
     ref
   ) => {
     const inputId = useId();
     const hasError = helperText.length > 0;
     return (
       <InputContent>
-        <Label htmlFor={inputId}>{label}</Label>
+        <Label sizeWidth={sizeWidth} htmlFor={inputId}>
+          {label}
+        </Label>
         {type === "checkbox" ? (
           <SwitchLabel>
             <HiddenToggleChecked
