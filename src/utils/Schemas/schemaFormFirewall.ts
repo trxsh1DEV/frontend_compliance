@@ -1,10 +1,5 @@
 import { z } from "zod";
-import { descriptionType, scoreType } from "./genericForm";
-
-export const OptionsBoolean = z.object({
-  enabled: z.boolean(),
-  score: scoreType,
-});
+import { OptionsBoolean, descriptionType, scoreType } from "./genericForm";
 
 export const schemaFirewall = z.object({
   enabled: z.boolean(),
@@ -21,7 +16,12 @@ export const schemaFirewall = z.object({
     score: scoreType,
   }),
   vpn: OptionsBoolean,
-  license: OptionsBoolean,
+  license: z.object({
+    expired_at: z.coerce
+      .date()
+      .min(new Date(), "Data tem que ser maior que a atual"),
+    score: scoreType,
+  }),
   description: descriptionType,
   isEditable: z.boolean(),
   // manufacturer: z.enum([

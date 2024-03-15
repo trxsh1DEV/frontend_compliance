@@ -8,11 +8,10 @@ import { Input } from "../../Input/Input";
 import { FC } from "react";
 import useFormulary from "./useForm";
 import { FormularyProps } from "../../../types/typesForm";
-import { Button, FormHelperText } from "@mui/material";
-// import { Controller } from "react-hook-form";
+import { Button } from "@mui/material";
 import { TextArea } from "../../Input/TextArea";
 import { InputContent } from "../../Input/styles";
-import { Label } from "../../Input/styles";
+import { Label, HelperText } from "../../Input/styles";
 import { Controller } from "react-hook-form";
 import { customStyles, multipleOption } from "../../../utils/data/dataUtil";
 import ReactSelect from "react-select";
@@ -39,6 +38,12 @@ const FormFirewall: FC<FormularyProps> = ({
   } = useFormulary({ nextStep, previousStep, setFormValues, data, id });
 
   const isEditMode = () => (!!data && !isEditable ? true : false);
+
+  function updateProgressBar() {
+    // @ts-ignore
+    console.log(document?.querySelector('input[type="number"]'));
+  }
+  updateProgressBar();
 
   return (
     <>
@@ -86,9 +91,9 @@ const FormFirewall: FC<FormularyProps> = ({
                       />
                     )}
                   />
-                  <FormHelperText>
+                  <HelperText>
                     {errors.nextGeneration?.score?.message}
-                  </FormHelperText>
+                  </HelperText>
                 </InputContent>
               </Container>
 
@@ -116,9 +121,7 @@ const FormFirewall: FC<FormularyProps> = ({
                       />
                     )}
                   />
-                  <FormHelperText>
-                    {errors.troughput?.score?.message}
-                  </FormHelperText>
+                  <HelperText>{errors.troughput?.score?.message}</HelperText>
                 </InputContent>
               </Container>
 
@@ -128,7 +131,6 @@ const FormFirewall: FC<FormularyProps> = ({
                   type="checkbox"
                   helperText={errors.documentedRules?.enabled?.message}
                   label="Regras documentadas?"
-                  sizeWidth="170px"
                 />
                 <InputContent>
                   <Label htmlFor={"score-2"}>Maturidade</Label>
@@ -147,9 +149,9 @@ const FormFirewall: FC<FormularyProps> = ({
                       />
                     )}
                   />
-                  <FormHelperText>
+                  <HelperText>
                     {errors.documentedRules?.score?.message}
-                  </FormHelperText>
+                  </HelperText>
                 </InputContent>
               </Container>
 
@@ -159,7 +161,6 @@ const FormFirewall: FC<FormularyProps> = ({
                   type="checkbox"
                   helperText={errors.failOver?.enabled?.message}
                   label="Possui Fail Over?"
-                  sizeWidth="170px"
                 />
                 <InputContent>
                   <Label htmlFor={"score-3"}>Maturidade</Label>
@@ -178,9 +179,7 @@ const FormFirewall: FC<FormularyProps> = ({
                       />
                     )}
                   />
-                  <FormHelperText>
-                    {errors.failOver?.score?.message}
-                  </FormHelperText>
+                  <HelperText>{errors.failOver?.score?.message}</HelperText>
                 </InputContent>
               </Container>
 
@@ -190,7 +189,6 @@ const FormFirewall: FC<FormularyProps> = ({
                   type="checkbox"
                   helperText={errors.loadBalance?.enabled?.message}
                   label="Possui Load Balance?"
-                  sizeWidth="170px"
                 />
                 <InputContent>
                   <Label htmlFor={"score-4"}>Maturidade</Label>
@@ -209,9 +207,7 @@ const FormFirewall: FC<FormularyProps> = ({
                       />
                     )}
                   />
-                  <FormHelperText>
-                    {errors.loadBalance?.score?.message}
-                  </FormHelperText>
+                  <HelperText>{errors.loadBalance?.score?.message}</HelperText>
                 </InputContent>
               </Container>
 
@@ -221,7 +217,6 @@ const FormFirewall: FC<FormularyProps> = ({
                   type="checkbox"
                   helperText={errors.highAvailability?.enabled?.message}
                   label="Possui HA?"
-                  sizeWidth="170px"
                 />
                 <InputContent>
                   <Label htmlFor={"score-5"}>Maturidade</Label>
@@ -240,9 +235,9 @@ const FormFirewall: FC<FormularyProps> = ({
                       />
                     )}
                   />
-                  <FormHelperText>
+                  <HelperText>
                     {errors.highAvailability?.score?.message}
-                  </FormHelperText>
+                  </HelperText>
                 </InputContent>
               </Container>
 
@@ -251,44 +246,12 @@ const FormFirewall: FC<FormularyProps> = ({
                   {...register(`monitoring.enabled`)}
                   type="checkbox"
                   helperText={errors.monitoring?.enabled?.message}
-                  label="Possui Load Balance?"
-                  sizeWidth="170px"
-                />
-                <InputContent>
-                  <Label htmlFor={"score-5"}>Maturidade</Label>
-                  <Controller
-                    name="monitoring.score"
-                    control={control}
-                    render={({ field }) => (
-                      <ReactSelect
-                        name={field.name}
-                        inputId={"score-5"}
-                        options={multipleOption}
-                        onChange={(val: any) => field.onChange(val.value)}
-                        styles={customStyles}
-                        isDisabled={isEditMode() || isEnabled(5)}
-                        defaultValue={multipleOption[0]}
-                      />
-                    )}
-                  />
-                  <FormHelperText>
-                    {errors.monitoring?.score?.message}
-                  </FormHelperText>
-                </InputContent>
-              </Container>
-
-              <Container>
-                <Input
-                  {...register(`updateSo.enabled`)}
-                  type="checkbox"
-                  helperText={errors.updateSo?.enabled?.message}
-                  label="Possui Load Balance?"
-                  sizeWidth="170px"
+                  label="Possui Monitoramento?"
                 />
                 <InputContent>
                   <Label htmlFor={"score-6"}>Maturidade</Label>
                   <Controller
-                    name="updateSo.score"
+                    name="monitoring.score"
                     control={control}
                     render={({ field }) => (
                       <ReactSelect
@@ -302,9 +265,63 @@ const FormFirewall: FC<FormularyProps> = ({
                       />
                     )}
                   />
-                  <FormHelperText>
-                    {errors.updateSo?.score?.message}
-                  </FormHelperText>
+                  <HelperText>{errors.monitoring?.score?.message}</HelperText>
+                </InputContent>
+              </Container>
+
+              <Container>
+                <Input
+                  {...register(`updateSo.enabled`)}
+                  type="checkbox"
+                  helperText={errors.updateSo?.enabled?.message}
+                  label="SO/Firmware atualizados?"
+                />
+                <InputContent>
+                  <Label htmlFor={"score-7"}>Maturidade</Label>
+                  <Controller
+                    name="updateSo.score"
+                    control={control}
+                    render={({ field }) => (
+                      <ReactSelect
+                        name={field.name}
+                        inputId={"score-7"}
+                        options={multipleOption}
+                        onChange={(val: any) => field.onChange(val.value)}
+                        styles={customStyles}
+                        isDisabled={isEditMode() || isEnabled(7)}
+                        defaultValue={multipleOption[0]}
+                      />
+                    )}
+                  />
+                  <HelperText>{errors.updateSo?.score?.message}</HelperText>
+                </InputContent>
+              </Container>
+
+              <Container>
+                <Input
+                  {...register(`vpn.enabled`)}
+                  type="checkbox"
+                  helperText={errors.vpn?.enabled?.message}
+                  label="Possui VPN?"
+                />
+                <InputContent>
+                  <Label htmlFor={"score-8"}>Maturidade</Label>
+                  <Controller
+                    name="vpn.score"
+                    control={control}
+                    render={({ field }) => (
+                      <ReactSelect
+                        name={field.name}
+                        inputId={"score-8"}
+                        options={multipleOption}
+                        onChange={(val: any) => field.onChange(val.value)}
+                        styles={customStyles}
+                        isDisabled={isEditMode() || isEnabled(8)}
+                        defaultValue={multipleOption[0]}
+                      />
+                    )}
+                  />
+                  <HelperText>{errors.updateSo?.score?.message}</HelperText>
                 </InputContent>
               </Container>
 
@@ -316,7 +333,6 @@ const FormFirewall: FC<FormularyProps> = ({
                   type="number"
                   helperText={errors.links?.qtde?.message}
                   label="Links (Qtd)?"
-                  sizeWidth="170px"
                 />
                 <InputContent>
                   <Label htmlFor={"score-7"}>Maturidade</Label>
@@ -335,11 +351,42 @@ const FormFirewall: FC<FormularyProps> = ({
                       />
                     )}
                   />
-                  <FormHelperText>
-                    {errors.links?.score?.message}
-                  </FormHelperText>
+                  <HelperText>{errors.links?.score?.message}</HelperText>
                 </InputContent>
               </Container>
+
+              <Container>
+                <Input
+                  {...register(`license.expired_at`)}
+                  type="date"
+                  min={new Date().toLocaleDateString("en-CA")}
+                  helperText={errors.license?.expired_at?.message}
+                  label="Licença (Expira em)?"
+                />
+                <InputContent>
+                  <Label htmlFor={"score-7"}>Maturidade</Label>
+                  <Controller
+                    name="license.score"
+                    control={control}
+                    render={({ field }) => (
+                      <ReactSelect
+                        name={field.name}
+                        inputId={"score-7"}
+                        options={multipleOption}
+                        onChange={(val: any) => field.onChange(val.value)}
+                        styles={customStyles}
+                        isDisabled={isEditMode()}
+                        defaultValue={multipleOption[0]}
+                      />
+                    )}
+                  />
+                  <HelperText>{errors.links?.score?.message}</HelperText>
+                </InputContent>
+              </Container>
+
+              {/* <ProgressBar>
+                <Progress style={{ backgroundColor: updateProgressBar(), width: `${Math.min((daysRemaining / totalDays) * 100, 100) * 4}px` }} />
+            </ProgressBar> */}
 
               <Container>
                 <TextArea

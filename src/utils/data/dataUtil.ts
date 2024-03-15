@@ -27,7 +27,9 @@ export const customStyles = {
   }),
   option: (provided: any, state: any) => ({
     ...provided,
-    backgroundColor: state.isFocused ? "#0799b3" : "#343434",
+    backgroundColor: state.isFocused ? "#0799b3" : "transparent",
+    // backgroundColor: "transparent",
+    cursor: "pointer",
   }),
   singleValue: (provided: any) => ({
     ...provided,

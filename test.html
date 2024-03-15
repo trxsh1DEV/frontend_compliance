@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculadora de Data de Expiração</title>
+    <style>
+      .progress-bar {
+        width: 100%;
+        max-width: 400px;
+        height: 20px;
+        background-color: #ddd;
+        border-radius: 5px;
+        margin-top: 10px;
+      }
+
+      .progress {
+        height: 100%;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <label for="exp-date">Data de Expiração:</label>
+    <input type="date" id="exp-date" name="exp-date" />
+    <div class="progress-bar">
+      <div class="progress" id="progress"></div>
+    </div>
+
+    <script>
+      function updateProgressBar() {
+        var expDate = new Date(document.getElementById("exp-date").value);
+        console.log(new Date().getDate() + 1);
+        console.log(new Date().toLocaleDateString("en-CA"));
+        var currentDate = new Date();
+        var daysRemaining = Math.ceil(
+          (expDate - currentDate) / (1000 * 60 * 60 * 24)
+        );
+        var progress = document.getElementById("progress");
+
+        var totalDays = Math.ceil(
+          (expDate - new Date(expDate.getFullYear(), 0, 1)) /
+            (1000 * 60 * 60 * 24)
+        );
+        var remainingPercentage = (daysRemaining / totalDays) * 100;
+
+        if (daysRemaining <= 30) {
+          progress.style.backgroundColor = "red";
+        } else if (daysRemaining <= 183) {
+          // Menos de 6 meses
+          var green = 255;
+          var red = Math.round((255 * (183 - daysRemaining)) / 183);
+          progress.style.backgroundColor = "rgb(" + red + "," + green + ",0)";
+        } else {
+          progress.style.backgroundColor = "green";
+        }
+
+        var width = Math.min(remainingPercentage, 100) * 4; // 400px correspondendo a 100%
+        progress.style.width = width + "px";
+      }
+
+      document
+        .getElementById("exp-date")
+        .addEventListener("change", updateProgressBar);
+    </script>
+  </body>
+</html>

@@ -8,13 +8,11 @@ import { Input } from "../../Input/Input";
 import { FC } from "react";
 import useFormulary from "./useForm";
 import { FormularyProps } from "../../../types/typesForm";
-import { Button, FormHelperText, MenuItem, Select } from "@mui/material";
+import { Button } from "@mui/material";
 import { Controller } from "react-hook-form";
-import {
-  dataSecurityGPO,
-  dataEnumNoneToAll,
-} from "../../../utils/data/dataUtil";
-import { TextArea } from "../../Input/TextArea";
+import { multipleOption, customStyles } from "../../../utils/data/dataUtil";
+import { InputContent, Label, HelperText } from "../../Input/styles";
+import ReactSelect from "react-select";
 
 const FormSecurity: FC<FormularyProps> = ({
   nextStep,
@@ -31,6 +29,7 @@ const FormSecurity: FC<FormularyProps> = ({
     handleSubmit,
     register,
     formValidate,
+    isEnabled,
     control,
     isEditable,
     haveSecurity,
@@ -53,104 +52,234 @@ const FormSecurity: FC<FormularyProps> = ({
             <>
               <Container>
                 <Input
-                  {...register(`accessAuditing`)}
-                  helperText={errors?.accessAuditing?.message}
-                  label="Auditoria de acessos?"
+                  {...register(`antivirus.enabled`)}
                   type="checkbox"
-                  disabled={isEditMode()}
+                  helperText={errors.antivirus?.enabled?.message}
+                  label="Possui Antivirus?"
                 />
-                <Input
-                  {...register(`policyPassword`)}
-                  helperText={errors?.policyPassword?.message}
-                  label="Política de senha?"
-                  type="checkbox"
-                  disabled={isEditMode()}
-                />
-                <Input
-                  {...register(`lgpd`)}
-                  helperText={errors?.lgpd?.message}
-                  label="De acordo com a LGPD?"
-                  type="checkbox"
-                  disabled={isEditMode()}
-                />
-              </Container>
-
-              <Container>
-                <label id="gpo">Maturidade de GPO</label>
-                <Controller
-                  name="gpo"
-                  control={control}
-                  render={({ field }) => (
-                    <Select
-                      labelId="gpo"
-                      value={field.value}
-                      onChange={(e: any) => field.onChange(e.target.value)}
-                      sx={{
-                        color: "#fff",
-                        fontSize: "16px",
-                      }}
-                    >
-                      {dataSecurityGPO.map((item) => (
-                        <MenuItem
-                          className="menuItem"
-                          value={`${item}`}
-                          disabled={isEditMode()}
-                        >
-                          {item}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  )}
-                />
-                <FormHelperText>{errors?.gpo?.message}</FormHelperText>
-
-                <label id="antivirus">Antivirus nos terminais</label>
-                <Controller
-                  name="antivirus"
-                  control={control}
-                  render={({ field }) => (
-                    <Select
-                      labelId="antivirus"
-                      value={field.value}
-                      onChange={(e: any) => field.onChange(e.target.value)}
-                      sx={{
-                        color: "#fff",
-                        fontSize: "16px",
-                      }}
-                    >
-                      {dataEnumNoneToAll.map((item) => (
-                        <MenuItem
-                          className="menuItem"
-                          value={`${item}`}
-                          disabled={isEditMode()}
-                        >
-                          {item}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  )}
-                />
-                <FormHelperText>{errors?.antivirus?.message}</FormHelperText>
+                <InputContent>
+                  <Label htmlFor={"score-0"}>Maturidade</Label>
+                  <Controller
+                    name="antivirus.score"
+                    control={control}
+                    render={({ field }) => (
+                      <ReactSelect
+                        name={field.name}
+                        inputId={"score-0"}
+                        options={multipleOption}
+                        onChange={(val: any) => field.onChange(val.value)}
+                        styles={customStyles}
+                        isDisabled={isEditMode() || isEnabled(0)}
+                        defaultValue={multipleOption[0]}
+                      />
+                    )}
+                  />
+                  <HelperText>{errors.antivirus?.score?.message}</HelperText>
+                </InputContent>
               </Container>
 
               <Container>
                 <Input
-                  {...register(`score`, {
-                    valueAsNumber: true,
-                  })}
-                  type="number"
-                  helperText={errors?.score?.message}
-                  label="Pontuação (Score)"
-                  disabled={isEditMode()}
+                  {...register(`firewall.enabled`)}
+                  type="checkbox"
+                  helperText={errors.firewall?.enabled?.message}
+                  label="Possui firewall?"
                 />
+                <InputContent>
+                  <Label htmlFor={"score-1"}>Maturidade</Label>
+                  <Controller
+                    name="firewall.score"
+                    control={control}
+                    render={({ field }) => (
+                      <ReactSelect
+                        name={field.name}
+                        inputId={"score-1"}
+                        options={multipleOption}
+                        onChange={(val: any) => field.onChange(val.value)}
+                        styles={customStyles}
+                        isDisabled={isEditMode() || isEnabled(1)}
+                        defaultValue={multipleOption[0]}
+                      />
+                    )}
+                  />
+                  <HelperText>{errors.firewall?.score?.message}</HelperText>
+                </InputContent>
+              </Container>
 
-                <TextArea
-                  {...register(`description`)}
-                  helperText={errors?.description?.message}
-                  label="Descrição"
-                  placeholder="Descrição"
-                  disabled={isEditMode()}
+              <Container>
+                <Input
+                  {...register(`policy_password.enabled`)}
+                  type="checkbox"
+                  helperText={errors.policy_password?.enabled?.message}
+                  label="Políticas de senha"
                 />
+                <InputContent>
+                  <Label htmlFor={"score-2"}>Maturidade</Label>
+                  <Controller
+                    name="policy_password.score"
+                    control={control}
+                    render={({ field }) => (
+                      <ReactSelect
+                        name={field.name}
+                        inputId={"score-2"}
+                        options={multipleOption}
+                        onChange={(val: any) => field.onChange(val.value)}
+                        styles={customStyles}
+                        isDisabled={isEditMode() || isEnabled(2)}
+                        defaultValue={multipleOption[0]}
+                      />
+                    )}
+                  />
+                  <HelperText>
+                    {errors.policy_password?.score?.message}
+                  </HelperText>
+                </InputContent>
+              </Container>
+
+              <Container>
+                <Input
+                  {...register(`identity_management.enabled`)}
+                  type="checkbox"
+                  helperText={errors.identity_management?.enabled?.message}
+                  label="Gestão de identidade"
+                />
+                <InputContent>
+                  <Label htmlFor={"score-3"}>Maturidade</Label>
+                  <Controller
+                    name="identity_management.score"
+                    control={control}
+                    render={({ field }) => (
+                      <ReactSelect
+                        name={field.name}
+                        inputId={"score-3"}
+                        options={multipleOption}
+                        onChange={(val: any) => field.onChange(val.value)}
+                        styles={customStyles}
+                        isDisabled={isEditMode() || isEnabled(3)}
+                        defaultValue={multipleOption[0]}
+                      />
+                    )}
+                  />
+                  <HelperText>
+                    {errors.identity_management?.score?.message}
+                  </HelperText>
+                </InputContent>
+              </Container>
+
+              <Container>
+                <Input
+                  {...register(`mfa.enabled`)}
+                  type="checkbox"
+                  helperText={errors.mfa?.enabled?.message}
+                  label="Possui MFA?"
+                />
+                <InputContent>
+                  <Label htmlFor={"score-4"}>Maturidade</Label>
+                  <Controller
+                    name="mfa.score"
+                    control={control}
+                    render={({ field }) => (
+                      <ReactSelect
+                        name={field.name}
+                        inputId={"score-4"}
+                        options={multipleOption}
+                        onChange={(val: any) => field.onChange(val.value)}
+                        styles={customStyles}
+                        isDisabled={isEditMode() || isEnabled(4)}
+                        defaultValue={multipleOption[0]}
+                      />
+                    )}
+                  />
+                  <HelperText>{errors.mfa?.score?.message}</HelperText>
+                </InputContent>
+              </Container>
+
+              <Container>
+                <Input
+                  {...register(`antispam.enabled`)}
+                  type="checkbox"
+                  helperText={errors.antispam?.enabled?.message}
+                  label="Gestão de identidade"
+                />
+                <InputContent>
+                  <Label htmlFor={"score-5"}>Maturidade</Label>
+                  <Controller
+                    name="antispam.score"
+                    control={control}
+                    render={({ field }) => (
+                      <ReactSelect
+                        name={field.name}
+                        inputId={"score-5"}
+                        options={multipleOption}
+                        onChange={(val: any) => field.onChange(val.value)}
+                        styles={customStyles}
+                        isDisabled={isEditMode() || isEnabled(5)}
+                        defaultValue={multipleOption[0]}
+                      />
+                    )}
+                  />
+                  <HelperText>{errors.antispam?.score?.message}</HelperText>
+                </InputContent>
+              </Container>
+
+              <Container>
+                <Input
+                  {...register(`access_control.enabled`)}
+                  type="checkbox"
+                  helperText={errors.access_control?.enabled?.message}
+                  label="Controle de acesso"
+                />
+                <InputContent>
+                  <Label htmlFor={"score-6"}>Maturidade</Label>
+                  <Controller
+                    name="access_control.score"
+                    control={control}
+                    render={({ field }) => (
+                      <ReactSelect
+                        name={field.name}
+                        inputId={"score-6"}
+                        options={multipleOption}
+                        onChange={(val: any) => field.onChange(val.value)}
+                        styles={customStyles}
+                        isDisabled={isEditMode() || isEnabled(6)}
+                        defaultValue={multipleOption[0]}
+                      />
+                    )}
+                  />
+                  <HelperText>
+                    {errors.access_control?.score?.message}
+                  </HelperText>
+                </InputContent>
+              </Container>
+
+              <Container>
+                <Input
+                  {...register(`network_segmentation.enabled`)}
+                  type="checkbox"
+                  helperText={errors.network_segmentation?.enabled?.message}
+                  label="Segmentação de redes"
+                />
+                <InputContent>
+                  <Label htmlFor={"score-7"}>Maturidade</Label>
+                  <Controller
+                    name="network_segmentation.score"
+                    control={control}
+                    render={({ field }) => (
+                      <ReactSelect
+                        name={field.name}
+                        inputId={"score-7"}
+                        options={multipleOption}
+                        onChange={(val: any) => field.onChange(val.value)}
+                        styles={customStyles}
+                        isDisabled={isEditMode() || isEnabled(7)}
+                        defaultValue={multipleOption[0]}
+                      />
+                    )}
+                  />
+                  <HelperText>
+                    {errors.network_segmentation?.score?.message}
+                  </HelperText>
+                </InputContent>
               </Container>
 
               {data && (

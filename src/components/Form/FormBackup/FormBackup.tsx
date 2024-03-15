@@ -8,9 +8,9 @@ import { Input } from "../../Input/Input";
 import { FC } from "react";
 import useFormulary from "./useFormulary";
 import { FormularyProps } from "../../../types/typesForm";
-import { Button, FormHelperText } from "@mui/material";
+import { Button } from "@mui/material";
 import { TextArea } from "../../Input/TextArea";
-import { InputContent, Label } from "../../Input/styles";
+import { HelperText, InputContent, Label } from "../../Input/styles";
 import { Controller } from "react-hook-form";
 import ReactSelect from "react-select";
 import { customStyles, multipleOption } from "../../../utils/data/dataUtil";
@@ -88,9 +88,9 @@ const FormBackup: FC<FormularyProps> = ({
                       />
                     )}
                   />
-                  <FormHelperText>
+                  <HelperText>
                     {errors.backup?.storage?.local?.message}
-                  </FormHelperText>
+                  </HelperText>
                 </InputContent>
                 <Input
                   {...register(`backup.storage.local.enabled`)}
@@ -127,9 +127,9 @@ const FormBackup: FC<FormularyProps> = ({
                       />
                     )}
                   />
-                  <FormHelperText>
+                  <HelperText>
                     {errors.backup?.storage?.remote?.message}
-                  </FormHelperText>
+                  </HelperText>
                 </InputContent>
                 <Input
                   {...register(`backup.storage.remote.enabled`)}

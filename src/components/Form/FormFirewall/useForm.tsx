@@ -87,12 +87,17 @@ const useFormulary = ({
         qtde: data?.links?.qtde || 1,
         score: data?.links?.score || 1,
       },
+      updateSo: {
+        enabled: data?.vpn?.enabled || false,
+        score: data?.vpn?.score || 1,
+      },
       vpn: {
         enabled: data?.vpn?.enabled || false,
         score: data?.vpn?.score || 1,
       },
       license: {
-        enabled: data?.license?.enabled || false,
+        expired_at:
+          data?.license?.expired_at || new Date().toLocaleDateString("en-CA"),
         score: data?.license?.score || 1,
       },
     },
@@ -108,8 +113,8 @@ const useFormulary = ({
     "loadBalance.enabled",
     "highAvailability.enabled",
     "monitoring.enabled",
+    "updateSo.enabled",
     "vpn.enabled",
-    "license.enabled",
   ]);
 
   const isEnabled = (n: number) => !fieldsEnabled[n];

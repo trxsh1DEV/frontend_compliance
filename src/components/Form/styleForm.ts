@@ -46,3 +46,17 @@ export const ButtonContent = styled.div`
   justify-content: center;
   gap: 2rem;
 `;
+
+export const ProgressBar = styled.div`
+  width: 100%;
+  max-width: 400px;
+  height: 20px;
+  background-color: #ddd;
+  border-radius: 5px;
+  margin-top: 10px;
+`;
+
+export const Progress = styled.div`
+  height: 100%;
+  border-radius: 5px;
+`;

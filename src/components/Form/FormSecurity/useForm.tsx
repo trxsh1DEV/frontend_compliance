@@ -52,20 +52,59 @@ const useFormulary = ({
     criteriaMode: "all",
     resolver: zodResolver(schemaSecurity),
     defaultValues: {
-      accessAuditing: data?.accessAuditing || false,
-      antivirus: data?.antivirus || "None",
-      gpo: data?.gpo || "Nenhuma",
-      lgpd: data?.lgpd || false,
-      policyPassword: data?.policyPassword || false,
+      antivirus: {
+        enabled: data?.antivirus.enabled || false,
+        score: data?.antivirus.score || 1,
+      },
+      firewall: {
+        enabled: data?.firewall.enabled || false,
+        score: data?.firewall.score || 1,
+      },
+      policy_password: {
+        enabled: data?.policy_password.enabled || false,
+        score: data?.policy_password.score || 1,
+      },
+      identity_management: {
+        enabled: data?.identity_management.enabled || false,
+        score: data?.identity_management.score || 1,
+      },
+
+      mfa: {
+        enabled: data?.mfa.enabled || false,
+        score: data?.mfa.score || 1,
+      },
+      antispam: {
+        enabled: data?.antispam.enabled || false,
+        score: data?.antispam.score || 1,
+      },
+      access_control: {
+        enabled: data?.access_control.enabled || false,
+        score: data?.access_control.score || 1,
+      },
+      network_segmentation: {
+        enabled: data?.network_segmentation.enabled || false,
+        score: data?.network_segmentation.score || 1,
+      },
       description: data?.description || "",
       enabled: data?.enabled || false,
       isEditable: data?.isEditable || false,
-      score: data?.score || 0,
     },
   });
 
   const haveSecurity = watch("enabled");
   const isEditable = watch("isEditable");
+  const fieldsEnabled = watch([
+    "antivirus.enabled",
+    "firewall.enabled",
+    "policy_password.enabled",
+    "identity_management.enabled",
+    "mfa.enabled",
+    "antispam.enabled",
+    "access_control.enabled",
+    "network_segmentation.enabled",
+  ]);
+
+  const isEnabled = (n: number) => !fieldsEnabled[n];
 
   useEffect(() => {
     setFocus("description");
@@ -97,6 +136,7 @@ const useFormulary = ({
     control,
     isEditable,
     haveSecurity,
+    isEnabled,
   };
 };
 
