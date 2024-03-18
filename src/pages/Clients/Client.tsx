@@ -117,18 +117,6 @@ export default function Client() {
               </ArticleStyled>
             </ContentGrid>
             <ContentGrid>
-              <h3>High Available</h3>
-              <ArticleStyled>
-                Pontuação - <Bold>{compliance.ha.points}%</Bold>
-                <WrapperAvailable>
-                  O que avaliamos? Monitoramento, Hardware, e Sistema
-                  operacional.
-                </WrapperAvailable>
-                <Paragrafh>Descrição: {compliance.ha.description}.</Paragrafh>
-                <div onClick={() => handleDetails("ha")}>Veja mais!</div>
-              </ArticleStyled>
-            </ContentGrid>
-            <ContentGrid>
               <h3>Firewall</h3>
               <ArticleStyled>
                 Pontuação - <Bold>{compliance.firewall.points}%</Bold>
@@ -143,20 +131,6 @@ export default function Client() {
               </ArticleStyled>
             </ContentGrid>
             <ContentGrid>
-              <h3>Inventário</h3>
-              <ArticleStyled>
-                Pontuação - <Bold>{compliance.inventory.points}%</Bold>
-                <WrapperAvailable>
-                  O que avaliamos? Dispositivos (Computadores, notebooks...),
-                  Contatos e Agent
-                </WrapperAvailable>
-                <Paragrafh>
-                  Descrição: {compliance.inventory.description}.
-                </Paragrafh>
-                <div onClick={() => handleDetails("inventory")}>Veja mais!</div>
-              </ArticleStyled>
-            </ContentGrid>
-            <ContentGrid>
               <h3>Segurança</h3>
               <ArticleStyled>
                 Pontuação - <Bold>{compliance.security.points}%</Bold>
@@ -168,21 +142,6 @@ export default function Client() {
                   Descrição: {compliance.security.description}.
                 </Paragrafh>
                 <div onClick={() => handleDetails("security")}>Veja mais!</div>
-              </ArticleStyled>
-            </ContentGrid>
-            <ContentGrid>
-              <h3>Serviços Outsourcing</h3>
-              <ArticleStyled>
-                Pontuação -{" "}
-                <Bold>{compliance.servicesOutsourcing.points}%</Bold>
-                <WrapperAvailable>
-                  O que avaliamos? E-mail, File Server, Intranet, ERP, Banco de
-                  dados, Servidores...
-                </WrapperAvailable>
-                <Paragrafh>
-                  Descrição: {compliance.servicesOutsourcing.description}.
-                </Paragrafh>
-                <div onClick={() => handleDetails("services")}>Veja mais!</div>
               </ArticleStyled>
             </ContentGrid>
           </WrapperGrid>

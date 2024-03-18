@@ -1,4 +1,5 @@
 import { useEffect, useState } from "preact/hooks";
+import { NavLink } from "react-router-dom";
 import requestWithToken from "../../utils/auth/requestApi";
 import {
   BottomContainer,
@@ -12,7 +13,11 @@ import {
   Paragrafh,
   ArticleStyled,
   DivButton,
+  Table,
+  Th,
+  Td,
 } from "./styled";
+import GaugeChart from "react-gauge-chart";
 
 export default function Compliance() {
   // const location = useLocation();
@@ -40,12 +45,90 @@ export default function Compliance() {
   return (
     <>
       <MainContainer>
-        <TopContainer></TopContainer>
+        <TopContainer>
+          <div style={{ width: "45%" }}>
+            <GaugeChart
+              nrOfLevels={30}
+              colors={["#FF5F6D", "#7DDA58"]}
+              arcWidth={0.3}
+              percent={
+                compliance.totalScore <= 0 ? 0.65 : compliance.totalScore / 100
+              }
+            />
+            <div
+              style={{
+                textAlign: "center",
+                fontSize: "3rem",
+              }}
+            >
+              650/1000 pontos
+            </div>
+          </div>
+          <div>
+            <Table>
+              <thead>
+                <tr>
+                  <Th>Ação a ser melhorada</Th>
+                  <Th>Relevância</Th>
+                  <Th>Pontuação Atual</Th>
+                  <Th>Categoria</Th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <Td>VPN</Td>
+                  <Td>Média</Td>
+                  <Td>Baixa</Td>
+                  <Td>Firewall</Td>
+                </tr>
+                <tr>
+                  <Td>Memória</Td>
+                  <Td>Média</Td>
+                  <Td>Baixa</Td>
+                  <Td>Servidor</Td>
+                </tr>
+                <tr>
+                  <Td>Backup Remoto</Td>
+                  <Td>Alta</Td>
+                  <Td>Baixa</Td>
+                  <Td>Backup</Td>
+                </tr>
+
+                <tr>
+                  <Td>Possui antivirus</Td>
+                  <Td>Alta</Td>
+                  <Td>Baixa</Td>
+                  <Td>Segurança da Informação</Td>
+                </tr>
+
+                <tr>
+                  <Td>Possui antivirus</Td>
+                  <Td>Alta</Td>
+                  <Td>Baixa</Td>
+                  <Td>Segurança da Informação</Td>
+                </tr>
+                <tr>
+                  <Td>Possui antivirus</Td>
+                  <Td>Alta</Td>
+                  <Td>Baixa</Td>
+                  <Td>Segurança da Informação</Td>
+                </tr>
+                <tr>
+                  <Td>Possui antivirus</Td>
+                  <Td>Alta</Td>
+                  <Td>Baixa</Td>
+                  <Td>Segurança da Informação</Td>
+                </tr>
+              </tbody>
+            </Table>
+            <NavLink>Veja mais possíveis melhorias</NavLink>
+          </div>
+        </TopContainer>
         {/* <CenterContainer>asdas</CenterContainer> */}
         <BottomContainer>
           <h1 style={{ textAlign: "center" }}>
             Pontuação Total -{" "}
-            {compliance.totalScore <= 0 ? "N/A" : compliance.totalScore}%
+            {compliance.totalScore <= 0 ? 0 : compliance.totalScore}%
           </h1>
           <WrapperGrid>
             <ContentGrid>
@@ -77,18 +160,6 @@ export default function Compliance() {
               </ArticleStyled>
             </ContentGrid>
             <ContentGrid>
-              <h3>High Available</h3>
-              <ArticleStyled>
-                Pontuação - <Bold>{compliance.ha.points}%</Bold>
-                <WrapperAvailable>
-                  O que avaliamos? Monitoramento, Hardware, e Sistema
-                  operacional.
-                </WrapperAvailable>
-                <Paragrafh>Descrição: {compliance.ha.description}.</Paragrafh>
-                <DivButton>Veja mais!</DivButton>
-              </ArticleStyled>
-            </ContentGrid>
-            <ContentGrid>
               <h3>Firewall</h3>
               <ArticleStyled>
                 Pontuação - <Bold>{compliance.firewall.points}%</Bold>
@@ -102,7 +173,7 @@ export default function Compliance() {
                 <DivButton>Veja mais!</DivButton>
               </ArticleStyled>
             </ContentGrid>
-            <ContentGrid>
+            {/* <ContentGrid>
               <h3>Inventário</h3>
               <ArticleStyled>
                 Pontuação - <Bold>{compliance.inventory.points}%</Bold>
@@ -115,7 +186,7 @@ export default function Compliance() {
                 </Paragrafh>
                 <DivButton>Veja mais!</DivButton>
               </ArticleStyled>
-            </ContentGrid>
+            </ContentGrid> */}
             <ContentGrid>
               <h3>Segurança</h3>
               <ArticleStyled>
@@ -126,21 +197,6 @@ export default function Compliance() {
                 </WrapperAvailable>
                 <Paragrafh>
                   Descrição: {compliance.security.description}.
-                </Paragrafh>
-                <DivButton>Veja mais!</DivButton>
-              </ArticleStyled>
-            </ContentGrid>
-            <ContentGrid>
-              <h3>Serviços Outsourcing</h3>
-              <ArticleStyled>
-                Pontuação -{" "}
-                <Bold>{compliance.servicesOutsourcing.points}%</Bold>
-                <WrapperAvailable>
-                  O que avaliamos? E-mail, File Server, Intranet, ERP, Banco de
-                  dados, Servidores...
-                </WrapperAvailable>
-                <Paragrafh>
-                  Descrição: {compliance.servicesOutsourcing.description}.
                 </Paragrafh>
                 <DivButton>Veja mais!</DivButton>
               </ArticleStyled>

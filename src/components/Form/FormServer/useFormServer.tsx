@@ -55,7 +55,7 @@ const useFormulary = ({
         servers: data?.server?.servers?.map((item) => {
           return {
             hostname: item?.hostname || {
-              text: item?.hostname?.text || "",
+              label: item?.hostname?.label || "",
               score: item?.hostname?.score || 0,
             },
             memory: item?.memory || {
@@ -63,7 +63,7 @@ const useFormulary = ({
               score: item?.memory?.score || 0,
             },
             processor: item?.processor || {
-              text: item?.processor?.text || "",
+              label: item?.processor?.label || "",
               score: item?.processor?.score || 0,
             },
             storage: item?.storage || {
@@ -163,7 +163,7 @@ const useFormulary = ({
   };
 
   const setAutoFocus = (index: number) => {
-    setFocus(`server.servers.${index}.hostname.text`);
+    setFocus(`server.servers.${index}.hostname.label`);
   };
 
   return {

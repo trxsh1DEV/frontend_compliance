@@ -16,7 +16,7 @@ export const OptionsBoolean = z.object({
 });
 
 export const OptionsString = z.object({
-  text: z.string().min(3, "Deve conter mais de 3 caracteres"),
+  label: z.string().min(3, "Deve conter mais de 3 caracteres"),
   score: scoreType,
 });
 

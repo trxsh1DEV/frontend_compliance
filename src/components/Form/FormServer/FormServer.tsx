@@ -61,9 +61,10 @@ const FormServer: FC<FormularyProps> = ({
                 <div key={item.id}>
                   <Container>
                     <Input
-                      {...register(`server.servers.${index}.hostname.text`)}
+                      {...register(`server.servers.${index}.hostname.label`)}
                       helperText={
-                        errors.server?.servers?.[index]?.hostname?.text?.message
+                        errors.server?.servers?.[index]?.hostname?.label
+                          ?.message
                       }
                       label="Hostname"
                     />
@@ -133,9 +134,9 @@ const FormServer: FC<FormularyProps> = ({
 
                   <Container>
                     <Input
-                      {...register(`server.servers.${index}.processor.text`)}
+                      {...register(`server.servers.${index}.processor.label`)}
                       helperText={
-                        errors.server?.servers?.[index]?.processor?.text
+                        errors.server?.servers?.[index]?.processor?.label
                           ?.message
                       }
                       label="Qual Processador/CPU?"
@@ -603,7 +604,7 @@ const FormServer: FC<FormularyProps> = ({
                     },
                     hostname: {
                       score: 0,
-                      text: "",
+                      label: "",
                     },
                     license_so: {
                       enabled: false,
@@ -614,7 +615,7 @@ const FormServer: FC<FormularyProps> = ({
                       score: 0,
                     },
                     processor: {
-                      text: "",
+                      label: "",
                       score: 0,
                     },
                     raid: {

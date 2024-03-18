@@ -28,7 +28,8 @@ export default function ServiceLevelAgreement() {
       {urlData && (
         <ContainerFull>
           <iframe
-            src={`${urlData.urls.url_sla}&action=embedview`}
+            src={`${urlData.urls.url_agreement}&action=embedview`}
+            // src={`${urlData.urls.url_sla}&action=embedview`}
             width="100%"
             height="100%"
             frameborder="0"

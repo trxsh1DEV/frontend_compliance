@@ -7,7 +7,7 @@ import requestWithToken from "../../utils/auth/requestApi";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { schemaRegister } from "../../utils/Schemas/schemaFormRegister";
-import { useEffect } from "preact/hooks";
+import { useEffect, useRef } from "preact/hooks";
 
 type formRegisterType = z.infer<typeof schemaRegister>;
 
@@ -36,19 +36,23 @@ const RegisterForm = () => {
     },
   });
 
+  const focusName = useRef(false);
+
   const onSubmit = async (data: any) => {
     try {
       await requestWithToken.post("admin/clients", data);
       reset();
+      focusName.current = !focusName.current;
       toast.success("Cliente cadastrado com sucesso!");
     } catch (err: any) {
       console.log(err.response.data.errors[0]);
       toast.error(`Erro ao cadastrar cliente: ${err.message}`);
     }
   };
+
   useEffect(() => {
     setFocus("name");
-  }, [onSubmit]);
+  }, [reset]);
 
   return (
     <>

@@ -7,7 +7,9 @@ export const PrivateRoute = ({ element }: any) => {
 
 export const AdminRoute = ({ element }: any) => {
   // Verifica se o usuário está autenticado e tem a role de admin
-  const isAuthenticatedAdmin = UserService.hasRole(["app-admin"]);
+  const isAuthenticatedAdmin = UserService.isLoggedIn()
+    ? UserService.hasRole(["app-admin"])
+    : UserService.doLogin();
 
   return isAuthenticatedAdmin ? element : <Navigate to="/unauthorized" />;
 };

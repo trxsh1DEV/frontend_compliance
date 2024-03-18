@@ -271,15 +271,15 @@ const FormFirewall: FC<FormularyProps> = ({
 
               <Container>
                 <Input
-                  {...register(`updateSo.enabled`)}
+                  {...register(`vpn.enabled`)}
                   type="checkbox"
-                  helperText={errors.updateSo?.enabled?.message}
-                  label="SO/Firmware atualizados?"
+                  helperText={errors.vpn?.enabled?.message}
+                  label="Possui VPN?"
                 />
                 <InputContent>
                   <Label htmlFor={"score-7"}>Maturidade</Label>
                   <Controller
-                    name="updateSo.score"
+                    name="vpn.score"
                     control={control}
                     render={({ field }) => (
                       <ReactSelect
@@ -293,35 +293,7 @@ const FormFirewall: FC<FormularyProps> = ({
                       />
                     )}
                   />
-                  <HelperText>{errors.updateSo?.score?.message}</HelperText>
-                </InputContent>
-              </Container>
-
-              <Container>
-                <Input
-                  {...register(`vpn.enabled`)}
-                  type="checkbox"
-                  helperText={errors.vpn?.enabled?.message}
-                  label="Possui VPN?"
-                />
-                <InputContent>
-                  <Label htmlFor={"score-8"}>Maturidade</Label>
-                  <Controller
-                    name="vpn.score"
-                    control={control}
-                    render={({ field }) => (
-                      <ReactSelect
-                        name={field.name}
-                        inputId={"score-8"}
-                        options={multipleOption}
-                        onChange={(val: any) => field.onChange(val.value)}
-                        styles={customStyles}
-                        isDisabled={isEditMode() || isEnabled(8)}
-                        defaultValue={multipleOption[0]}
-                      />
-                    )}
-                  />
-                  <HelperText>{errors.updateSo?.score?.message}</HelperText>
+                  <HelperText>{errors.vpn?.score?.message}</HelperText>
                 </InputContent>
               </Container>
 
@@ -335,14 +307,14 @@ const FormFirewall: FC<FormularyProps> = ({
                   label="Links (Qtd)?"
                 />
                 <InputContent>
-                  <Label htmlFor={"score-7"}>Maturidade</Label>
+                  <Label htmlFor={"score-8"}>Maturidade</Label>
                   <Controller
                     name="links.score"
                     control={control}
                     render={({ field }) => (
                       <ReactSelect
                         name={field.name}
-                        inputId={"score-7"}
+                        inputId={"score-8"}
                         options={multipleOption}
                         onChange={(val: any) => field.onChange(val.value)}
                         styles={customStyles}

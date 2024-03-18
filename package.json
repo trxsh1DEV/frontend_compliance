@@ -15,12 +15,12 @@
     "@mui/icons-material": "^5.15.2",
     "@mui/material": "^5.15.1",
     "@mui/x-data-grid": "^6.18.5",
-    "@react-keycloak/web": "^3.4.0",
     "axios": "^1.6.2",
     "keycloak-js": "^23.0.6",
-    "keycloak-react-web": "^0.1.19",
+    "lodash.isequal": "^4.5.0",
     "phosphor-react": "^1.4.1",
-    "preact": "^10.19.1",
+    "preact": "^10.19.6",
+    "react-gauge-chart": "^0.4.1",
     "react-hook-form": "^7.49.0",
     "react-router-dom": "^6.20.1",
     "react-select": "^5.8.0",
@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.6.0",
-    "@types/js-cookie": "^3.0.6",
+    "@types/react-gauge-chart": "^0.4.3",
     "typescript": "^5.2.2",
     "vite": "^5.0.0"
   }

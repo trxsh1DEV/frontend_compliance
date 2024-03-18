@@ -10,7 +10,33 @@ export const DivButton = styled.div`
 `;
 
 export const TopContainer = styled.section`
+  display: flex;
+  height: fit-content;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  /* background-color: green; */
+  padding: 2rem 3rem 2rem 2rem;
   /* border: 2px solid azure; */
+`;
+
+export const Table = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+`;
+
+export const Th = styled.th`
+  /* background-color: #f2f2f2; */
+  border: 1px solid #dddddd;
+  padding: 8px;
+  text-align: left;
+`;
+
+export const Td = styled.td`
+  border: 1px solid #dddddd;
+  padding: 8px;
+  text-align: left;
 `;
 
 export const CenterContainer = styled.section`
@@ -29,7 +55,7 @@ export const WrapperGrid = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-auto-flow: row;
   gap: 30px 20px;
-  padding: 15px;
+  padding: 2rem 3rem 2rem 2rem;
   overflow: hidden;
   /* justify-items: self-start; */
 
@@ -70,9 +96,9 @@ export const WrapperAvailable = styled.div`
 
 export const Paragrafh = styled.p`
   overflow: hidden;
-  height: 50px;
+  height: 60px;
   padding: 0 3px;
-  margin-bottom: 40px;
+  margin-bottom: 1rem;
 `;
 
 export const ArticleStyled = styled.article`
